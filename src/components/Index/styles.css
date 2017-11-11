@@ -1,0 +1,24 @@
+:local .app {
+  text-align: center; }
+
+:local .logo {
+  animation: spin infinite 20s linear;
+  height: 80px; }
+
+@keyframes :local(spin) {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
+
+:local .header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white; }
+
+:local .title {
+  font-size: 1.5em; }
+
+:local .intro {
+  font-size: large; }

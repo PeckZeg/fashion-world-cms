@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import styles from './App.css';
+import { ConnectedRouter } from 'react-router-redux';
+import { Route, Switch } from 'react-router-dom';
+import { Provider, connect } from 'react-redux';
 
-class App extends Component {
+import Index from '~/components/Index';
+
+import mapMyToProps from '~/utils/connect/mapMyToProps';
+
+@connect(mapMyToProps)
+export default class App extends Component {
   render() {
+    const { store, history } = this.props;
+
     return (
-      <div className={styles.app}>
-        <header className={styles.header}>
-          <img src={logo} className={styles.logo} alt="logo" />
-          <h1 className={styles.title}>[DEV]Welcome to React</h1>
-        </header>
-        <p className={styles.intro}>
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
+          <Switch>
+            <Route path="/" component={Index} />
+          </Switch>
+        </ConnectedRouter>
+      </Provider>
     );
   }
 }
-
-export default App;
