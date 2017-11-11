@@ -183,6 +183,7 @@ module.exports = {
                         importLoaders: 1,
                         modules: true,
                         minimize: true,
+                        camelCase: true,
                         sourceMap: shouldUseSourceMap,
                       },
                     },
