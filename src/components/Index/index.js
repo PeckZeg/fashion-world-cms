@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Menu, Icon, Layout } from 'antd';
 
+import styles from './styles.css';
+
 export default class Index extends Component {
   state = {
     collapsed: false
@@ -10,16 +12,20 @@ export default class Index extends Component {
     const { collapsed } = this.state;
 
     return (
-      <Layout>
+      <Layout className={styles.layout}>
         <Layout.Sider
+          className={styles.sider}
+          width={256}
           trigger={null}
           collapsible
           collapsed={collapsed}
         >
-          <div className="logo">
+          <div className={styles.logo}>
             <a href="javascript:;">
-              <img />
-              <h1>Fashion World</h1>
+              <img src={`${process.env.PUBLIC_URL}/images/logo.svg`} alt="" />
+              {!collapsed && (
+                <h1>Fashion World</h1>
+              )}
             </a>
           </div>
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
@@ -48,8 +54,6 @@ export default class Index extends Component {
           </Layout.Header>
           <Layout.Content style={{
             margin: '24px 16px',
-            padding: 24,
-            background: '#fff',
             minHeight: 280
           }}>
             Content

@@ -1,0 +1,10 @@
+@import "src/scss/global";
+
+html, body {
+  @include font-smoothing();
+  @include size(100%);
+}
+
+:global(#root) {
+  @include size(100%);
+}

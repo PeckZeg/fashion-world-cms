@@ -1,33 +1,41 @@
-:local .app {
-  text-align: center;
+@import "src/scss/global";
+
+$sider-width:                           256px;
+$sider-box-shadow:                      2px 0 6px rgba(#001529, 0.35);
+
+$logo-bg-color:                         #002140;
+$logo-height:                           32px;
+
+:local .layout {
+  @include size(100%);
+}
+
+:local .sider {
+  width: $sider-width;
+  box-shadow: $sider-box-shadow;
 }
 
 :local .logo {
-  animation: spin infinite 20s linear;
-  height: 80px;
-}
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: $header-height;
+  line-height: $header-height;
+  background-color: $logo-bg-color;
 
-@keyframes :local(spin) {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
+  img {
+    display: inline-block;
+    vertical-align: middle;
+    height: $logo-height;
+  }
 
-:local .header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+  h1 {
+    display: inline-block;
+    margin: 0;
+    margin-left: 12px;
+    vertical-align: middle;
+    font-weight: 600;
+    color: $white;
+    font-size: $font-size-h4;
+  }
 }
-
-:local .title {
-  font-size: 1.5em;
-}
-
-:local .intro {
-  font-size: large;
-}
-
-// :local @keyframes App-logo-spin {
-//   from { transform: rotate(0deg); }
-//   to { transform: rotate(360deg); }
-// }

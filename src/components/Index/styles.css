@@ -1,24 +1,27 @@
-:local .app {
-  text-align: center; }
+:local .layout {
+  width: 100%;
+  height: 100%; }
+
+:local .sider {
+  width: 256px;
+  box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35); }
 
 :local .logo {
-  animation: spin infinite 20s linear;
-  height: 80px; }
-
-@keyframes :local(spin) {
-  from {
-    transform: rotate(0deg); }
-  to {
-    transform: rotate(360deg); } }
-
-:local .header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white; }
-
-:local .title {
-  font-size: 1.5em; }
-
-:local .intro {
-  font-size: large; }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 64px;
+  line-height: 64px;
+  background-color: #002140; }
+  :local .logo img {
+    display: inline-block;
+    vertical-align: middle;
+    height: 32px; }
+  :local .logo h1 {
+    display: inline-block;
+    margin: 0;
+    margin-left: 12px;
+    vertical-align: middle;
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 18px; }
