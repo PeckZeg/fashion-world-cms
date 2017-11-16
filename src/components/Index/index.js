@@ -1,15 +1,23 @@
-import React, { Component } from 'react';
-import { Menu, Icon, Layout } from 'antd';
+import React, { PureComponent } from 'react';
+import { Avatar, Menu, Icon, Layout } from 'antd';
+import { connect } from 'react-redux';
 
+import * as actions from '~/src/actions/layout';
 import styles from './styles.css';
 
-export default class Index extends Component {
-  state = {
-    collapsed: false
-  };
+@connect(
+  ({ reducers }) => ({ collapsed: reducers.layout.collapsed }),
+  dispatch => ({
+    onCollapsed: collapsed => dispatch(actions.setLayoutCollapsed(collapsed))
+  })
+)
+export default class Index extends PureComponent {
+  toggle = () => {
+    this.props.onCollapsed(!this.props.collapsed);
+  }
 
   render() {
-    const { collapsed } = this.state;
+    const { collapsed } = this.props;
 
     return (
       <Layout className={styles.layout}>
@@ -45,12 +53,24 @@ export default class Index extends Component {
         </Layout.Sider>
 
         <Layout>
-          <Layout.Header style={{ background: '#fff', padding: 0 }}>
+          <Layout.Header className={styles.header}>
             <Icon
-              className="trigger"
-              type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
+              className={styles.trigger}
+              type={collapsed ? 'menu-unfold' : 'menu-fold'}
               onClick={this.toggle}
             />
+
+            <div className={styles.right}>
+              <div className={styles.action}>
+                <a href="javascript:;">
+                  文档
+                </a>
+              </div>
+              <div className={styles.action}>
+                <Avatar icon="user" />
+                PeckZeg
+              </div>
+            </div>
           </Layout.Header>
           <Layout.Content style={{
             margin: '24px 16px',

@@ -114,7 +114,8 @@
         {
           "varsIgnorePattern": "[rR]eact"
         }
-      ]
+      ],
+      "no-script-url": "off"
     }
   },
   "devDependencies": {

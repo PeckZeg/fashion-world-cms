@@ -25,3 +25,46 @@
     font-weight: 600;
     color: #ffffff;
     font-size: 18px; }
+
+:local .header {
+  position: relative;
+  padding: 0 12px 0 0;
+  height: 64px;
+  background-color: #ffffff;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08); }
+  :local .header:after {
+    content: '';
+    display: table;
+    clear: both; }
+  :local .header .trigger {
+    padding: 0 24px;
+    font-size: 20px;
+    line-height: 64px; }
+  :local .header .right {
+    float: right;
+    height: 100%; }
+    :local .header .right:after {
+      content: '';
+      display: table;
+      clear: both; }
+
+:local .trigger,
+:local .action {
+  cursor: pointer;
+  transition: all 0.2s ease-out; }
+  :local .trigger:hover, :local .trigger:global(.active),
+  :local .action:hover,
+  :local .action:global(.active) {
+    background-color: #e6f7ff; }
+
+:local .action {
+  float: left;
+  display: flex;
+  padding: 0 12px;
+  justify-content: center;
+  align-items: center; }
+  :local .action :global(.ant-avatar) {
+    margin-right: 0.25em; }
+  :local .action a {
+    text-decoration: none;
+    color: #666; }

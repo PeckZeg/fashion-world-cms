@@ -39,3 +39,52 @@ $logo-height:                           32px;
     font-size: $font-size-h4;
   }
 }
+
+:local .header {
+  position: relative;
+  padding: 0 $padding-base-horizontal 0 0;
+  height: $header-height;
+  background-color: $white;
+  box-shadow: $header-box-shadow;
+  @include clearfix();
+
+  .trigger {
+    padding: 0 $padding-base-horizontal * 2;
+    font-size: floor($font-size-h3 * 0.85);
+    line-height: $header-height;
+  }
+
+  .right {
+    float: right;
+    height: 100%;
+    @include clearfix();
+  }
+}
+
+:local .trigger,
+:local .action {
+  cursor: pointer;
+  @include enable-transition();
+
+  &:hover,
+  &:global(.active) {
+    background-color: $header-item-hover-bg-color;
+  }
+}
+
+:local .action {
+  float: left;
+  display: flex;
+  padding: 0 $padding-base-horizontal;
+  justify-content: center;
+  align-items: center;
+
+  :global(.ant-avatar) {
+    margin-right: 0.25em;
+  }
+
+  a {
+    text-decoration: none;
+    color: $gray-darken;
+  }
+}
