@@ -19,18 +19,18 @@ export default class BaseLayout extends PureComponent {
           <p className={styles.desc}>
             {config.desc}
           </p>
-
-          {this.props.children}
-
-          <GlobalFooter
-            className={styles.globalFooter}
-            copyright={(
-              <div>
-                Copyright <Icon type="copyright" /> 2017 {config.copyright}
-              </div>
-            )}
-          />
         </div>
+
+        {this.props.children}
+
+        <GlobalFooter
+          className={styles.globalFooter}
+          copyright={(
+            <div>
+              Copyright <Icon type="copyright" /> 2017 {config.copyright}
+            </div>
+          )}
+        />
       </div>
     );
   }

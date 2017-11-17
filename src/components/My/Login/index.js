@@ -5,12 +5,18 @@ import { connect } from 'react-redux';
 import BaseLayout from '~/src/components/My/BaseLayout';
 
 import mapMyToProps from '~/src/utils/connect/mapMyToProps';
+import injectApi from '~/src/utils/injectApi';
+import * as myActions from '~/src/actions/my';
 
 import * as fields from './fields';
 import styles from './styles.css';
 
-@connect(mapMyToProps)
+@connect(mapMyToProps, dispatch => ({
+  onToken: token => dispatch(myActions.setMyToken(token)),
+  onProfile: profile => dispatch(myActions.setMyProfile(profile))
+}))
 @Form.create()
+@injectApi('my')
 export default class Login extends PureComponent {
   state = {
     submiting: false
@@ -49,7 +55,7 @@ export default class Login extends PureComponent {
               <Input
                 type="password"
                 size="large"
-                prefix={<Icon type="user" className={styles.prefixIcon} />}
+                prefix={<Icon type="lock" className={styles.prefixIcon} />}
                 placeholder="密码"
                 disabled={submiting}
               />
