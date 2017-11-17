@@ -1,0 +1,16 @@
+@import "src/scss/global";
+
+$main-width:                                 368px;
+
+:local .main {
+  margin: 0 auto;
+  width: $main-width;
+
+  .prefix-icon {
+    color: $gray-lighten;
+  }
+
+  .submit {
+    width: 100%;
+  }
+}

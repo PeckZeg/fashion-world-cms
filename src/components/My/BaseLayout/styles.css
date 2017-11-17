@@ -1,0 +1,31 @@
+:local .container {
+  position: relative;
+  padding: 110px 0 144px 0;
+  width: 100%;
+  height: 100%;
+  background: #f0f2f5 url("../bg.svg") 50%/100% no-repeat; }
+
+:local .header {
+  text-align: center;
+  height: 48px;
+  line-height: 48px; }
+  :local .header .title img {
+    margin-right: 16px;
+    height: 48px;
+    vertical-align: middle; }
+  :local .header .title h1 {
+    display: inline;
+    vertical-align: middle; }
+  :local .header .desc {
+    margin-top: 8px;
+    margin-bottom: 32px;
+    line-height: 1.75;
+    color: #808080; }
+
+:local .global-footer {
+  position: absolute;
+  bottom: 0;
+  margin: 48px 0 24px 0;
+  padding: 0 16px;
+  width: 100%;
+  text-align: center; }

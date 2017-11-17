@@ -1,0 +1,44 @@
+@import "src/scss/global";
+
+$header-height:                              48px;
+
+:local .container {
+  position: relative;
+  padding: 110px 0 144px 0;
+  @include size(100%);
+  background: $my-bg-color url($my-bg-image) 50%/100% no-repeat;
+}
+
+:local .header {
+  text-align: center;
+  height: $header-height;
+  line-height: $header-height;
+
+  .title {
+    img {
+      margin-right: $padding-lg-horizontal;
+      height: $header-height;
+      vertical-align: middle;
+    }
+
+    h1 {
+      display: inline;
+      vertical-align: middle;
+    }
+  }
+
+  .desc {
+    @include margin-y(8px, 32px);
+    line-height: 1.75;
+    color: $gray;
+  }
+}
+
+:local .global-footer {
+  position: absolute;
+  bottom: 0;
+  margin: 48px 0 24px 0;
+  padding: 0 $padding-lg-horizontal;
+  width: 100%;
+  text-align: center;
+}

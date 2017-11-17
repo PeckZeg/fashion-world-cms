@@ -1,0 +1,7 @@
+:local .main {
+  margin: 0 auto;
+  width: 368px; }
+  :local .main .prefix-icon {
+    color: #ccc; }
+  :local .main .submit {
+    width: 100%; }

@@ -1,1 +1,4 @@
-export default ({ reducers }) => ({ my: reducers.my || {} });
+export default ({ reducers }) => ({
+  token: reducers.my.token,
+  my: reducers.my || {}
+});

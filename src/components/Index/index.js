@@ -1,9 +1,12 @@
 import React, { PureComponent } from 'react';
-import { Avatar, Menu, Icon, Layout } from 'antd';
+import { Avatar, Icon, Layout } from 'antd';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import * as actions from '~/src/actions/layout';
 import styles from './styles.css';
+
+import Sider from './Sider';
 
 @connect(
   ({ reducers }) => ({ collapsed: reducers.layout.collapsed }),
@@ -29,27 +32,14 @@ export default class Index extends PureComponent {
           collapsed={collapsed}
         >
           <div className={styles.logo}>
-            <a href="javascript:;">
+            <Link to="/">
               <img src={`${process.env.PUBLIC_URL}/images/logo.svg`} alt="" />
               {!collapsed && (
                 <h1>Fashion World</h1>
               )}
-            </a>
+            </Link>
           </div>
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item key="1">
-              <Icon type="user" />
-              <span>nav 1</span>
-            </Menu.Item>
-            <Menu.Item key="2">
-              <Icon type="video-camera" />
-              <span>nav 2</span>
-            </Menu.Item>
-            <Menu.Item key="3">
-              <Icon type="upload" />
-              <span>nav 3</span>
-            </Menu.Item>
-          </Menu>
+          <Sider collapsed={collapsed} />
         </Layout.Sider>
 
         <Layout>

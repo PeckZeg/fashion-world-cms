@@ -15,7 +15,7 @@ import './index.css';
 
 moment.locale('zh-cn');
 
-const history = createHistory({ basename: '/admin' });
+const history = createHistory();
 const middleware = routerMiddleware(history);
 
 const enhancer = compose(
