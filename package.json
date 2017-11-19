@@ -47,6 +47,7 @@
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
     "promise": "8.0.1",
+    "querystring": "^0.2.0",
     "raf": "3.4.0",
     "react": "^16.1.0",
     "react-dev-utils": "^4.2.1",
@@ -112,6 +113,10 @@
   "eslintConfig": {
     "extends": "react-app",
     "rules": {
+      "radix": [
+        "error",
+        "as-needed"
+      ],
       "no-unused-vars": [
         "warn",
         {

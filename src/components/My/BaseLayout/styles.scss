@@ -11,10 +11,11 @@ $header-height:                              48px;
 
 :local .header {
   text-align: center;
-  height: $header-height;
-  line-height: $header-height;
 
   .title {
+    height: $header-height;
+    line-height: $header-height;
+
     img {
       margin-right: $padding-lg-horizontal;
       height: $header-height;
@@ -28,7 +29,7 @@ $header-height:                              48px;
   }
 
   .desc {
-    @include margin-y(8px, 32px);
+    @include margin-y($padding-lg-horizontal / 2, $padding-lg-horizontal);
     line-height: 1.75;
     color: $gray;
   }

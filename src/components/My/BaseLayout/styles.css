@@ -6,19 +6,20 @@
   background: #f0f2f5 url("../bg.svg") 50%/100% no-repeat; }
 
 :local .header {
-  text-align: center;
-  height: 48px;
-  line-height: 48px; }
-  :local .header .title img {
-    margin-right: 16px;
+  text-align: center; }
+  :local .header .title {
     height: 48px;
-    vertical-align: middle; }
-  :local .header .title h1 {
-    display: inline;
-    vertical-align: middle; }
+    line-height: 48px; }
+    :local .header .title img {
+      margin-right: 16px;
+      height: 48px;
+      vertical-align: middle; }
+    :local .header .title h1 {
+      display: inline;
+      vertical-align: middle; }
   :local .header .desc {
     margin-top: 8px;
-    margin-bottom: 32px;
+    margin-bottom: 16px;
     line-height: 1.75;
     color: #808080; }
 
