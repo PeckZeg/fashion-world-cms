@@ -48,15 +48,15 @@ export default class Login extends PureComponent {
     this.setState({ submiting: true }, async () => {
       try {
         const { name, password } = await validateFields(form, fieldSchema);
-        const { apiKey, secretKey, expiresIn, account } = await this.login(name, password);
+        const { apiKey, secretKey, expireIn, account } = await this.login(name, password);
         const { redirect = '/' } = parseQuery(this.props.location.search);
 
-        onToken({ apiKey, secretKey, expiresIn });
+        onToken({ apiKey, secretKey, expireIn });
         onProfile(account);
 
         message.success(`账号 ${account.name} 登录成功！`);
-        history.push(redirect);
         this.setState({ submiting: false });
+        history.push(redirect);
       }
 
       catch (err) {

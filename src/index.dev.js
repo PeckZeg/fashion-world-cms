@@ -24,7 +24,7 @@ const enhancer = compose(
       const { reducers } = state;
       let { token, profile } = reducers.my || {};
 
-      if (!token || !token.expiresIn || moment().isAfter(token.expiresIn)) {
+      if (!token || !token.expireIn || moment().isAfter(token.expireIn)) {
         token = null;
         profile = null;
       }

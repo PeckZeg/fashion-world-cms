@@ -6,11 +6,15 @@ $sider-box-shadow:                      2px 0 6px rgba(#001529, 0.35);
 $logo-bg-color:                         #002140;
 $logo-height:                           32px;
 
+$avatar-popover-width:                  200px;
+$avatar-popover-height:                 $padding-lg-horizontal * 1.25;
+
 :local .layout {
   @include size(100%);
 }
 
 :local .sider {
+  z-index: 8;
   width: $sider-width;
   box-shadow: $sider-box-shadow;
 }
@@ -85,6 +89,85 @@ $logo-height:                           32px;
 
   a {
     text-decoration: none;
+    font-size: $font-size-medium;
     color: $gray-darken;
+
+    :global .anticon {
+      margin-right: 0.5em;
+    }
+  }
+}
+
+:local .avatar-action > span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+:local(.avatar-popover) {
+  left: auto !important;
+  right: $padding-base-horizontal;
+
+  :global(.ant-popover-content) {
+    // padding-top: 0;
+
+    > :global(.ant-popover-arrow) {
+      display: none;
+    }
+
+    :global(.ant-popover-inner) {
+      border-radius: 2px;
+      box-shadow: 0 6px 16px rgba($black, 0.2);
+
+      &-content {
+        padding: 0;
+
+        ul {
+          list-style: none;
+          padding: $padding-base-vertical 0;
+          width: $avatar-popover-width;
+
+          li {
+            line-height: $avatar-popover-height;
+
+            a {
+              display: block;
+              padding: $padding-lg-vertical $padding-lg-horizontal;
+              font-size: $font-size-base;
+              color: $gray-darkest;
+              @include enable-transition();
+
+              &:hover {
+                background-color: $gray-lightest;
+              }
+
+              &:focus {
+                text-decoration: none;
+              }
+
+              > :global(.anticon) {
+                margin-right: 0.5em;
+              }
+
+              &:global(.disabled) {
+                color: $gray-lighten;
+                cursor: not-allowed;
+
+                &:hover {
+                  background-color: transparent;
+                }
+              }
+            }
+
+            &:global(.divider) {
+              margin: 0;
+              padding: 0;
+              border-top: 1px solid #eee;
+              height: 0;
+            }
+          }
+        }
+      }
+    }
   }
 }

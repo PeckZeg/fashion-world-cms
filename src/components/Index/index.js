@@ -1,11 +1,16 @@
+import { Link, Route, Switch, Redirect } from 'react-router-dom';
 import React, { PureComponent } from 'react';
-import { Avatar, Icon, Layout } from 'antd';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Icon, Layout } from 'antd';
 
+import keys from 'lodash/keys';
+
+import { routes, routeKeys } from '~/src/const/siders';
+import { logo, title } from '~/src/const/config';
 import * as actions from '~/src/actions/layout';
 import styles from './styles.css';
 
+import Header from './Header';
 import Sider from './Sider';
 
 @connect(
@@ -33,9 +38,11 @@ export default class Index extends PureComponent {
         >
           <div className={styles.logo}>
             <Link to="/">
-              <img src={`${process.env.PUBLIC_URL}/images/logo.svg`} alt="" />
+              <img src={logo} alt="" />
               {!collapsed && (
-                <h1>Fashion World</h1>
+                <h1>
+                  {title}
+                </h1>
               )}
             </Link>
           </div>
@@ -50,23 +57,16 @@ export default class Index extends PureComponent {
               onClick={this.toggle}
             />
 
-            <div className={styles.right}>
-              <div className={styles.action}>
-                <a href="javascript:;">
-                  文档
-                </a>
-              </div>
-              <div className={styles.action}>
-                <Avatar icon="user" />
-                PeckZeg
-              </div>
-            </div>
+            <Header />
           </Layout.Header>
-          <Layout.Content style={{
-            margin: '24px 16px',
-            minHeight: 280
-          }}>
-            Content
+
+          <Layout.Content>
+            <Switch>
+              {routes.map(({ key, component }) => (
+                <Route key={key} path={key} component={component} />
+              ))}
+              <Redirect from ="/" to={keys(routeKeys)[0]} />
+            </Switch>
           </Layout.Content>
         </Layout>
       </Layout>
