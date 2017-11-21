@@ -2,11 +2,13 @@ import forEach from 'lodash/forEach';
 import reduce from 'lodash/reduce';
 import map from 'lodash/map';
 
+import * as qiniu from './qiniu';
 import * as my from './my';
 
 // 菜单列表
 export const menus = [
-  my
+  my,
+  qiniu
 ];
 
 // 基础键列表

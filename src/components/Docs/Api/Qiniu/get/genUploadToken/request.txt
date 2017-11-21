@@ -1,0 +1,6 @@
+GET /api/admin/qiniu/upload-token HTTP/1.1
+Host: localhost:3003
+Content-Type: application/json
+Authorization: Caa {{ACCOUNT_AUTHORIZATION}}
+Cache-Control: no-cache
+Postman-Token: 1921678b-3afe-6677-5865-70e969c494e2

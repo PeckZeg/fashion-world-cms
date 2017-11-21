@@ -1,0 +1,31 @@
+{
+    "account": {
+        "_id": "592f6a5e53532796c6b50ae3",
+        "name": "PeckZeg",
+        "password": "fe7d5d79226524b5b3f035ead02cf5dc",
+        "createAt": 1496279646438,
+        "removeAt": null,
+        "activeAt": 1506735854498,
+        "permissions": [
+            "CREATE_ACCOUNT",
+            "VIEW_ACCOUNT",
+            "UPDATE_ACCOUNT",
+            "DESTROY_ACCOUNT",
+            "VIEW_CHANNEL",
+            "UPDATE_CHANNEL",
+            "DESTROY_CHANNEL",
+            "CREATE_CATEGORY",
+            "VIEW_CATEGORY",
+            "UPDATE_CATEGORY",
+            "DESTROY_CATEGORY",
+            "VIEW_VIDEO",
+            "UPDATE_VIDEO",
+            "DESTROY_VIDEO",
+            "CREATE_BANNER",
+            "VIEW_BANNER",
+            "UPDATE_BANNER",
+            "DESTROY_BANNER"
+        ],
+        "avatar": "http://beta.images.fashionworldcn.com/account/592f6a5e53532796c6b50ae3/8226fe587d70bea2d7c2f33082b158dcbb2cc589.png"
+    }
+}

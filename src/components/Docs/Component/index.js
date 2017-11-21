@@ -5,8 +5,8 @@ import { withRouter } from 'react-router';
 export default class ComponentPage extends PureComponent {
   render() {
     return (
-      <pre>
-        {JSON.stringify(this.props.location)}
+      <pre style={{ padding: '1.75em' }}>
+        {JSON.stringify(this.props.location, null, 2)}
       </pre>
     );
   }

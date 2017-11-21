@@ -1,0 +1,11 @@
+PUT /api/admin/my HTTP/1.1
+Host: localhost:3003
+Content-Type: application/json
+Authorization: Caa {{ACCOUNT_AUTHORIZATION}}
+Cache-Control: no-cache
+Postman-Token: db26058c-c71a-2588-a49a-0897b3857a48
+
+{
+  "name": "PeckZeg115",
+  "password": "fe7d5d79226524b5b3f035ead02cf5dc"
+}

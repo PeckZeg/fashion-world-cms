@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { withRouter, matchPath } from 'react-router';
-import { Menu } from 'antd';
+import { Icon, Menu } from 'antd';
 
 import isFunction from 'lodash/isFunction';
 import forEach from 'lodash/forEach';
@@ -98,8 +98,10 @@ export default class Sider extends PureComponent {
         onSelect={this.onSelect}
         onOpenChange={this.onOpenChange}
       >
-        {menus.map(({ key, label, items }) => (
-          <Menu.SubMenu key={key} title={label}>
+        {menus.map(({ key, label, items, icon }) => (
+          <Menu.SubMenu key={key} title={icon ? (
+              <span><Icon type={icon} /><span>{label}</span></span>
+            ) : label}>
             {items.map(({ key, method, label }) => (
               <Menu.Item key={key}>
                 <MethodTag value={method} />

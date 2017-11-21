@@ -1,0 +1,5 @@
+GET /api/admin/my HTTP/1.1
+Host: localhost:3003
+Authorization: Caa {{ACCOUNT_AUTHORIZATION}}
+Cache-Control: no-cache
+Postman-Token: ce823299-347a-eb3d-2204-07fa4128926c

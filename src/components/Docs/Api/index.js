@@ -27,6 +27,7 @@ export default class ApiPage extends PureComponent {
             <Route
               key={key}
               path={key}
+              exact
               render={props => <ApiContent {...props} {...config} />}
             />
           ))}
