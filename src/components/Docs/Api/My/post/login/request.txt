@@ -1,0 +1,10 @@
+POST /api/admin/my/login HTTP/1.1
+Host: localhost:3003
+Content-Type: application/json
+Cache-Control: no-cache
+Postman-Token: 5b53ff14-3c58-63bd-f5b8-80ba8a8a3f68
+
+{
+  "name": "PeckZeg",
+  "password": "fe7d5d79226524b5b3f035ead02cf5dc"
+}

@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { Link } from 'react-router-dom';
 import { Icon } from 'antd';
 
 import MyAvatar from './MyAvatar';
@@ -11,10 +12,10 @@ export default class Header extends PureComponent {
       <div className={styles.right}>
         {process.env.NODE_ENV === 'development' && (
           <div className={styles.action}>
-            <a href="javascript:;">
+            <Link to="/docs">
               <Icon type="api" />
               文档
-            </a>
+            </Link>
           </div>
         )}
 

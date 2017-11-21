@@ -1,0 +1,6 @@
+DELETE /api/admin/my/logout HTTP/1.1
+Host: localhost:3003
+Content-Type: application/x-www-form-urlencoded
+Authorization: Caa {{ACCOUNT_AUTHORIZATION}}
+Cache-Control: no-cache
+Postman-Token: 63298ac0-7e5d-7024-9f48-14be92b232a6

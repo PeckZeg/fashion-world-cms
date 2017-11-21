@@ -5,6 +5,10 @@ html, body {
   @include size(100%);
 }
 
+// body {
+//   font-size: $font-size-small;
+// }
+
 :global(#root) {
   @include size(100%);
 }

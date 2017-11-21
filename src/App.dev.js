@@ -5,6 +5,7 @@ import { Provider, connect } from 'react-redux';
 
 import MyLogin from '~/src/components/My/Login';
 import Index from '~/src/components/Index';
+import Docs from '~/src/components/Docs';
 
 import mapMyToProps from '~/src/utils/connect/mapMyToProps';
 
@@ -18,6 +19,7 @@ export default class App extends PureComponent {
         <ConnectedRouter history={history}>
           <Switch>
             <Route path="/my/login" exact component={MyLogin} />
+            <Route path="/docs" component={Docs} />
             {!token ? (
               <Redirect to="/my/login" />
             ) : (
