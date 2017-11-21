@@ -1,5 +1,3 @@
-import React from 'react';
-
 import genItems from '~/src/components/Docs/const/siders/genItems';
 
 import * as PUT_UPDATE_MY_PROFILE from '~/src/components/Docs/Api/My/put/updateMyProfile';

@@ -1,0 +1,6 @@
+GET /api/admin/account/5938c4b0e24947494586df5f HTTP/1.1
+Host: localhost:3003
+Content-Type: application/json
+Authorization: Caa {{ACCOUNT_AUTHORIZATION}}
+Cache-Control: no-cache
+Postman-Token: aea5cb33-e4bb-f421-36f3-c697086dd190

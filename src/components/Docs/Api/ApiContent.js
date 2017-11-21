@@ -27,6 +27,11 @@ export default class ApiContent extends PureComponent {
         render: type => <code>{type}</code>
       },
       {
+        dataIndex: 'default',
+        title: '默认值',
+        render: defaults => <code>{defaults || '-'}</code>
+      },
+      {
         dataIndex: 'note',
         title: '备注'
       }

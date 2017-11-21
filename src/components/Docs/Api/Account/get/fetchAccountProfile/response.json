@@ -1,0 +1,12 @@
+{
+    "account": {
+        "_id": "5938c4b0e24947494586df5f",
+        "name": "test_1496892593",
+        "password": "fe7d5d79226524b5b3f035ead02cf5dc",
+        "createAt": 1496892592884,
+        "removeAt": null,
+        "activeAt": null,
+        "permissions": [],
+        "avatar": "http://beta.images.fashionworldcn.com/default-avatar.png"
+    }
+}
