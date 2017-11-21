@@ -1,0 +1,6 @@
+POST /api/admin/account/5938ca53e24947494586df61 HTTP/1.1
+Host: localhost:3003
+Content-Type: application/x-www-form-urlencoded
+Authorization: Caa {{ACCOUNT_AUTHORIZATION}}
+Cache-Control: no-cache
+Postman-Token: 8648e870-92b0-9e81-ea14-52bbc2cda168

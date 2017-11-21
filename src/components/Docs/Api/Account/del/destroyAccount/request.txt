@@ -1,0 +1,6 @@
+DELETE /api/admin/account/5938ca53e24947494586df61/block HTTP/1.1
+Host: localhost:3003
+Content-Type: application/json
+Authorization: Caa {{ACCOUNT_AUTHORIZATION}}
+Cache-Control: no-cache
+Postman-Token: c56198e1-a43c-7a37-d5f7-ec87f665f40f

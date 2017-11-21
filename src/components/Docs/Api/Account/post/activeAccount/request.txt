@@ -1,0 +1,6 @@
+POST /api/admin/account/5938ca53e24947494586df61/active HTTP/1.1
+Host: localhost:3003
+Content-Type: application/json
+Authorization: Caa blVXRzY0YWNUdW1JQVN1OEZuSkVRMk5FcGhxMjQ5RE9BV3JpWHVaR1EvRT06NUlNNVVSbk9lU3YyWmRORXFFaFNBUk1ZVUNJPSAxNTExMjU3ODY4NjEz
+Cache-Control: no-cache
+Postman-Token: 0c436337-c0bf-a11a-b956-995518a2163e
