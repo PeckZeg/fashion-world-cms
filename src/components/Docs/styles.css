@@ -63,6 +63,9 @@
   :local(.sider) .sider-menu {
     border-right: 0;
     height: 100%; }
+  :local(.sider) .sider-title small {
+    margin-left: 0.75em;
+    color: #808080; }
 
 :local(.content) {
   padding: 0 194px 32px 64px; }
@@ -76,3 +79,10 @@
 
 :local(.doc-module) {
   margin-bottom: 1em; }
+
+:global(.queue-anim-leaving) {
+  position: absolute;
+  width: 100%; }
+
+:local(.queue-anim) {
+  overflow-x: hidden !important; }

@@ -6,9 +6,8 @@ import * as GET_FETCH_MY_PROFILE from '~/src/components/Docs/Api/My/get/fetchMyP
 import * as DEL_LOGOUT from '~/src/components/Docs/Api/My/del/logout';
 import * as POST_LOGIN from '~/src/components/Docs/Api/My/post/login';
 
-export const key = 'my';
-export const icon = 'user';
-export const label = '个人中心';
+export { key, icon, label } from '~/src/components/Docs/Api/My';
+
 export const items = genItems(
   GET_FETCH_MY_PROFILE,
   POST_LOGIN,

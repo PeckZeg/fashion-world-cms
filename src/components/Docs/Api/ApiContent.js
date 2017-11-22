@@ -1,6 +1,6 @@
+import { BackTop, Layout, Table, Icon, Tag } from 'antd';
 import DocumentTitle from 'react-document-title';
 import React, { PureComponent } from 'react';
-import { Layout, Table, Icon, Tag } from 'antd';
 
 import isEmpty from 'lodash/isEmpty';
 
@@ -120,13 +120,13 @@ export default class ApiContent extends PureComponent {
 
   render() {
     const {
-      type, title, method, desc, pathname, headers, pathParams, queryParams,
+      label, title, method, desc, pathname, headers, pathParams, queryParams,
       bodyParams, responseBody, errorCodes, example, action
     } = this.props;
     const { headersColumns, errorCodeColumns, responseBodyColumns } = this.state;
 
     return (
-      <DocumentTitle title={`[${method}] ${title} - ${type} - 接口文档`}>
+      <DocumentTitle title={`[${method}] ${title} - ${label} - 接口文档`}>
         <Layout.Content className={styles.content}>
           <h1 className={styles.docTitle}>
             <MethodTag value={method} />
@@ -196,6 +196,8 @@ export default class ApiContent extends PureComponent {
           <pre>{example.request}</pre>
           <h3>响应</h3>
           <pre>{JSON.stringify(example.response, null, 2)}</pre>
+
+          <BackTop target={() => document.querySelector('#root')} />
         </Layout.Content>
       </DocumentTitle>
     );

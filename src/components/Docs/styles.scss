@@ -90,6 +90,11 @@ $header-box-shadow:                     0 2px 8px #f0f1f2;
     border-right: 0;
     height: 100%;
   }
+
+  .sider-title small {
+    margin-left: 0.75em;
+    color: $gray;
+  }
 }
 
 :local(.content) {
@@ -108,4 +113,17 @@ $header-box-shadow:                     0 2px 8px #f0f1f2;
 
 :local(.doc-module) {
   margin-bottom: 1em;
+}
+
+:global(.queue-anim-leaving) {
+  position: absolute;
+  width: 100%;
+}
+
+// :global(.queue-anim-entering) {
+//   overflow: hidden;
+// }
+
+:local(.queue-anim) {
+  overflow-x: hidden !important;
 }

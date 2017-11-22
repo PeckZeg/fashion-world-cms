@@ -99,9 +99,16 @@ export default class Sider extends PureComponent {
         onOpenChange={this.onOpenChange}
       >
         {menus.map(({ key, label, items, icon }) => (
-          <Menu.SubMenu key={key} title={icon ? (
-              <span><Icon type={icon} /><span>{label}</span></span>
-            ) : label}>
+          <Menu.SubMenu
+            key={key}
+            title={(
+              <span className={styles.siderTitle}>
+                <Icon type={icon} />
+                <span>{label}</span>
+                <small>{key}</small>
+              </span>
+            )}
+          >
             {items.map(({ key, method, label }) => (
               <Menu.Item key={key}>
                 <MethodTag value={method} />

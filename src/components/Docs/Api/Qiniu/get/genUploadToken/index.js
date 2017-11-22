@@ -4,7 +4,7 @@ import genApiPath from '~/src/components/Docs/Api/Qiniu/genApiPath';
 import request from './request.txt';
 import response from './response.json';
 
-export const type = '七牛';
+export { label } from '~/src/components/Docs/Api/My';
 export const method = 'GET';
 export const title = '生成七牛上传令牌';
 export const desc = '于上传七牛时使用。';

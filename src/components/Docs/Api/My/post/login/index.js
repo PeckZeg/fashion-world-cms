@@ -4,7 +4,7 @@ import genApiPath from '~/src/components/Docs/Api/My/genApiPath';
 import request from './request.txt';
 import response from './response.json';
 
-export const type = '个人中心';
+export { label } from '~/src/components/Docs/Api/My';
 export const method = 'POST';
 export const title = '登录';
 export const desc = '用于整个内容管理系统的用户登录。';

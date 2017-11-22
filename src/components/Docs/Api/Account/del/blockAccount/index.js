@@ -4,7 +4,7 @@ import genApiPath from '~/src/components/Docs/Api/Account/genApiPath';
 import request from './request.txt';
 import response from './response.json';
 
-export const type = '账号';
+export { label } from '~/src/components/Docs/Api/Account';
 export const method = 'DEL';
 export const title = '冻结账号';
 export const desc = '用于冻结用户账号。';

@@ -4,7 +4,7 @@ import genApiPath from '~/src/components/Docs/Api/My/genApiPath';
 import request from './request.txt';
 import response from './response.json';
 
-export const type = '个人中心';
+export { label } from '~/src/components/Docs/Api/My';
 export const method = 'PUT';
 export const title = '更新我的信息';
 export const desc = '用于修改当前登录账号的信息（除头像）。';

@@ -4,7 +4,7 @@ import genApiPath from '~/src/components/Docs/Api/Account/genApiPath';
 import request from './request.txt';
 import response from './response.json';
 
-export const type = '账号';
+export { label } from '~/src/components/Docs/Api/Account';
 export const method = 'GET';
 export const title = '获取账号列表';
 export const desc = '用于获取账号列表或搜索账号。';

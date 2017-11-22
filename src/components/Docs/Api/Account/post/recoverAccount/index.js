@@ -4,7 +4,7 @@ import genApiPath from '~/src/components/Docs/Api/Account/genApiPath';
 import request from './request.txt';
 import response from './response.json';
 
-export const type = '账号';
+export { label } from '~/src/components/Docs/Api/Account';
 export const method = 'POST';
 export const title = '恢复账号';
 export const desc = '用于恢复用户账号。';

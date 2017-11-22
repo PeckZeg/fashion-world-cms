@@ -4,7 +4,7 @@ import genApiPath from '~/src/components/Docs/Api/My/genApiPath';
 import request from './request.txt';
 import response from './response.json';
 
-export const type = '个人中心';
+export { label } from '~/src/components/Docs/Api/My';
 export const method = 'GET';
 export const title = '获取我的资料';
 export const desc = '用于获取当前登录账号的信息。';
