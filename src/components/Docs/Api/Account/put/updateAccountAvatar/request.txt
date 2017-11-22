@@ -1,0 +1,10 @@
+PUT /api/admin/account/59351300a58737dbdb630956/avatar HTTP/1.1
+Host: localhost:3003
+Content-Type: application/json
+Authorization: Caa {{ACCOUNT_AUTHORIZATION}}
+Cache-Control: no-cache
+Postman-Token: 05ca3424-4164-2419-5f27-7bcec459afde
+
+{
+	"key": "51b9ed59095d1a294a54245345871f14a9ef8f43.png"
+}

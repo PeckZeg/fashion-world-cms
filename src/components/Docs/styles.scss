@@ -117,6 +117,10 @@ $header-box-shadow:                     0 2px 8px #f0f1f2;
 
 :global(.queue-anim-leaving) {
   position: absolute;
+  // width: 100%;
+}
+
+:global(.queue-anim-entering) {
   width: 100%;
 }
 
@@ -125,5 +129,7 @@ $header-box-shadow:                     0 2px 8px #f0f1f2;
 // }
 
 :local(.queue-anim) {
-  overflow-x: hidden !important;
+  position: relative;
+  width: 100%;
+  // overflow-x: hidden !important;
 }

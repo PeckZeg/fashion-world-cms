@@ -1,0 +1,12 @@
+POST /api/admin/account HTTP/1.1
+Host: localhost:3003
+Content-Type: application/json
+Authorization: Caa blVXRzY0YWNUdW1JQVN1OEZuSkVRMk5FcGhxMjQ5RE9BV3JpWHVaR1EvRT06ZkM4RVk0TXRoSTdjRTNEYUZYVVYvd2lMWlA0PSAxNTExMzIwODQ3ODk0
+Cache-Control: no-cache
+Postman-Token: b160bac0-4388-9b71-cdeb-929deebb9ae5
+
+{
+  "name": "test1511320850",
+  "password": "fe7d5d79226524b5b3f035ead02cf5dc",
+  "permissions": []
+}

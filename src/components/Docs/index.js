@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Switch, Route, Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
-import { Layout } from 'antd';
+import { BackTop, Layout } from 'antd';
 
 import HeaderMenu from './HeaderMenu';
 
@@ -27,6 +27,8 @@ export default class BaseLayout extends PureComponent {
           ))}
           <Redirect from="/" to={routes[0].key} />
         </Switch>
+
+        <BackTop />
       </Layout>
     );
   }

@@ -81,8 +81,11 @@
   margin-bottom: 1em; }
 
 :global(.queue-anim-leaving) {
-  position: absolute;
+  position: absolute; }
+
+:global(.queue-anim-entering) {
   width: 100%; }
 
 :local(.queue-anim) {
-  overflow-x: hidden !important; }
+  position: relative;
+  width: 100%; }

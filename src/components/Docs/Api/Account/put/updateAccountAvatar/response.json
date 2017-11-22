@@ -1,0 +1,12 @@
+{
+    "account": {
+        "_id": "59351300a58737dbdb630956",
+        "name": "Matthew545",
+        "password": "50d9cd6b99def221b68995d13b7a1df8",
+        "createAt": 1496650496557,
+        "removeAt": null,
+        "activeAt": null,
+        "permissions": [],
+        "avatar": "http://beta.images.fashionworldcn.com/51b9ed59095d1a294a54245345871f14a9ef8f43.png"
+    }
+}

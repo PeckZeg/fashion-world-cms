@@ -1,0 +1,11 @@
+PUT /api/admin/account/59351300a58737dbdb630956 HTTP/1.1
+Host: localhost:3003
+Content-Type: application/json
+Authorization: Caa {{ACCOUNT_AUTHORIZATION}}
+Cache-Control: no-cache
+Postman-Token: 7f618332-0cb7-b227-229a-39018ab07d7e
+
+{
+	"name": "Matthew876",
+	"permissions": []
+}

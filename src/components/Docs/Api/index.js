@@ -30,7 +30,12 @@ export default class ApiPage extends PureComponent {
     }
 
     return (
-      <QueueAnim className={styles.queueAnim} type={['bottom', 'top']} duration={666}>
+      <QueueAnim
+        className={styles.queueAnim}
+        type={['left', 'right']}
+        duration={666}
+        // duration={3000}
+      >
         <Route
           key={location.pathname}
           location={location}
@@ -51,7 +56,9 @@ export default class ApiPage extends PureComponent {
           <Sider />
         </Layout.Sider>
 
-        <Route render={this.renderRoute} />
+        <Layout.Content className={styles.content}>
+          <Route render={this.renderRoute} />
+        </Layout.Content>
       </Layout>
     );
   }

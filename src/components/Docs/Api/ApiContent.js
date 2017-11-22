@@ -1,4 +1,4 @@
-import { BackTop, Layout, Table, Icon, Tag } from 'antd';
+import { Layout, Table, Icon, Tag } from 'antd';
 import DocumentTitle from 'react-document-title';
 import React, { PureComponent } from 'react';
 
@@ -127,7 +127,7 @@ export default class ApiContent extends PureComponent {
 
     return (
       <DocumentTitle title={`[${method}] ${title} - ${label} - 接口文档`}>
-        <Layout.Content className={styles.content}>
+        <Layout.Content>
           <h1 className={styles.docTitle}>
             <MethodTag value={method} />
             <span>
@@ -196,8 +196,6 @@ export default class ApiContent extends PureComponent {
           <pre>{example.request}</pre>
           <h3>响应</h3>
           <pre>{JSON.stringify(example.response, null, 2)}</pre>
-
-          <BackTop target={() => document.querySelector('#root')} />
         </Layout.Content>
       </DocumentTitle>
     );
