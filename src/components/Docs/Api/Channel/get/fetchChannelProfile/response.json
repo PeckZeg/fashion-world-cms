@@ -1,0 +1,23 @@
+{
+    "total": 5,
+    "channels": [
+        {
+            "_id": "5a162bef714f19244f475c35",
+            "name": "Deep444",
+            "removeAt": null,
+            "createAt": 1511402479031,
+            "publishAt": 1514736000000,
+            "priority": 811,
+            "cover": "http://beta.images.fashionworldcn.com/00452b3a1deeeacb4ef2a9faeb6aa20f694a9fb4.jpeg"
+        },
+        {
+            "_id": "596ecd3ff223c686eeb624c2",
+            "name": "WLC2",
+            "removeAt": null,
+            "createAt": 1500433830540,
+            "publishAt": 1503913408414,
+            "priority": 1,
+            "cover": null
+        }
+    ]
+}

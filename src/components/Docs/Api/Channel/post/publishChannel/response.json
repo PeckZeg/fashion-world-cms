@@ -1,0 +1,12 @@
+{
+    "channel": {
+        "_id": "5923d5a2afa4194436827737",
+        "name": "Fashion One",
+        "removeBy": null,
+        "removeAt": null,
+        "createAt": 1499053348232,
+        "publishAt": 1511423594298,
+        "priority": 3,
+        "cover": null
+    }
+}

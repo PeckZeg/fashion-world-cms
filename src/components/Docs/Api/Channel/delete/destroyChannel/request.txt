@@ -1,0 +1,6 @@
+DELETE /api/admin/channel/5923d5a2afa4194436827737 HTTP/1.1
+Host: localhost:3003
+Content-Type: application/x-www-form-urlencoded
+Authorization: Caa blVXRzY0YWNUdW1JQVN1OEZuSkVRMk5FcGhxMjQ5RE9BV3JpWHVaR1EvRT06b04yckljY3RabVdlZG1CUVJCYzJsZ1JyV2JNPSAxNTExNDIyNzk4Mjg4
+Cache-Control: no-cache
+Postman-Token: aff557ca-4abc-f168-bce4-a795817f3d50

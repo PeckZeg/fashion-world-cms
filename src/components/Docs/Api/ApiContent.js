@@ -2,6 +2,7 @@ import { Layout, Table, Icon, Tag } from 'antd';
 import DocumentTitle from 'react-document-title';
 import React, { PureComponent } from 'react';
 
+import isUndefined from 'lodash/isUndefined';
 import isEmpty from 'lodash/isEmpty';
 
 import MethodTag from './MethodTag';
@@ -29,7 +30,7 @@ export default class ApiContent extends PureComponent {
       {
         dataIndex: 'default',
         title: '默认值',
-        render: defaults => <code>{defaults || '-'}</code>
+        render: defaults => <code>{isUndefined(defaults) ? '-' : defaults}</code>
       },
       {
         dataIndex: 'note',

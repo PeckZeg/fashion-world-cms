@@ -1,0 +1,10 @@
+POST /api/admin/channel/5923d5a2afa4194436827737/publish HTTP/1.1
+Host: localhost:3003
+Content-Type: application/x-www-form-urlencoded
+Authorization: Caa blVXRzY0YWNUdW1JQVN1OEZuSkVRMk5FcGhxMjQ5RE9BV3JpWHVaR1EvRT06TXNxcEFzTFp2Q0xaSDI0YTJuTGRyb0tGRkNVPSAxNTExNDIzNTk0MjQy
+Cache-Control: no-cache
+Postman-Token: 607a73d4-61e0-f7a4-530b-525d15de8b17
+
+{
+	"publishAt": 1514736000000
+}

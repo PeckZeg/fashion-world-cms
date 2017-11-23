@@ -1,0 +1,5 @@
+GET /api/admin/channel?limit=2 HTTP/1.1
+Host: localhost:3003
+Authorization: Caa blVXRzY0YWNUdW1JQVN1OEZuSkVRMk5FcGhxMjQ5RE9BV3JpWHVaR1EvRT06V3VNN0FmaWdXUUJ6TTNZQ1lnc0NTL2F1c3I0PSAxNTExNDA3NjAzNDA1
+Cache-Control: no-cache
+Postman-Token: ee7c2f11-9086-eae7-b4e3-54f4827012de

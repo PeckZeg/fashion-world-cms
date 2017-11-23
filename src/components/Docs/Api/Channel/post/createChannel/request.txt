@@ -1,0 +1,12 @@
+POST /api/admin/channel HTTP/1.1
+Host: localhost:3003
+Content-Type: application/json
+Authorization: Caa blVXRzY0YWNUdW1JQVN1OEZuSkVRMk5FcGhxMjQ5RE9BV3JpWHVaR1EvRT06eEh4ZWg0NHdGWnJtdEFaaUk0M0Rna0Z5QkZZPSAxNTExNDIyOTcyMjE0
+Cache-Control: no-cache
+Postman-Token: f7b96c19-1bc0-0597-589b-4f2e41edc483
+
+{
+	"publishAt": 1514736000000,
+	"name": "12312312",
+	"priority": -123
+}
