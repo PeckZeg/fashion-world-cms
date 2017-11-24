@@ -1,0 +1,12 @@
+POST /api/admin/category HTTP/1.1
+Host: localhost:3003
+Content-Type: application/json
+Authorization: Caa {{ACCOUNT_AUTHORIZATION}}
+Cache-Control: no-cache
+Postman-Token: e5a0d7b5-ab88-1cfa-d824-b85eac47fe64
+
+{
+  "name": "Test293",
+  "channelId": "5959b33cb912aab9e9e9eb15",
+  "publishAt": "{{TIMESTAMP}}"
+}

@@ -1,0 +1,11 @@
+PUT /api/admin/category/5959bd385c2960da1aa844f7 HTTP/1.1
+Host: localhost:3003
+Content-Type: application/json
+Authorization: Caa {{ACCOUNT_AUTHORIZATION}}
+Cache-Control: no-cache
+Postman-Token: 9afc1cb9-4844-0f0f-da48-0ffc689282bd
+
+{
+  "name": "旧影新知88",
+  "priority": "88"
+}

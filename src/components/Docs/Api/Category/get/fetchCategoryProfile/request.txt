@@ -1,0 +1,6 @@
+DELETE /api/admin/category/5959bd385c2960da1aa844f7/block HTTP/1.1
+Host: localhost:3003
+Content-Type: application/x-www-form-urlencoded
+Authorization: Caa {{ACCOUNT_AUTHORIZATION}}
+Cache-Control: no-cache
+Postman-Token: c3125305-70d5-dd49-b25e-0676fe2358fc

@@ -1,0 +1,10 @@
+PUT /api/admin/category/5959bd385c2960da1aa844f7/cover HTTP/1.1
+Host: localhost:3003
+Content-Type: application/json
+Authorization: Caa {{ACCOUNT_AUTHORIZATION}}
+Cache-Control: no-cache
+Postman-Token: 85d81842-7863-d6c4-bc28-55edbedd0949
+
+{
+  "key": "00452b3a1deeeacb4ef2a9faeb6aa20f694a9fb4.jpeg"
+}

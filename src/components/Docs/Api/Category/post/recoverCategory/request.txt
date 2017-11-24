@@ -1,0 +1,6 @@
+POST /api/admin/category/5959bd385c2960da1aa844f7 HTTP/1.1
+Host: localhost:3003
+Content-Type: application/json
+Authorization: Caa {{ACCOUNT_AUTHORIZATION}}
+Cache-Control: no-cache
+Postman-Token: 619e336b-c674-9f12-6629-fe4706a4db28

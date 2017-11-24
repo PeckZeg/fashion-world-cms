@@ -1,0 +1,10 @@
+POST /api/admin/category/5959bd385c2960da1aa844f7/publish HTTP/1.1
+Host: localhost:3003
+Content-Type: application/json
+Authorization: Caa {{ACCOUNT_AUTHORIZATION}}
+Cache-Control: no-cache
+Postman-Token: 616538d9-8554-50c7-7191-c161835ed469
+
+{
+  "publishAt": 1489690763421
+}

@@ -1,0 +1,23 @@
+{
+    "category": {
+        "_id": "5959bd385c2960da1aa844f7",
+        "channelId": "5959b33cb912aab9e9e9eb15",
+        "name": "旧影新知189",
+        "removeBy": null,
+        "removeAt": 1511494010871,
+        "createAt": 1499053368880,
+        "publishAt": null,
+        "priority": 252,
+        "cover": "http://beta.images.fashionworldcn.com/00452b3a1deeeacb4ef2a9faeb6aa20f694a9fb4.jpeg",
+        "channel": {
+            "_id": "5959b33cb912aab9e9e9eb15",
+            "name": "Deeep",
+            "removeBy": "592f6a5e53532796c6b50ae3",
+            "removeAt": null,
+            "createAt": 1499053348235,
+            "publishAt": 1489690763421,
+            "priority": 10,
+            "cover": null
+        }
+    }
+}

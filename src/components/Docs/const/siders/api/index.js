@@ -2,6 +2,7 @@ import forEach from 'lodash/forEach';
 import reduce from 'lodash/reduce';
 import map from 'lodash/map';
 
+import * as category from './category';
 import * as account from './account';
 import * as channel from './channel';
 import * as qiniu from './qiniu';
@@ -10,6 +11,7 @@ import * as my from './my';
 // 菜单列表
 export const menus = [
   channel,
+  category,
   my,
   account,
   qiniu

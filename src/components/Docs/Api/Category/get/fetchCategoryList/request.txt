@@ -1,0 +1,5 @@
+GET /api/admin/category?channelId=5959b33cb912aab9e9e9eb15&amp;sortPriority=-1&amp;searchName=旧 HTTP/1.1
+Host: localhost:3003
+Authorization: Caa {{ACCOUNT_AUTHORIZATION}}
+Cache-Control: no-cache
+Postman-Token: 6961da6b-c448-247c-056d-3483c394d2cf

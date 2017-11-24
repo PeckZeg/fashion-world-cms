@@ -1,0 +1,22 @@
+{
+    "category": {
+        "name": "Test747",
+        "channelId": "5959b33cb912aab9e9e9eb15",
+        "_id": "5a179570f33e9354eefee89a",
+        "removeAt": null,
+        "createAt": 1511495024681,
+        "publishAt": 1511495024644,
+        "priority": 0,
+        "cover": null,
+        "channel": {
+            "_id": "5959b33cb912aab9e9e9eb15",
+            "name": "Deeep",
+            "removeBy": "592f6a5e53532796c6b50ae3",
+            "removeAt": null,
+            "createAt": 1499053348235,
+            "publishAt": 1489690763421,
+            "priority": 10,
+            "cover": null
+        }
+    }
+}
