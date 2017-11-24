@@ -1,0 +1,33 @@
+@import "src/scss/global";
+
+:local(.header) {
+  padding: $padding-lg-horizontal
+           $padding-lg-horizontal * 2
+           0
+           $padding-lg-horizontal * 2;
+  border-bottom: 1px solid #e8e8e8;
+  background-color: $white;
+
+  .title, .main {
+    flex: auto;
+  }
+
+  .breadcrumb {
+    margin-bottom: $padding-lg-horizontal;
+  }
+
+  .detail, .row {
+    display: flex;
+  }
+
+  .content {
+    margin-bottom: $padding-lg-horizontal;
+  }
+
+  .title {
+    margin-bottom: $padding-lg-horizontal;
+    font-size: $font-size-xlg;
+    font-weight: 500;
+    color: $gray-darkest;
+  }
+}

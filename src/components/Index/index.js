@@ -60,7 +60,7 @@ export default class Index extends PureComponent {
             <Header />
           </Layout.Header>
 
-          <Layout.Content>
+          <Layout.Content className={styles.content}>
             <Switch>
               {routes.map(({ key, component }) => (
                 <Route key={key} path={key} component={component} />

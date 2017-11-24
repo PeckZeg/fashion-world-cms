@@ -40,3 +40,24 @@ export const baseQueriesByRoute = reduce(menus, (queries, { items }) => {
 
   return queries;
 }, {});
+
+// 面包屑次级类别路由表
+export const breadcrumbIndexRoutes = reduce(menus, (routes, { label, indexRoute, items }) => {
+  forEach(items, ({ key }) => {
+    routes[key] = {
+      route: indexRoute,
+      label
+    };
+  });
+
+  return routes;
+}, {});
+
+// 面包屑三级类别路由表
+export const breadcrumbRoutes = reduce(menus, (routes, { items }) => {
+  forEach(items, ({ key, label }) => {
+    routes[key] = label;
+  });
+
+  return routes;
+}, {});

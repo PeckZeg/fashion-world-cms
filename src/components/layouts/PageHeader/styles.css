@@ -1,0 +1,17 @@
+:local(.header) {
+  padding: 16px 32px 0 32px;
+  border-bottom: 1px solid #e8e8e8;
+  background-color: #ffffff; }
+  :local(.header) .title, :local(.header) .main {
+    flex: auto; }
+  :local(.header) .breadcrumb {
+    margin-bottom: 16px; }
+  :local(.header) .detail, :local(.header) .row {
+    display: flex; }
+  :local(.header) .content {
+    margin-bottom: 16px; }
+  :local(.header) .title {
+    margin-bottom: 16px;
+    font-size: 20px;
+    font-weight: 500;
+    color: #333; }

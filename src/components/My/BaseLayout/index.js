@@ -1,6 +1,5 @@
-import React, { PureComponent } from 'react';
-import { Icon } from 'antd';
 import GlobalFooter from 'ant-design-pro/lib/GlobalFooter';
+import React, { PureComponent } from 'react';
 
 import * as config from '~/src/const/config';
 import styles from './styles.css';
@@ -25,11 +24,7 @@ export default class BaseLayout extends PureComponent {
 
         <GlobalFooter
           className={styles.globalFooter}
-          copyright={(
-            <div>
-              Copyright <Icon type="copyright" /> 2017 {config.copyright}
-            </div>
-          )}
+          copyright={config.copyright}
         />
       </div>
     );

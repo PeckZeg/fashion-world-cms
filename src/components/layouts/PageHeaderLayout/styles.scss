@@ -1,0 +1,15 @@
+@import "src/scss/global";
+
+:local(.container) {
+  margin: (-$padding-lg-horizontal) (-$padding-lg-horizontal) 0;
+}
+
+:local(.content) {
+  margin: $padding-lg-horizontal;
+}
+
+:local(.global-footer) {
+  margin: $padding-base-horizontal * 4 0 $padding-base-horizontal * 2 0;
+  padding: 0 $padding-lg-horizontal;
+  text-align: center;
+}

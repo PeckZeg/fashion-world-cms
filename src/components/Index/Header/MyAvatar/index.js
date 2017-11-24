@@ -3,18 +3,29 @@ import { connect } from 'react-redux';
 import { Avatar, Popover } from 'antd';
 import classnames from 'classnames';
 
+import toProcessImage from '~/src/utils/qiniu/toProcessImage';
 import mapMyToProps from '~/src/utils/connect/mapMyToProps';
 import Menu from './Menu';
 
-import styles from '../../styles.css';
+import indexStyles from '../../styles.css';
+import styles from './styles.css';
 
 @connect(mapMyToProps)
 export default class Header extends PureComponent {
   render() {
     const { profile: account } = this.props.my;
+    const { name } = account;
+    const avatar = toProcessImage(account.avatar, {
+      w: 32,
+      h: 32,
+      interlace: 1
+    });
 
     return (
-      <div className={classnames([styles.action, styles.avatarAction])}>
+      <div className={classnames([
+        indexStyles.action,
+        indexStyles.avatarAction
+      ])}>
         <Popover
           overlayClassName={styles.avatarPopover}
           content={<Menu />}
@@ -23,8 +34,8 @@ export default class Header extends PureComponent {
           arrowPointAtCenter={true}
           // visible
         >
-          <Avatar icon="user" src={account.avatar} />
-          {account.name}
+          <Avatar icon="user" src={avatar} />
+          {name}
         </Popover>
       </div>
     );
