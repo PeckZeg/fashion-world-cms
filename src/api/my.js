@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-// import genSignature from './utils/genSignature';
 import genConfig from './utils/genConfig';
 import shimData from './utils/shimData';
 

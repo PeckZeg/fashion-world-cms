@@ -1,10 +1,24 @@
 import forEach from 'lodash/forEach';
 import has from 'lodash/has';
 
+import * as account from './account';
 import * as my from './my';
 
 const METHOD_LIST = {
+  account,
   my
+};
+
+const GLOBAL_METHOD = {
+  token() {
+    return this.props.token;
+  },
+
+  setStateAsync(...args) {
+    return new Promise(resolve => {
+      this.setState(...args, () => resolve(this.state));
+    });
+  }
 };
 
 /**
@@ -14,11 +28,11 @@ const METHOD_LIST = {
  */
 export default function(...types) {
   return function(Component) {
-    if (!has(Component.prototype, 'token')) {
-      Component.prototype.token = function() {
-        return this.props.token;
-      };
-    }
+    forEach(GLOBAL_METHOD, (method, name) => {
+      if (!has(Component.prototype, name)) {
+        Component.prototype[name] = method;
+      }
+    });
 
     forEach(types, type => {
       if (has(METHOD_LIST, type)) {

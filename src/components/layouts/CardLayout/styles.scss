@@ -1,0 +1,7 @@
+@import "src/scss/global";
+
+:local(.container) {
+  :global(.ant-card-head) {
+    border-bottom: none;
+  }
+}

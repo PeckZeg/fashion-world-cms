@@ -1,4 +1,4 @@
-import isPlainObject from 'lodash/isPlainObject';
+// import isPlainObject from 'lodash/isPlainObject';
 import genSignature from './genSignature';
 
 /**
@@ -9,6 +9,7 @@ import genSignature from './genSignature';
  *  @param {object} [opts.config = {}] axios 配置
  *  @param {object} [opts.headers] http headers
  *  @param {object} [opts.query] 查询参数
+ *  @param {object} [opts.params] 查询参数
  */
 export default (action, token, opts = {}) => {
   let { config = {} } = opts;
@@ -19,12 +20,11 @@ export default (action, token, opts = {}) => {
     ...opts.headers
   };
 
-  if (isPlainObject(opts.query)) {
-    config.params = {
-      ...config.params,
-      ...opts.query
-    };
-  }
+  config.params = {
+    ...config.params,
+    ...opts.params,
+    ...opts.query
+  };
 
   return config;
 };

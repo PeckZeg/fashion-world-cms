@@ -40,16 +40,6 @@ export const bodyParams = [
     param: 'key',
     type: 'string',
     note: '存储在七牛存储空间上的键'
-  },
-  {
-    param: 'password',
-    type: 'string',
-    note: '密码（MD5 加密，32 位小写）'
-  },
-  {
-    param: 'permissions',
-    type: 'string[]',
-    note: '权限列表，需全量提交'
   }
 ];
 

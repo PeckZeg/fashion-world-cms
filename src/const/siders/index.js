@@ -3,6 +3,7 @@ import reduce from 'lodash/reduce';
 import map from 'lodash/map';
 
 import * as account from './account';
+import { title } from '../config';
 
 // 菜单列表
 export const menus = [
@@ -39,6 +40,15 @@ export const baseQueriesByRoute = reduce(menus, (queries, { items }) => {
   });
 
   return queries;
+}, {});
+
+// 文档标题（按路由）
+export const docTitlesByRoute = reduce(menus, (routes, { label: mainLabel, items }) => {
+  forEach(items, ({ key, label }) => {
+    routes[key] = `${label} - ${mainLabel} - ${title}`;
+  });
+
+  return routes;
 }, {});
 
 // 面包屑次级类别路由表
