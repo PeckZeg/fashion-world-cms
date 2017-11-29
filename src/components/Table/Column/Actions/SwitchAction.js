@@ -54,6 +54,10 @@ export default class SwitchAction extends PureComponent {
     onNoClick: PropTypes.func
   };
 
+  state = {
+    loading: false
+  };
+
   /**
    *  按钮猛击处理器
    *  @param {Event} 猛击事件
@@ -63,18 +67,30 @@ export default class SwitchAction extends PureComponent {
     const { status, onYesClick, onNoClick } = this.props;
     const handler = status ? onYesClick : onNoClick;
 
-    isFunction(handler) && handler(e, this);
+    e.preventDefault();
+
+    isFunction(handler) && handler(this);
   }
 
   render() {
-    const { status, yesType, yesIcon, noType, noIcon, yesLabel, noLabel } = this.props;
+    const {
+      status,
+      yesType, yesIcon, yesLabel,
+      noType, noIcon, noLabel
+    } = this.props;
+    const { loading } = this.state;
     const type = status ? yesType : noType;
     const icon = status ? yesIcon : noIcon;
     const label = status ? yesLabel : noLabel;
 
     return (
       <li>
-        <Button type={type} icon={icon} onClick={this.onClick}>
+        <Button
+          type={type}
+          icon={icon}
+          loading={loading}
+          onClick={this.onClick}
+        >
           {label}
         </Button>
       </li>

@@ -1,5 +1,5 @@
+import { Link } from 'react-router-dom';
 import React from 'react';
-import { Button } from 'antd';
 
 import SwitchAction from '@table-column/Actions/SwitchAction';
 import CreateAtCol from '@table-column/CreateAt';
@@ -53,33 +53,42 @@ export default function(com, query) {
       title: '操作',
       width: 160,
       float: 'right',
-      render: (_, entry) => (
-        <ActionsCol
-          entry={entry}
-          moreContent={(
-            <ul>
-              <SwitchAction
-                status={!entry.activeAt}
-                // yesType="default"
-                yesLabel="激活"
-                yesIcon="check"
-                // noType="danger"
-                noIcon="lock"
-                noLabel="冻结"
-              />
-              <SwitchAction
-                status={!entry.removeAt}
-                yesType="danger"
-                yesLabel="删除"
-                yesIcon="delete"
-                noType="default"
-                noIcon="rollback"
-                noLabel="恢复"
-              />
-            </ul>
-          )}
-        />
-      )
+      render: (actions, entry) => {
+        const more = (
+          <ul>
+            <SwitchAction
+              entry={entry}
+              status={!entry.activeAt}
+              yesLabel="激活"
+              yesIcon="check"
+              noIcon="lock"
+              noLabel="冻结"
+              onYesClick={com.activeEntry}
+              onNoClick={com.blockEntry}
+            />
+            <SwitchAction
+              entry={entry}
+              status={!entry.removeAt}
+              yesType="danger"
+              yesLabel="删除"
+              yesIcon="delete"
+              noType="default"
+              noIcon="rollback"
+              noLabel="恢复"
+              onYesClick={com.destroyEntry}
+              onNoClick={com.recoverEntry}
+            />
+          </ul>
+        );
+
+        return (
+          <ActionsCol moreContent={more}>
+            <Link to={`/account/${entry._id}/edit`}>
+              编辑
+            </Link>
+          </ActionsCol>
+        );
+      }
     }
   ];
 };

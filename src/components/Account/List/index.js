@@ -14,6 +14,7 @@ import mapMyToProps from '~/src/utils/connect/mapMyToProps';
 import onTableChange from '~/src/utils/table/onTableChange';
 import genPagination from '~/src/utils/table/genPagination';
 import genQueryArgs from '~/src/utils/list/genQueryArgs';
+import handleEntry from '~/src/utils/list/handleEntry';
 import initState from '~/src/utils/list/initState';
 import catchError from '~/src/utils/catchError';
 import injectApi from '~/src/utils/injectApi';
@@ -28,7 +29,10 @@ export default class List extends PureComponent {
     super(props);
 
     initState(this, props, querySchema, {
-      entriesProp: 'accounts'
+      entriesProp: 'accounts',
+      entryProp: 'account',
+      entryTitle: '账号',
+      entryNameProp: 'name'
     });
   }
 
@@ -40,6 +44,11 @@ export default class List extends PureComponent {
     removeHistoryListener(this);
   }
 
+  /**
+   *  获取条目列表
+   *  @param {number} offset 页面位移
+   *  @param {number} limit 每页限制
+   */
   fetchEntryList = async (offset, limit) => {
     const { entriesProp } = this.state;
     const query = genQueryArgs(this, offset, limit, querySchema);
@@ -66,7 +75,39 @@ export default class List extends PureComponent {
     }
   }
 
+  /**
+   *  激活条目
+   *  @param {React.Component} button 按钮组件实例
+   */
+  activeEntry = button => handleEntry(this, button, '激活', 'activeAccount');
+
+  /**
+   *  冻结条目
+   *  @param {React.Component} button 按钮组件实例
+   */
+  blockEntry = button => handleEntry(this, button, '冻结', 'blockAccount');
+
+  /**
+   *  删除条目
+   *  @param {React.Component} button 按钮组件实例
+   */
+  destroyEntry = button => handleEntry(this, button, '删除', 'destroyAccount');
+
+  /**
+   *  恢复条目
+   *  @param {React.Component} button 按钮组件实例
+   */
+  recoverEntry = button => handleEntry(this, button, '恢复', 'recoverAccount');
+
+  /**
+   *  表格改变处理器
+   */
   onTableChange = (...args) => onTableChange(this, ...args, querySchema);
+
+  /**
+   *  变更行选择处理器
+   *  @param {ObjectId[]} selectedRowKeys 已选择的行列表
+   */
   onRowChange = selectedRowKeys => this.setState({ selectedRowKeys });
 
   render() {

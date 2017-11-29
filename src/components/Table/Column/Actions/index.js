@@ -6,11 +6,6 @@ import styles from './styles.css';
 
 export default class TableActionsColumn extends PureComponent {
   static propTypes = {
-    editLabel: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.string
-    ]).isRequired,
-
     moreLabel: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.string
@@ -25,7 +20,6 @@ export default class TableActionsColumn extends PureComponent {
   };
 
   static defaultProps = {
-    editLabel: '编辑',
     moreLabel: '更多',
     moreIcon: 'down'
   };
@@ -39,17 +33,12 @@ export default class TableActionsColumn extends PureComponent {
   }
 
   render() {
-    const { editLabel, moreLabel, moreIcon, moreContent } = this.props;
+    const { children, moreLabel, moreIcon, moreContent } = this.props;
     const { visible } = this.state;
 
     return (
       <ul className={styles.actions}>
-        {/* 编辑按钮 */}
-        <li>
-          <a href="javascript:;">
-            {editLabel}
-          </a>
-        </li>
+        {children && <li>{children}</li>}
 
         {/* 更多 */}
         <li>
@@ -60,7 +49,6 @@ export default class TableActionsColumn extends PureComponent {
             onVisibleChange={this.onVisibleChange}
             content={moreContent}
             placement="bottomRight"
-            // visible
           >
             <a href="javascript:;">
               {moreLabel} <Icon type={moreIcon} />
