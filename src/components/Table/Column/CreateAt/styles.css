@@ -1,0 +1,8 @@
+:local(.container) {
+  text-align: left; }
+  :local(.container) strong, :local(.container) small {
+    display: block;
+    font-size: 14px;
+    font-weight: 400; }
+  :local(.container) small {
+    color: #808080; }

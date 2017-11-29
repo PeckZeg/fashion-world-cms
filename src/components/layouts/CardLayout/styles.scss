@@ -1,7 +1,13 @@
 @import "src/scss/global";
 
 :local(.container) {
-  :global(.ant-card-head) {
-    border-bottom: none;
+  :global {
+    .ant-card-head {
+      border-bottom: none;
+    }
+
+    .ant-card-body {
+      padding: $padding-lg-horizontal;
+    }
   }
 }

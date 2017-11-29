@@ -1,0 +1,81 @@
+@import "src/scss/global";
+
+$popover-width:                         128px;
+$popover-btn-height:                    40px;
+
+:local(.actions) {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: right;
+
+  li {
+    position: relative;
+    display: inline-block;
+    padding: 0 $padding-xs-horizontal;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:not(:last-child):after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 0;
+      @include size(1px, $padding-md-horizontal);
+      background-color: #e8e8e8;
+      transform: translateY(-50%);
+    }
+
+    :global(.anticon) {
+      font-size: small;
+    }
+  }
+
+  a:focus {
+    text-decoration: none;
+  }
+}
+
+:local(.popover) {
+  :global {
+    // .ant-popover-arrow {
+    //   display: none;
+    // }
+
+    .ant-popover-inner {
+      box-shadow: 0 0 $padding-base-horizontal rgba($black, 0.2);
+    }
+
+    .ant-popover-inner-content {
+      padding: 0;
+
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: $padding-base-vertical 0;
+        width: $popover-width;
+
+        li {
+          .ant-btn {
+            border: none;
+            border-radius: 0;
+            width: 100%;
+            height: $popover-btn-height;
+            line-height: $popover-btn-height;
+            text-align: left;
+
+            &:not(.ant-btn-primary):not(:hover):not(:focus) {
+              background-color: $white;
+            }
+
+            &.ant-btn-clicked:after {
+              content: none;
+            }
+          }
+        }
+      }
+    }
+ }
+}

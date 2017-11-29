@@ -1,0 +1,16 @@
+@import "src/scss/global";
+
+:local(.container) {
+  text-align: left;
+
+  strong, small {
+    display: block;
+    font-size: $font-size-base;
+    font-weight: 400;
+  }
+
+  small {
+    color: $gray;
+    // font-style: italic;
+  }
+}

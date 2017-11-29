@@ -1,0 +1,75 @@
+@import "src/scss/global";
+
+$ellipsis-width:                             4em;
+$base-height:                                1.5em;
+$hover-bg-color:                             #ecf6fd;
+
+:local(.container) {
+  h4, .desc {
+    position: relative;
+    overflow: hidden;
+    height: $base-height;
+    white-space: normal;
+    line-height: $base-height;
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      @include size($ellipsis-width, $base-height);
+      transition: all 0.3s;
+    }
+
+    &:before {
+      opacity: 0;
+      background: linear-gradient(
+        to left,
+        $hover-bg-color,
+        rgba($hover-bg-color, 0)
+      );
+    }
+
+    &:after {
+      background: linear-gradient(
+        to left,
+        $white,
+        rgba($white, 0)
+      );
+    }
+
+    :global(.ant-table-tbody) > tr:hover > td &,
+    :global(.ant-table-tbody) > tr:global(.ant-table-row-hover) > td &,
+    :global(.ant-select-dropdown-menu-item:hover) &,
+    :global(.ant-select-dropdown-menu-item-active) & {
+      &:before {
+        opacity: 1;
+      }
+
+      &:after {
+        opacity: 0;
+      }
+    }
+  }
+
+  h4 {
+    margin: 0;
+    
+    &, a {
+      font-weight: normal;
+      font-size: $font-size-medium;
+      color: $gray-darken;
+    }
+
+    a {
+      &:hover {
+        color: lighten($gray-darken, 16%);
+      }
+    }
+  }
+
+  .desc {
+    color: $gray;
+  }
+}

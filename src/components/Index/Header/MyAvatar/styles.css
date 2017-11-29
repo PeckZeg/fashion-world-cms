@@ -5,7 +5,7 @@
     display: none; }
   :local(.avatar-popover) :global(.ant-popover-content) :global(.ant-popover-inner) {
     border-radius: 2px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); }
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.2); }
     :local(.avatar-popover) :global(.ant-popover-content) :global(.ant-popover-inner)-content {
       padding: 0; }
       :local(.avatar-popover) :global(.ant-popover-content) :global(.ant-popover-inner)-content ul {

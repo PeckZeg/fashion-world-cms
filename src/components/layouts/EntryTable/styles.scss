@@ -1,0 +1,13 @@
+@import "src/scss/global";
+
+:local(.table) {
+  :global {
+    // .ant-table-pagination {
+    //   padding: $padding-lg-horizontal 0;
+    // }
+
+    .ant-pagination-options-size-changer {
+      margin-right: $padding-lg-horizontal / 2;
+    }
+  }
+}

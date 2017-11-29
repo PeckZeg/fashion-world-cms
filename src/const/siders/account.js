@@ -1,3 +1,4 @@
+import Profile from '~/src/components/Account/Profile';
 import List from '~/src/components/Account/List';
 
 export const key = 'account';
@@ -30,6 +31,12 @@ export const items = [
     icon: 'delete',
     label: '已删除的账号',
     component: List,
-    baseQuery: { activeAt: 'off', removeAt: 'off' }
+    baseQuery: { activeAt: 'off', removeAt: 'on' }
   },
+  {
+    hidden: true,
+    key: '/account/:accountId',
+    label: '账号信息',
+    component: Profile
+  }
 ];

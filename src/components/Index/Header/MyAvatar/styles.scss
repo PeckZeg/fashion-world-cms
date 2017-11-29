@@ -16,7 +16,7 @@ $avatar-popover-height:                 $padding-lg-horizontal * 1.25;
 
     :global(.ant-popover-inner) {
       border-radius: 2px;
-      box-shadow: 0 6px 16px rgba($black, 0.2);
+      box-shadow: 0 0 $padding-lg-horizontal rgba($black, 0.2);
 
       &-content {
         padding: 0;

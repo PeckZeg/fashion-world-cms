@@ -1,0 +1,4 @@
+:local(.container) {
+  text-align: center; }
+  :local(.container) :global .ant-tag {
+    margin: auto; }
