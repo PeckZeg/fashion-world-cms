@@ -1,0 +1,16 @@
+:local(.permissions) {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+  :local(.permissions) > li h4 {
+    display: inline-block;
+    width: 4em;
+    margin-right: 0.25em;
+    font-weight: 400;
+    color: #808080; }
+  :local(.permissions) :global .ant-tag {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    font-size: 14px;
+    cursor: default; }

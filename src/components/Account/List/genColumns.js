@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import React from 'react';
 
 import SwitchAction from '@table-column/Actions/SwitchAction';
+import PermissionsCol from '@table-column/Permissions';
 import CreateAtCol from '@table-column/CreateAt';
 import ActionsCol from '@table-column/Actions';
 import StatusCol from '@table-column/Status';
@@ -39,7 +40,7 @@ export default function(com, query) {
     {
       dataIndex: 'permissions',
       title: '权限',
-      render: permissions => JSON.stringify(permissions)
+      render: permissions => <PermissionsCol value={permissions} />
     },
     {
       dataIndex: 'createAt',
