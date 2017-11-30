@@ -3,7 +3,7 @@
 # dependencies
 /node_modules
 /proxy.json
-src/*.css
+src/**/*.css
 
 # testing
 /coverage
