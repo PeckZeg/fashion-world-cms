@@ -7,6 +7,7 @@ import CreateAtCol from '@table-column/CreateAt';
 import ActionsCol from '@table-column/Actions';
 import StatusCol from '@table-column/Status';
 import TitleCol from '@table-column/Title';
+import CoverCol from '@table-column/Cover';
 
 import genSorter from '~/src/utils/table/genSorter';
 
@@ -16,7 +17,7 @@ export default function(com, query) {
       dataIndex: 'status',
       title: '状态',
       width: 64,
-      render: (_, entry) => (
+      render: (status, entry) => (
         <StatusCol
           publishAt={entry.activeAt}
           removeAt={entry.removeAt}
@@ -29,6 +30,12 @@ export default function(com, query) {
     //   // width: 213,
     //   render: _id => <code>{_id}</code>
     // },
+    {
+      dataIndex: 'avatar',
+      title: '头像',
+      width: 80,
+      render: avatar => <CoverCol icon="user" value={avatar} circular />
+    },
     {
       dataIndex: 'name',
       title: '登录名',

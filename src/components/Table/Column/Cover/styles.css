@@ -1,0 +1,62 @@
+:local .wrapper {
+  text-align: center;
+  vertical-align: middle; }
+
+:local .container {
+  position: relative;
+  display: inline-block;
+  border-radius: 4px;
+  width: 64px;
+  height: 64px;
+  background-color: #eee;
+  vertical-align: middle; }
+  :local .container:global(.circular) {
+    border-radius: 50%; }
+    :local .container:global(.circular) a.image, :local .container:global(.circular) a.image:before {
+      border-radius: 50%; }
+
+:local .placeholder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 18px;
+  color: #aaa;
+  transform: translate(-50%, -50%); }
+
+:local a.image {
+  position: relative;
+  z-index: 4;
+  display: block;
+  border-radius: 4px;
+  background: none 50%/cover no-repeat;
+  width: 100%;
+  height: 100%;
+  color: #ffffff;
+  cursor: zoom-in; }
+  :local a.image:before {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    border-radius: 4px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.33);
+    transition: all 0.2s ease-out; }
+  :local a.image:hover:before {
+    opacity: 1; }
+  :local a.image:hover .zoom-in {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1); }
+  :local a.image .zoom-in {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+    font-size: 24px;
+    transform: translate(-50%, -50%) scale(0.66);
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.66);
+    transition: all 0.2s ease-out; }

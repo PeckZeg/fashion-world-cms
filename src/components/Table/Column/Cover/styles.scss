@@ -1,1 +1,89 @@
 @import "src/scss/global";
+
+$cover-size:                                 64px;
+$border-radius:                              4px;
+$bg-color:                                   #eee;
+$placeholder-color:                          #aaa;
+
+:local {
+  .wrapper {
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .container {
+    position: relative;
+    display: inline-block;
+    border-radius: $border-radius;
+    @include size($cover-size);
+    background-color: $bg-color;
+    // box-shadow: 0 0 6px rgba($black, 0.2);
+    vertical-align: middle;
+
+    &:global(.circular) {
+      border-radius: 50%;
+
+      a.image {
+        &, &:before {
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+
+  .placeholder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: $font-size-h4;
+    color: $placeholder-color;
+    transform: translate(-50%, -50%);
+  }
+
+  a.image {
+    position: relative;
+    z-index: 4;
+    display: block;
+    border-radius: $border-radius;
+    background: none 50%/cover no-repeat;
+    @include size(100%);
+    color: $white;
+    cursor: zoom-in;
+
+    &:before {
+      content: '';
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      border-radius: $border-radius;
+      @include size(100%);
+      background-color: rgba($black, 0.33);
+      @include enable-transition();
+    }
+
+    &:hover {
+      &:before {
+        opacity: 1;
+      }
+
+      .zoom-in {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    .zoom-in {
+      position: absolute;
+      z-index: 2;
+      top: 50%;
+      left: 50%;
+      opacity: 0;
+      font-size: $font-size-h3;
+      transform: translate(-50%, -50%) scale(0.66);
+      text-shadow: 0 0 4px rgba($black, 0.66);
+      @include enable-transition();
+    }
+  }
+}
