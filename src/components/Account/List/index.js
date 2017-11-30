@@ -45,6 +45,14 @@ export default class List extends PureComponent {
   }
 
   /**
+   *  打开图片预览模态
+   *  @param {object} entry 条目字典
+   */
+  openImageViwer = entry => {
+    console.log(entry);
+  }
+
+  /**
    *  获取条目列表
    *  @param {number} offset 页面位移
    *  @param {number} limit 每页限制

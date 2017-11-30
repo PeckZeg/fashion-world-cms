@@ -34,7 +34,14 @@ export default function(com, query) {
       dataIndex: 'avatar',
       title: '头像',
       width: 80,
-      render: avatar => <CoverCol icon="user" value={avatar} circular />
+      render: (avatar, entry) => (
+        <CoverCol
+          icon="user"
+          value={avatar}
+          circular
+          onClick={com.openImageViwer.bind(com, entry)}
+        />
+      )
     },
     {
       dataIndex: 'name',
