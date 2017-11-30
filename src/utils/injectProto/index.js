@@ -2,9 +2,11 @@ import forEach from 'lodash/forEach';
 import has from 'lodash/has';
 
 import setStateAsync from './setStateAsync';
+import ref from './ref';
 
 const METHOD_LIST = {
-  setStateAsync
+  setStateAsync,
+  ref
 };
 
 export default function(...methods) {

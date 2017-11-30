@@ -6,16 +6,19 @@ import { connect } from 'react-redux';
 import PageHeaderLayout from '~/src/components/layouts/PageHeaderLayout';
 import CardLayout from '~/src/components/layouts/CardLayout';
 import EntryTable from '~/src/components/layouts/EntryTable';
+import ImageViewer from '~/src/components/ImageViewer';
 
 import removeHistoryListener from '~/src/utils/list/removeHistoryListener';
 import addHistoryListener from '~/src/utils/list/addHistoryListener';
 import genRowSelection from '~/src/utils/table/genRowSelection';
+import toProcessImage from '~/src/utils/qiniu/toProcessImage';
 import mapMyToProps from '~/src/utils/connect/mapMyToProps';
 import onTableChange from '~/src/utils/table/onTableChange';
 import genPagination from '~/src/utils/table/genPagination';
 import genQueryArgs from '~/src/utils/list/genQueryArgs';
 import handleEntry from '~/src/utils/list/handleEntry';
 import initState from '~/src/utils/list/initState';
+import injectProto from '~/src/utils/injectProto';
 import catchError from '~/src/utils/catchError';
 import injectApi from '~/src/utils/injectApi';
 import * as querySchema from './querySchema';
@@ -24,6 +27,7 @@ import genColumns from './genColumns';
 @withRouter
 @connect(mapMyToProps)
 @injectApi('account')
+@injectProto('ref')
 export default class List extends PureComponent {
   constructor(props) {
     super(props);
@@ -48,8 +52,14 @@ export default class List extends PureComponent {
    *  打开图片预览模态
    *  @param {object} entry 条目字典
    */
-  openImageViwer = entry => {
-    console.log(entry);
+  openImageViewer = entry => {
+    this.imageViewer.show(entry.avatar, (
+      <ImageViewer.Title
+        icon="user"
+        title={entry.name}
+        avatar={toProcessImage(entry.avatar, { w: 32, h: 32 })}
+      />
+    ));
   }
 
   /**
@@ -76,6 +86,12 @@ export default class List extends PureComponent {
         limit: query.limit,
         columns: genColumns(this, query)
       });
+
+      // const entry = entries.filter(entry => entry.avatar)[0];
+      //
+      // if (entry) {
+      //   this.openImageViewer(entry);
+      // }
     }
 
     catch (err) {
@@ -138,6 +154,9 @@ export default class List extends PureComponent {
               rowKey="_id"
               onChange={this.onTableChange}
             />
+
+            <ImageViewer ref={this.ref.bind(this, 'imageViewer')} />
+
             {/* <pre style={{ margin: 0 }}>
               {JSON.stringify(this.state.entries, null, 2)}
             </pre> */}

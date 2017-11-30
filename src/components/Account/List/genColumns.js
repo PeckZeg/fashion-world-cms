@@ -39,7 +39,7 @@ export default function(com, query) {
           icon="user"
           value={avatar}
           circular
-          onClick={com.openImageViwer.bind(com, entry)}
+          onClick={com.openImageViewer.bind(com, entry)}
         />
       )
     },
