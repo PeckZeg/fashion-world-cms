@@ -2,11 +2,13 @@ import DocumentTitle from 'react-document-title';
 import React, { PureComponent } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
+import { Button } from 'antd';
 
 import PageHeaderLayout from '~/src/components/layouts/PageHeaderLayout';
 import CardLayout from '~/src/components/layouts/CardLayout';
 import EntryTable from '~/src/components/layouts/EntryTable';
 import ImageViewer from '~/src/components/ImageViewer';
+import Toolbar from '@table/Toolbar';
 
 import removeHistoryListener from '~/src/utils/list/removeHistoryListener';
 import addHistoryListener from '~/src/utils/list/addHistoryListener';
@@ -134,9 +136,15 @@ export default class List extends PureComponent {
    */
   onRowChange = selectedRowKeys => this.setState({ selectedRowKeys });
 
+  /**
+   *  清空已选择行处理器
+   */
+  onEmptyRowKeys = () => this.setState({ selectedRowKeys: [] });
+
   render() {
     const {
-      docTitle, total, loading, columns, entries, offset, limit
+      docTitle, total, loading, columns, entries, offset, limit,
+      selectedRowKeys
     } = this.state;
 
     return (
@@ -148,7 +156,6 @@ export default class List extends PureComponent {
               loading={loading}
               columns={columns}
               dataSource={entries}
-              // showHeader={false}
               pagination={genPagination({ total, offset, limit })}
               rowSelection={genRowSelection(this)}
               rowKey="_id"
@@ -157,9 +164,18 @@ export default class List extends PureComponent {
 
             <ImageViewer ref={this.ref.bind(this, 'imageViewer')} />
 
-            {/* <pre style={{ margin: 0 }}>
-              {JSON.stringify(this.state.entries, null, 2)}
-            </pre> */}
+            <Toolbar
+              visible={!!selectedRowKeys.length}
+              extra={`已选择 ${selectedRowKeys.length} 个项目`}
+            >
+              <Button type="primary">激活</Button>
+              <Button type="default">恢复</Button>
+              <Button type="danger">冻结</Button>
+              <Button type="danger">删除</Button>
+              <Button onClick={this.onEmptyRowKeys}>
+                取消
+              </Button>
+            </Toolbar>
           </CardLayout>
         </PageHeaderLayout>
       </DocumentTitle>

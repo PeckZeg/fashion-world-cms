@@ -1,5 +1,5 @@
-import React, { PureComponent, Fragment } from 'react';
-import { Avatar, Modal, Spin } from 'antd';
+import React, { PureComponent } from 'react';
+import { Modal, Spin } from 'antd';
 import Animate from 'rc-animate';
 
 import uniqueId from 'lodash/uniqueId';

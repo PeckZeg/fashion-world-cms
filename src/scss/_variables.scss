@@ -11,6 +11,9 @@
 
 $folder-images:                              '../../public/images';
 
+$z-index-modal:                              1024;
+$z-index-sider:                              512;
+$z-index-toolbar:                            256;
 
 $my-bg-color:                                #f0f2f5;
 $my-bg-image:                                '../bg.svg';
@@ -18,3 +21,6 @@ $my-bg-image:                                '../bg.svg';
 $header-height:                              64px;
 $header-box-shadow:                          0 1px 4px rgba(0, 21, 41, 0.08);
 $header-item-hover-bg-color:                 #e6f7ff;
+
+$sider-width:                               256px;
+$sider-box-shadow:                          2px 0 6px rgba(#001529, 0.35);

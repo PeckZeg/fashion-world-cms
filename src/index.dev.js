@@ -11,6 +11,8 @@ import registerServiceWorker from './registerServiceWorker';
 import reducers from './reducers';
 
 import App from './App.dev';
+
+import 'ant-design-pro/dist/ant-design-pro.css';
 import './index.css';
 
 moment.locale('zh-cn');

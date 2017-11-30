@@ -1,0 +1,9 @@
+@import "src/scss/global";
+
+:local(.container) {
+  &:global(.antd-pro-toolbar) {
+    z-index: $z-index-toolbar;
+    padding-left: $sider-width + 24px;
+    transition: none;
+  }
+}
