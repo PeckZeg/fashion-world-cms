@@ -1,0 +1,23 @@
+@import "src/scss/global";
+
+:local(.desc) {
+  .label,
+  .detail {
+    display: table-cell;
+    padding-bottom: $padding-lg-horizontal / 2;
+  }
+
+  .label {
+    white-space: nowrap;
+    color: $gray;
+
+    &:after {
+      content: ':';
+      margin: 0 ($padding-lg-horizontal / 2) 0 2px;
+    }
+  }
+
+  .detail {
+    width: 100%;
+  }
+}

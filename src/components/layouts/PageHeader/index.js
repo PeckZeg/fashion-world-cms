@@ -1,10 +1,12 @@
 import React, { PureComponent } from 'react';
 import { withRouter } from 'react-router';
-import { Breadcrumb } from 'antd';
+import { Breadcrumb, Icon } from 'antd';
 
 import { breadcrumbRoutes, breadcrumbIndexRoutes } from '~/src/const/siders';
 
 import styles from './styles.css';
+
+// const img = 'https://gw.alipayobjects.com/zos/rmsportal/nxkuOJlFJuAUhzlMTCEe.png';
 
 @withRouter
 export default class PageHeader extends PureComponent {
@@ -36,7 +38,7 @@ export default class PageHeader extends PureComponent {
   }
 
   render() {
-    const { title, content, match } = this.props;
+    const { title, content, match, logo } = this.props;
 
     return (
       <div className={styles.header}>
@@ -56,6 +58,12 @@ export default class PageHeader extends PureComponent {
         </Breadcrumb>
 
         <div className={styles.detail}>
+          {logo && (
+            <div className={styles.logo}>
+              <Icon type="user" />
+              <ins style={{ backgroundImage: `url(${logo})` }} />
+            </div>
+          )}
           <div className={styles.main}>
             <div className={styles.row}>
               {title && <h1 className={styles.title}>{title}</h1>}

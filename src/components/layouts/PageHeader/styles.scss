@@ -1,5 +1,8 @@
 @import "src/scss/global";
 
+$logo-size:                             32px;
+$logo-border-radius:                    4px;
+
 :local(.header) {
   padding: $padding-lg-horizontal
            $padding-lg-horizontal * 2
@@ -20,14 +23,52 @@
     display: flex;
   }
 
+  .logo {
+    position: relative;
+    flex: 0 0 $logo-size;
+    margin-right: $padding-lg-horizontal;
+    margin-bottom: $padding-lg-horizontal;
+    width: $logo-size;
+
+    :global(.anticon) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      @include size($logo-size);
+      border-radius: $logo-border-radius;
+      background-color: $gray-lightest;
+      color: $gray;
+
+      &:before {
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    ins {
+      position: absolute;
+      z-index: 4;
+      top: 0;
+      left: 0;
+      border-radius: $logo-border-radius;
+      @include size($logo-size);
+      background: none 50%/cover no-repeat;
+    }
+  }
+
   .content {
     margin-bottom: $padding-lg-horizontal;
+    flex: auto;
   }
 
   .title {
     margin-bottom: $padding-lg-horizontal;
     font-size: $font-size-xlg;
     font-weight: 500;
+    line-height: $logo-size;
     color: $gray-darkest;
   }
 }

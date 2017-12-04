@@ -8,10 +8,42 @@
     margin-bottom: 16px; }
   :local(.header) .detail, :local(.header) .row {
     display: flex; }
+  :local(.header) .logo {
+    position: relative;
+    flex: 0 0 32px;
+    margin-right: 16px;
+    margin-bottom: 16px;
+    width: 32px; }
+    :local(.header) .logo :global(.anticon) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 4px;
+      background-color: #f5f5f5;
+      color: #808080; }
+      :local(.header) .logo :global(.anticon):before {
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); }
+    :local(.header) .logo ins {
+      position: absolute;
+      z-index: 4;
+      top: 0;
+      left: 0;
+      border-radius: 4px;
+      width: 32px;
+      height: 32px;
+      background: none 50%/cover no-repeat; }
   :local(.header) .content {
-    margin-bottom: 16px; }
+    margin-bottom: 16px;
+    flex: auto; }
   :local(.header) .title {
     margin-bottom: 16px;
     font-size: 20px;
     font-weight: 500;
+    line-height: 32px;
     color: #333; }

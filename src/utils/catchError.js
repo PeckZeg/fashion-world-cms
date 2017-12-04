@@ -17,12 +17,14 @@ import has from 'lodash/has';
 export default (component, err, opts = {}) => {
   let { message = '你碰到了一个错误' } = opts;
   let description = err.message || opts.description || '未知错误';
+  let response;
 
   console.error(err);
 
   // handle axios error
   if (has(err, 'response')) {
     const { status, statusText, data } = err.response;
+    response = err.response;
     description = `${status}: ${data.message || statusText}`;
 
     if (status === 404 && data.message === 'apiKey not found') {
@@ -46,5 +48,9 @@ export default (component, err, opts = {}) => {
 
   notification.error({ message, description });
 
-  return { message, description };
+  return {
+    message,
+    description,
+    ...response && { response } 
+  };
 };

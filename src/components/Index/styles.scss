@@ -44,6 +44,10 @@ $avatar-popover-height:                 $padding-lg-horizontal * 1.25;
   }
 }
 
+:local(.main) {
+  position: relative;
+}
+
 :local .header {
   position: relative;
   padding: 0 $padding-base-horizontal 0 0;

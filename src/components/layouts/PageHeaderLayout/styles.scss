@@ -1,7 +1,16 @@
 @import "src/scss/global";
 
 :local(.container) {
+  // position: relative;
   margin: (-$padding-lg-horizontal) (-$padding-lg-horizontal) 0;
+  // min-height: 100%;
+}
+
+:local(.loading) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 240px;
 }
 
 :local(.content) {
@@ -9,7 +18,15 @@
 }
 
 :local(.global-footer) {
-  margin: $padding-base-horizontal * 4 0 $padding-base-horizontal * 2 0;
+  margin: ($padding-base-horizontal * 2) 0;
   padding: 0 $padding-lg-horizontal;
+  width: 100%;
   text-align: center;
+
+  &:global(.fixed) {
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+  }
 }

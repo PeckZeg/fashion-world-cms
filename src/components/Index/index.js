@@ -49,7 +49,7 @@ export default class Index extends PureComponent {
           <Sider collapsed={collapsed} />
         </Layout.Sider>
 
-        <Layout>
+        <Layout className={styles.main}>
           <Layout.Header className={styles.header}>
             <Icon
               className={styles.trigger}

@@ -27,6 +27,9 @@
     color: #ffffff;
     font-size: 18px; }
 
+:local(.main) {
+  position: relative; }
+
 :local .header {
   position: relative;
   padding: 0 12px 0 0;

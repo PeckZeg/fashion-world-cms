@@ -195,7 +195,7 @@ export default class List extends PureComponent {
 
     return (
       <DocumentTitle title={docTitle}>
-        <PageHeaderLayout>
+        <PageHeaderLayout loading={loading}>
           <CardLayout>
             <EntryTable
               total={total}
