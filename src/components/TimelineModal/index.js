@@ -2,7 +2,6 @@ import { Button, Modal, Timeline } from 'antd';
 import injectProto from '~/src/utils/injectProto';
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 
 import Item from './Item';
 import createItem from './createItem';
@@ -23,18 +22,21 @@ export default class TimelineModal extends PureComponent {
 
   state = {
     visible: false,
+    title: null,
     // maskClosable: false,
     closable: true,
     loading: false
   };
 
   onClose = () => this.setState(prevState => ({
-    visible: prevState.closable ? false : prevState.visible
+    visible: prevState.closable ? false : prevState.visible,
+    title: prevState.closable ? null: prevState.title
   }));
 
   render() {
-    const { title, children } = this.props;
+    const { children } = this.props;
     const { visible, closable, loading } = this.state;
+    const title = this.props.title || this.state.title;
 
     const footer = (
       <Button onClick={this.onClose} disabled={!closable} loading={loading}>

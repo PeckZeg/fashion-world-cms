@@ -13,6 +13,7 @@ import Toolbar from '@table/Toolbar';
 
 import removeHistoryListener from '~/src/utils/list/removeHistoryListener';
 import addHistoryListener from '~/src/utils/list/addHistoryListener';
+import handleEntries from '~/src/utils/list/handleSelectedEntries';
 import genRowSelection from '~/src/utils/table/genRowSelection';
 import toProcessImage from '~/src/utils/qiniu/toProcessImage';
 import mapMyToProps from '~/src/utils/connect/mapMyToProps';
@@ -25,7 +26,6 @@ import injectProto from '~/src/utils/injectProto';
 import catchError from '~/src/utils/catchError';
 import injectApi from '~/src/utils/injectApi';
 import * as querySchema from './querySchema';
-import activeEntries from './activeEntries';
 import genColumns from './genColumns';
 
 @withRouter
@@ -107,7 +107,32 @@ export default class List extends PureComponent {
   /**
    *  激活多条条目
    */
-  activeEntries = () => activeEntries(this);
+  activeEntries = () => {
+    handleEntries(this, '激活', 'activeAccount', {
+      shouldIgnore: entry => entry.activeAt
+    });
+  }
+
+  /**
+   *  冻结多个条目
+   */
+  blockEntries = () => handleEntries(this, '冻结', 'blockAccount', {
+    shouldIgnore: entry => !entry.activeAt
+  });
+
+  /**
+   *  恢复多个条目
+   */
+  recoverEntries = () => handleEntries(this, '恢复', 'recoverAccount', {
+    shouldIgnore: entry => !entry.removeAt
+  })
+
+  /**
+   *  删除多个条目
+   */
+  destroyEntries = () => handleEntries(this, '删除', 'destroyAccount', {
+    shouldIgnore: entry => entry.removeAt
+  })
 
   /**
    *  激活条目
@@ -161,12 +186,10 @@ export default class List extends PureComponent {
         extra={`已选择 ${selectedRowKeys.length} 个项目`}
       >
         <Button type="primary" onClick={this.activeEntries}>激活</Button>
-        <Button type="default" disabled>恢复</Button>
-        <Button type="danger" disabled>冻结</Button>
-        <Button type="danger" disabled>删除</Button>
-        <Button onClick={this.onEmptyRowKeys}>
-          取消
-        </Button>
+        <Button type="default" onClick={this.recoverEntries}>恢复</Button>
+        <Button type="danger" onClick={this.blockEntries}>冻结</Button>
+        <Button type="danger" onClick={this.destroyEntries}>删除</Button>
+        <Button onClick={this.onEmptyRowKeys}>取消</Button>
       </Toolbar>
     );
 
@@ -189,10 +212,7 @@ export default class List extends PureComponent {
 
             {toolbar}
 
-            <TimelineModal
-              title="激活多个账号"
-              ref={this.ref.bind(this, 'timelineModal')}
-            >
+            <TimelineModal ref={this.ref.bind(this, 'timelineModal')}>
               {timeline}
             </TimelineModal>
           </CardLayout>

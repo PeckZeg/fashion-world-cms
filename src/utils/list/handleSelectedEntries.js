@@ -1,6 +1,7 @@
 import { Tag } from 'antd';
 import React from 'react';
 
+import isFunction from 'lodash/isFunction';
 import uniqueId from 'lodash/uniqueId';
 import find from 'lodash/find';
 
@@ -12,40 +13,49 @@ import unshift from '~/src/utils/array/unshift';
 
 const { Item } = TimelineModal;
 const key = () => uniqueId('timeline');
-const action = '激活';
 
-export default async function(com) {
-  let { entries, selectedRowKeys, entryTitle, entryProp } = com.state;
+export default async function(com, action, handleName, opts = {}) {
+  let {
+    entries,
+    selectedRowKeys: selected,
+    entryTitle,
+    entryProp,
+    entryNameProp
+  } = com.state;
   let { timelineModal } = com;
 
-  let successEntries = [];
+  let completeEntries = [];
   let ignoreEntries = [];
-  let errorEntries = [];
+  let failEntries = [];
   let timeline = [];
 
   await com.setStateAsync({
     timeline: unshift(timeline, (
       <Item key={key()}>
-        共有 <code>{selectedRowKeys.length}</code> 个${entryTitle}需要{action}
+        共有 <code>{selected.length}</code> 个 {entryTitle}需要{action}
       </Item>
     ))
   });
 
   await timelineModal.setStateAsync({
+    title: `${action}多个${entryTitle}`,
     closable: false,
     loading: true,
     visible: true
   });
 
-  for (let entryId of selectedRowKeys) {
-    const entry = find(entries, ['_id', entryId]);
+  const { shouldIgnore } = opts;
 
-    if (entry.activeAt) {
+  for (let entryId of selected) {
+    const entry = find(entries, ['_id', entryId]);
+    const { [entryNameProp]: name } = entry;
+
+    if (isFunction(shouldIgnore) && shouldIgnore(entry)) {
       ignoreEntries.push(entryId);
       await com.setStateAsync({
         timeline: unshift(timeline, (
           <Item key={key()} color="#e9e9e9">
-            忽略已{action}{entryTitle} <code>{entry.name}</code>
+            忽略已{action}{entryTitle} <code>{name}</code>
           </Item>
         ))
       });
@@ -55,21 +65,21 @@ export default async function(com) {
     await com.setStateAsync({
       timeline: unshift(timeline, (
         <Item key={key()}>
-          正在{action}{entryTitle} <code>{entry.name}</code>
+          正在{action}{entryTitle} <code>{name}</code>
         </Item>
       ))
     });
 
     try {
-      const { [entryProp]: newEntry } = await com.activeAccount(entryId);
+      const { [entryProp]: newEntry } = await com[handleName](entryId);
 
-      successEntries.push(entryId);
+      completeEntries.push(entryId);
 
       await com.setStateAsync({
         entries: replace(entries, entry, newEntry),
         timeline: unshift(timeline, (
           <Item key={key()} color="green">
-            成功{action}{entryTitle} <code>{entry.name}</code>
+            成功{action}{entryTitle} <code>{name}</code>
           </Item>
         ))
       });
@@ -78,12 +88,12 @@ export default async function(com) {
     catch (err) {
       const { description } = catchError(this, err);
 
-      errorEntries.push(entryId);
+      failEntries.push(entryId);
 
       await com.setStateAsync({
         timeline: unshift(timeline, (
           <Item key={key()} color="red">
-            {action}{entryTitle} <code>{entry.name}</code> 失败
+            {action}{entryTitle} <code>{name}</code> 失败
             <p>
               <Tag>原因</Tag> <code>{description}</code>
             </p>
@@ -97,12 +107,17 @@ export default async function(com) {
     timeline: unshift(timeline, (
       <Item
         key={key()}
-        complete={successEntries.length}
-        fail={errorEntries.length}
+        complete={completeEntries.length}
         ignore={ignoreEntries.length}
+        fail={failEntries.length}
       />
     ))
   });
 
-  await timelineModal.setStateAsync({  closable: true, loading: false });
+  await com.setStateAsync({ selectedRowKeys: [] });
+
+  await timelineModal.setStateAsync({
+    closable: true,
+    loading: false
+  });
 };
