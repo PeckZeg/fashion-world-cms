@@ -45,4 +45,6 @@ export default (component, err, opts = {}) => {
   }
 
   notification.error({ message, description });
+
+  return { message, description };
 };

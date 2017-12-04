@@ -7,6 +7,7 @@ import { Button } from 'antd';
 import PageHeaderLayout from '~/src/components/layouts/PageHeaderLayout';
 import CardLayout from '~/src/components/layouts/CardLayout';
 import EntryTable from '~/src/components/layouts/EntryTable';
+import TimelineModal from '~/src/components/TimelineModal';
 import ImageViewer from '~/src/components/ImageViewer';
 import Toolbar from '@table/Toolbar';
 
@@ -24,17 +25,19 @@ import injectProto from '~/src/utils/injectProto';
 import catchError from '~/src/utils/catchError';
 import injectApi from '~/src/utils/injectApi';
 import * as querySchema from './querySchema';
+import activeEntries from './activeEntries';
 import genColumns from './genColumns';
 
 @withRouter
 @connect(mapMyToProps)
 @injectApi('account')
-@injectProto('ref')
+@injectProto('ref', 'setStateAsync')
 export default class List extends PureComponent {
   constructor(props) {
     super(props);
 
     initState(this, props, querySchema, {
+      timeline: [],
       entriesProp: 'accounts',
       entryProp: 'account',
       entryTitle: '账号',
@@ -102,6 +105,11 @@ export default class List extends PureComponent {
   }
 
   /**
+   *  激活多条条目
+   */
+  activeEntries = () => activeEntries(this);
+
+  /**
    *  激活条目
    *  @param {React.Component} button 按钮组件实例
    */
@@ -144,8 +152,23 @@ export default class List extends PureComponent {
   render() {
     const {
       docTitle, total, loading, columns, entries, offset, limit,
-      selectedRowKeys
+      selectedRowKeys, timeline
     } = this.state;
+
+    const toolbar = (
+      <Toolbar
+        visible={!!selectedRowKeys.length}
+        extra={`已选择 ${selectedRowKeys.length} 个项目`}
+      >
+        <Button type="primary" onClick={this.activeEntries}>激活</Button>
+        <Button type="default" disabled>恢复</Button>
+        <Button type="danger" disabled>冻结</Button>
+        <Button type="danger" disabled>删除</Button>
+        <Button onClick={this.onEmptyRowKeys}>
+          取消
+        </Button>
+      </Toolbar>
+    );
 
     return (
       <DocumentTitle title={docTitle}>
@@ -164,18 +187,14 @@ export default class List extends PureComponent {
 
             <ImageViewer ref={this.ref.bind(this, 'imageViewer')} />
 
-            <Toolbar
-              visible={!!selectedRowKeys.length}
-              extra={`已选择 ${selectedRowKeys.length} 个项目`}
+            {toolbar}
+
+            <TimelineModal
+              title="激活多个账号"
+              ref={this.ref.bind(this, 'timelineModal')}
             >
-              <Button type="primary">激活</Button>
-              <Button type="default">恢复</Button>
-              <Button type="danger">冻结</Button>
-              <Button type="danger">删除</Button>
-              <Button onClick={this.onEmptyRowKeys}>
-                取消
-              </Button>
-            </Toolbar>
+              {timeline}
+            </TimelineModal>
           </CardLayout>
         </PageHeaderLayout>
       </DocumentTitle>

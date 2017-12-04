@@ -1,7 +1,8 @@
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import React, { PureComponent } from 'react';
+import { Icon, Spin, message } from 'antd';
 import Animate from 'rc-animate';
 import filesize from 'filesize';
-import { Icon, Spin } from 'antd';
 
 import uniqueId from 'lodash/uniqueId';
 import random from 'lodash/random';
@@ -45,6 +46,10 @@ export default class ImageInfo extends PureComponent {
     }
   }
 
+  onCopy = (text, result) => {
+    result ? message.success('复制成功') : message.error('复制失败');
+  }
+
   render() {
     const { src } = this.props;
     const { info, loading } = this.state;
@@ -79,6 +84,15 @@ export default class ImageInfo extends PureComponent {
 
               <dt>颜色模式</dt>
               <dd><code>{info.colorModel}</code></dd>
+
+              <dd>
+                <CopyToClipboard text={src} onCopy={this.onCopy}>
+                  <a href="javascript:;">
+                    复制链接
+                    <Icon type="copy" />
+                  </a>
+                </CopyToClipboard>
+              </dd>
 
               <dd>
                 <a href={src} target="_blank">
