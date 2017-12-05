@@ -29,6 +29,10 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%); }
+    :local(.header) .logo > a {
+      display: block;
+      width: 32px;
+      height: 32px; }
     :local(.header) .logo ins {
       position: absolute;
       z-index: 4;

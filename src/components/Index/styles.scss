@@ -109,5 +109,6 @@ $avatar-popover-height:                 $padding-lg-horizontal * 1.25;
 }
 
 :local(.content) {
+  flex: 1 1 100%;
   margin: $padding-lg-horizontal;
 }

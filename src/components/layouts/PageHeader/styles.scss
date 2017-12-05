@@ -48,6 +48,12 @@ $logo-border-radius:                    4px;
       }
     }
 
+    > a {
+      // position: relative;
+      display: block;
+      @include size($logo-size);
+    }
+
     ins {
       position: absolute;
       z-index: 4;

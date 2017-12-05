@@ -82,23 +82,35 @@ export default class AccountProfile extends PureComponent {
     }
   };
 
+  openImageViewer = () => {
+    console.log(this.entry);
+  }
+
   render() {
     const { docTitle, loading, exception, entry } = this.state;
     let logo, title, desc;
 
     if (entry) {
       title = entry.name;
-      logo = toProcessImage(entry.avatar, { w: 64, h: 64 });
+      // logo = toProcessImage(entry.avatar, { w: 64, h: 64 });
+      logo = {
+        url: entry.avatar,
+        visible: true,
+        icon: 'user',
+        qiniu: true,
+        openable: true,
+        onClick: this.openImageViewer
+      };
       desc = (
         <DescList>
           <DescListItem label="激活时间">
-            {formatTimestamp(entry.activeAt, { default: '-' })}
+            {formatTimestamp(entry.activeAt)}
           </DescListItem>
           <DescListItem label="删除时间">
-            {formatTimestamp(entry.removeAt, { default: '-' })}
+            {formatTimestamp(entry.removeAt)}
           </DescListItem>
           <DescListItem label="创建时间">
-            {formatTimestamp(entry.createAt, { default: '-' })}
+            {formatTimestamp(entry.createAt)}
           </DescListItem>
         </DescList>
       );

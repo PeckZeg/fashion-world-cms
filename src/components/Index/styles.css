@@ -82,4 +82,5 @@
   align-items: center; }
 
 :local(.content) {
+  flex: 1 1 100%;
   margin: 16px; }
