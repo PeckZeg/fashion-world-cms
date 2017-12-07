@@ -9,6 +9,7 @@ html, body {
   height: 100%; }
 
 :local(.form) {
-  margin: 16px; }
+  margin: 16px;
+  margin-bottom: -16px; }
   :local(.form) .submit-button {
     margin-left: 0.75em; }

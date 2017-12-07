@@ -9,6 +9,7 @@ import { Spin } from 'antd';
 import PageHeader from '~/src/components/layouts/PageHeader';
 import UniqKey from '~/src/utils/UniqKey';
 
+import mounted from '~/src/utils/component/mounted';
 import injectProto from '~/src/utils/injectProto';
 import { copyright } from '~/src/const/config';
 
@@ -18,6 +19,7 @@ import styles from './styles.css';
  *  附带页头的页面布局
  *  @class
  */
+ @mounted
  @injectProto('ref')
 export default class PageHeaderLayout extends PureComponent {
   static propTypes = {
@@ -54,16 +56,19 @@ export default class PageHeaderLayout extends PureComponent {
   onContainerChange = () => {
     cancelAnimationFrame(this.watcher);
 
-    const { lastScrollHeight } = this;
-    const { scrollHeight } = this.$container;
+    if (this.mounted) {
+      const { lastScrollHeight } = this;
+      const { scrollHeight } = this.$container;
 
-    if (lastScrollHeight !== scrollHeight) {
-      this.setState({
-        fixed: scrollHeight + 128 < window.innerHeight
-      });
+      if (lastScrollHeight !== scrollHeight) {
+        this.setState({
+          fixed: scrollHeight + 128 < window.innerHeight
+        });
+      }
+
+      this.lastScrollHeight = scrollHeight;
     }
 
-    this.lastScrollHeight = scrollHeight;
     this.watcher = requestAnimationFrame(this.onContainerChange);
   }
 

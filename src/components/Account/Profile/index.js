@@ -1,10 +1,8 @@
+import React, { PureComponent, Fragment } from 'react';
 import DocumentTitle from 'react-document-title';
-import React, { PureComponent } from 'react';
-import { withRouter } from 'react-router';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { Button } from 'antd';
 import { Route, Switch } from 'react-router-dom';
+import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
 
 import random from 'lodash/random';
 
@@ -13,6 +11,7 @@ import toProcessImage from '~/src/utils/qiniu/toProcessImage';
 import mapMyToProps from '~/src/utils/connect/mapMyToProps';
 import setTimeoutAsync from '~/src/utils/setTimeoutAsync';
 import formatTimestamp from '~/src/utils/formatTimestamp';
+import handleEntry from '~/src/utils/profile/handleEntry';
 import initState from '~/src/utils/profile/initState';
 import injectProto from '~/src/utils/injectProto';
 import catchError from '~/src/utils/catchError';
@@ -20,17 +19,12 @@ import injectApi from '~/src/utils/injectApi';
 import genRoutes from './genRoutes';
 
 import PageHeaderLayout from '~/src/components/layouts/PageHeaderLayout';
+import SwitchButton from '~/src/components/SwitchButton';
 import ImageViewer from '~/src/components/ImageViewer';
 import Exception from 'ant-design-pro/lib/Exception';
 import DescList from '~/src/components/DescList';
 
 const { Item: DescListItem } = DescList;
-
-const TEST_ID = [
-  '593512d8a58737dbdb6308da',
-  '597855e6a1522a303fc6f712',
-  '5a13df708e83984e9f4aef2d'
-];
 
 @withRouter
 @connect(mapMyToProps)
@@ -51,10 +45,23 @@ export default class AccountProfile extends PureComponent {
     });
   }
 
+  /**
+   *  标签切换处理器
+   *  @param {string} pathname 切换的路径
+   */
   onTabChange = pathname => {
     this.props.history.push(pathname);
   }
 
+  /**
+   *  条目更新处理器
+   *  @param {object} entry 更新后的条目
+   */
+  onUpdate = entry => this.setState({ entry, entryId: entry._id });
+
+  /**
+   *  获取条目信息
+   */
   fetchEntry = async () => {
     const { entryId, entryProp, entryNameProp } = this.state;
 
@@ -82,6 +89,9 @@ export default class AccountProfile extends PureComponent {
     }
   };
 
+  /**
+   *  打开图片预览器
+   */
   openImageViewer = () => {
     const { entry } = this.state;
 
@@ -94,6 +104,33 @@ export default class AccountProfile extends PureComponent {
     ));
   }
 
+  /**
+   *  激活条目
+   *  @param {React.Component} button 按钮组件实例
+   */
+  activeEntry = button => handleEntry(this, button, '激活', 'activeAccount');
+
+  /**
+   *  恢复条目
+   *  @param {React.Component} button 按钮组件实例
+   */
+  recoverEntry = button => handleEntry(this, button, '恢复', 'recoverAccount');
+
+  /**
+   *  冻结条目
+   *  @param {React.Component} button 按钮组件实例
+   */
+  blockEntry = button => handleEntry(this, button, '冻结', 'blockAccount');
+
+  /**
+   *  删除条目
+   *  @param {React.Component} button 按钮组件实例
+   */
+  destroyEntry = button => handleEntry(this, button, '删除', 'destroyAccount');
+
+  /**
+   *  设置选项卡
+   */
   setTabs = (opts = {}) => {
     const { location, match } = opts;
 
@@ -124,10 +161,15 @@ export default class AccountProfile extends PureComponent {
     };
   }
 
+  /**
+   *  渲染路由
+   *  @param {React.Component} Component 需要渲染的组件
+   */
   renderRoute = Component => {
     return (
       <Component
         entry={this.state.entry}
+        onUpdate={this.onUpdate}
       />
     );
   }
@@ -137,7 +179,7 @@ export default class AccountProfile extends PureComponent {
       docTitle, loading, exception, entry, defaultTab, tabs
     } = this.state;
     const routes = genRoutes(this);
-    let logo, title, desc;
+    let logo, title, desc, action;
 
     if (entry) {
       title = entry.name;
@@ -163,6 +205,26 @@ export default class AccountProfile extends PureComponent {
           </DescListItem>
         </DescList>
       );
+      action = (
+        <Fragment>
+          <SwitchButton
+            status={!entry.activeAt}
+            yesLabel="激活"
+            noLabel="冻结"
+            onYesClick={this.activeEntry}
+            onNoClick={this.blockEntry}
+          />
+          <SwitchButton
+            status={!entry.removeAt}
+            yesType="danger"
+            yesLabel="删除"
+            noType="default"
+            noLabel="恢复"
+            onYesClick={this.destroyEntry}
+            onNoClick={this.recoverEntry}
+          />
+        </Fragment>
+      );
     }
 
     return (
@@ -171,21 +233,13 @@ export default class AccountProfile extends PureComponent {
           loading={loading}
           logo={logo}
           title={title}
+          action={action}
           content={desc}
           exception={exception}
           tabs={tabs}
           defaultTab={defaultTab ? defaultTab : void 0}
           onTabChange={this.onTabChange}
         >
-          <Button.Group style={{ marginBottom: '16px' }}>
-            {TEST_ID.map(id => (
-              <Button key={id}>
-                <Link to={`/account/${id}`}>
-                  {id}
-                </Link>
-              </Button>
-            ))}
-          </Button.Group>
 
           <Switch>
             {routes.map(({ path, Component, ...restProps }) => (

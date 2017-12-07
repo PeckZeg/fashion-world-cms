@@ -15,6 +15,7 @@ html, body {
 
 :local(.form) {
   margin: $padding-lg-horizontal;
+  margin-bottom: -$padding-lg-horizontal;
 
   .submit-button {
     margin-left: 0.75em;

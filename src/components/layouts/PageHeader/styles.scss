@@ -74,12 +74,32 @@ $logo-border-radius:                    4px;
     flex: auto;
   }
 
-  .title {
+  .title,
+  .action {
     margin-bottom: $padding-lg-horizontal;
+  }
+
+  .title {
     font-size: $font-size-xlg;
     font-weight: 500;
     line-height: $logo-size;
     color: $gray-darkest;
+  }
+
+  .action {
+    margin-left: $padding-lg-horizontal * 3;
+    text-align: right;
+
+    :global {
+      .ant-btn-group:not(:last-child),
+      .ant-btn:not(:last-child) {
+        margin-right: $padding-lg-horizontal / 2;
+      }
+
+      .ant-btn-group > .ant-btn {
+        margin-right: 0;
+      }
+    }
   }
 }
 

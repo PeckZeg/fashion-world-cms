@@ -47,12 +47,22 @@
   :local(.header) .content {
     margin-bottom: 16px;
     flex: auto; }
+  :local(.header) .title,
+  :local(.header) .action {
+    margin-bottom: 16px; }
   :local(.header) .title {
-    margin-bottom: 16px;
     font-size: 20px;
     font-weight: 500;
     line-height: 32px;
     color: #333; }
+  :local(.header) .action {
+    margin-left: 48px;
+    text-align: right; }
+    :local(.header) .action :global .ant-btn-group:not(:last-child),
+    :local(.header) .action :global .ant-btn:not(:last-child) {
+      margin-right: 8px; }
+    :local(.header) .action :global .ant-btn-group > .ant-btn {
+      margin-right: 0; }
 
 :local(.tabs) :global(.ant-tabs-bar) {
   margin-bottom: 0;
