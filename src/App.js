@@ -1,21 +1,31 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import styles from './App.css';
+import React, { PureComponent } from 'react';
+import { ConnectedRouter } from 'react-router-redux';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import { Provider, connect } from 'react-redux';
 
-class App extends Component {
+import MyLogin from '~/src/components/My/Login';
+import Index from '~/src/components/Index';
+
+import mapMyToProps from '~/src/utils/connect/mapMyToProps';
+
+@connect(mapMyToProps)
+export default class App extends PureComponent {
   render() {
+    const { store, history, token } = this.props;
+
     return (
-      <div className={styles.app}>
-        <header className={styles.header}>
-          <img src={logo} className={styles.logo} alt="logo" />
-          <h1 className={styles.title}>Welcome to React</h1>
-        </header>
-        <p className={styles.intro}>
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
+          <Switch>
+            <Route path="/my/login" exact component={MyLogin} />
+            {!token ? (
+              <Redirect to="/my/login" />
+            ) : (
+              <Route path="/" component={Index} />
+            )}
+          </Switch>
+        </ConnectedRouter>
+      </Provider>
     );
   }
 }
-
-export default App;

@@ -12,6 +12,8 @@ import CoverCol from '@table-column/Cover';
 import genSorter from '~/src/utils/table/genSorter';
 
 export default function(com, query) {
+  const { searchName } = query;
+
   return [
     {
       dataIndex: 'status',
@@ -48,7 +50,11 @@ export default function(com, query) {
       title: '登录名',
       width: 256,
       render: (name, entry) => (
-        <TitleCol title={name} link={`/account/${entry._id}`} />
+        <TitleCol
+          title={name}
+          searchTitle={searchName}
+          link={`/account/${entry._id}`}
+        />
       )
     },
     {

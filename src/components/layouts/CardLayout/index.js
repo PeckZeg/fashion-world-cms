@@ -10,13 +10,13 @@ export default class CardLayout extends PureComponent {
   };
 
   render() {
-    const { children, title } = this.props;
+    const { children, ...resetProps } = this.props;
 
     return (
       <Card
         className={styles.container}
-        title={title}
         bordered={false}
+        {...resetProps}
       >
         {children}
       </Card>

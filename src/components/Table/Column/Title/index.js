@@ -1,6 +1,10 @@
+import Highlighter from 'react-highlight-words';
 import React, { PureComponent } from 'react';
 import { withRouter } from 'react-router';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
+import isArray from 'lodash/isArray';
 
 import styles from './styles.css';
 
@@ -12,6 +16,11 @@ export default class TableTitleColumn extends PureComponent {
       PropTypes.element
     ]),
 
+    searchTitle: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.arrayOf(PropTypes.string)
+    ]),
+
     desc: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.element
@@ -20,26 +29,28 @@ export default class TableTitleColumn extends PureComponent {
     link: PropTypes.string,
   };
 
-  onLinkClick = e => {
-    e.preventDefault();
+  title() {
+    const { title, searchTitle } = this.props;
 
-    const link = e.target.getAttribute('href');
-
-    if (link) {
-      this.props.history.push(link);
-    }
+    return searchTitle ? (
+      <Highlighter
+        textToHighlight={title}
+        searchWords={isArray(searchTitle) ? searchTitle : [searchTitle]}
+      />
+    ) : title;
   }
 
   render() {
-    const { title, desc, link } = this.props;
+    const { desc, link } = this.props;
+    const title = this.title();
 
     return (
       <div className={styles.container}>
         <h4>
           {link ? (
-            <a href={link} onClick={this.onLinkClick}>
+            <Link to={link}>
               {title}
-            </a>
+            </Link>
           ) : title}
         </h4>
         {desc && (

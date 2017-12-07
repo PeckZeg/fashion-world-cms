@@ -10,6 +10,7 @@ import EntryTable from '~/src/components/layouts/EntryTable';
 import TimelineModal from '~/src/components/TimelineModal';
 import ImageViewer from '~/src/components/ImageViewer';
 import Toolbar from '@table/Toolbar';
+import Filter from './Filter';
 
 import removeHistoryListener from '~/src/utils/list/removeHistoryListener';
 import addHistoryListener from '~/src/utils/list/addHistoryListener';
@@ -196,7 +197,7 @@ export default class List extends PureComponent {
     return (
       <DocumentTitle title={docTitle}>
         <PageHeaderLayout loading={loading}>
-          <CardLayout>
+          <CardLayout extra={<Filter />}>
             <EntryTable
               total={total}
               loading={loading}

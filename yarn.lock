@@ -1431,7 +1431,7 @@ babel-register@^6.26.0:
     mkdirp "^0.5.1"
     source-map-support "^0.4.15"
 
-babel-runtime@6.26.0, babel-runtime@6.x, babel-runtime@^6.18.0, babel-runtime@^6.2.0, babel-runtime@^6.22.0, babel-runtime@^6.23.0, babel-runtime@^6.26.0, babel-runtime@^6.9.2:
+babel-runtime@6.26.0, babel-runtime@6.x, babel-runtime@^6.11.6, babel-runtime@^6.18.0, babel-runtime@^6.2.0, babel-runtime@^6.22.0, babel-runtime@^6.23.0, babel-runtime@^6.26.0, babel-runtime@^6.9.2:
   version "6.26.0"
   resolved "http://registry.npm.taobao.org/babel-runtime/download/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
   dependencies:
@@ -3619,6 +3619,12 @@ hawk@~6.0.2:
 he@1.1.x:
   version "1.1.1"
   resolved "http://registry.npm.taobao.org/he/download/he-1.1.1.tgz#93410fd21b009735151f8868c2f271f3427e23fd"
+
+highlight-words-core@^1.1.0:
+  version "1.1.0"
+  resolved "http://registry.npm.taobao.org/highlight-words-core/download/highlight-words-core-1.1.0.tgz#6ca35f256b1be72857963eafe97c255a2168c7ff"
+  dependencies:
+    babel-runtime "^6.11.6"
 
 history@^4.7.2:
   version "4.7.2"
@@ -6460,6 +6466,13 @@ react-fittext@^1.0.0:
   dependencies:
     create-react-class "^15.5.3"
     prop-types "^15.5.10"
+
+react-highlight-words@^0.10.0:
+  version "0.10.0"
+  resolved "http://registry.npm.taobao.org/react-highlight-words/download/react-highlight-words-0.10.0.tgz#2e905c76c11635237f848ecad00600f1b6f6f4a8"
+  dependencies:
+    highlight-words-core "^1.1.0"
+    prop-types "^15.5.8"
 
 react-lazy-load@^3.0.12:
   version "3.0.12"
