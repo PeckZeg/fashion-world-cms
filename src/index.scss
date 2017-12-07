@@ -12,3 +12,11 @@ html, body {
 :global(#root) {
   @include size(100%);
 }
+
+:local(.form) {
+  margin: $padding-lg-horizontal;
+
+  .submit-button {
+    margin-left: 0.75em;
+  }
+}

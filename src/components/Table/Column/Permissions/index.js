@@ -22,7 +22,7 @@ export default class TablePermissionsColumn extends PureComponent {
   }
 
   icon(permission) {
-    return this.hasPermission(permission) ? 'check' : 'times';
+    return this.hasPermission(permission) ? 'check' : 'close';
   }
 
   render() {

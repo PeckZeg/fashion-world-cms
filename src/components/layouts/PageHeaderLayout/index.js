@@ -1,15 +1,13 @@
 import GlobalFooter from 'ant-design-pro/lib/GlobalFooter';
-import React, { PureComponent, Fragment } from 'react';
+import React, { Fragment, PureComponent } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import Animate from 'rc-animate';
 import { Spin } from 'antd';
 
-import uniqueId from 'lodash/uniqueId';
-import throttle from 'lodash/throttle';
-
 import PageHeader from '~/src/components/layouts/PageHeader';
+import UniqKey from '~/src/utils/UniqKey';
 
 import injectProto from '~/src/utils/injectProto';
 import { copyright } from '~/src/const/config';
@@ -30,92 +28,88 @@ export default class PageHeaderLayout extends PureComponent {
     super(props);
 
     this.state = {
-      fixed: false,
-      resizeHandler: throttle(() => this.autoFixed(), 150)
+      fixed: false
     };
+
+    this.uniqKey = new UniqKey();
   }
 
   componentDidMount() {
-    this.autoFixed();
-
-    window.addEventListener('resize', this.state.resizeHandler);
+    this.$container = ReactDOM.findDOMNode(this);
+    this.watcher = requestAnimationFrame(this.onContainerChange);
   }
 
   componentDidUpdate(prevProps) {
-    const { loading: prevLoading } = prevProps;
-    const { loading } = this.props;
+    const { children: prevChildren } = prevProps;
+    const { children } = this.props;
 
-    if (prevLoading !== loading) {
-      this.autoFixed();
+    if (prevChildren !== children) {
+      this.$container = ReactDOM.findDOMNode(this);
     }
   }
 
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.state.resize);
-  }
+  /**
+   *  容器内容高度变化处理器
+   */
+  onContainerChange = () => {
+    cancelAnimationFrame(this.watcher);
 
-  autoFixed() {
-    const container = ReactDOM.findDOMNode(this);
-    const footer = container.querySelector(`.${styles.globalFooter}`);
-    let height = container.offsetHeight + 64;
-    if (footer) {
-      const styles = getComputedStyle(footer);
+    const { lastScrollHeight } = this;
+    const { scrollHeight } = this.$container;
 
-      height += parseInt(styles.marginTop) + parseInt(styles.marginBottom);
+    if (lastScrollHeight !== scrollHeight) {
+      this.setState({
+        fixed: scrollHeight + 128 < window.innerHeight
+      });
     }
 
-    this.setState({ fixed: height < window.innerHeight });
+    this.lastScrollHeight = scrollHeight;
+    this.watcher = requestAnimationFrame(this.onContainerChange);
   }
 
   render() {
     const { children, loading, exception, ...restProps } = this.props;
     const { fixed } = this.state;
+    const { uniqKey } = this;
 
-    return exception ? (
-      <div className={styles.exception}>
-        {exception}
-        <GlobalFooter
-          className={styles.globalFooter}
-          copyright={copyright}
-        />
-      </div>
-    ) : (
-      <div className={styles.container}>
-        <Animate
-          component=""
-          transitionName="fade"
-          transitionAppear
-          transitionLeave={false}
-        >
-          {loading ? (
-            <div className={styles.loading} key={uniqueId('animate')}>
-              <Spin />
-            </div>
-          ): (
-            <Fragment key={uniqueId('animate')}>
-              <PageHeader {...restProps} />
-              {children ? (
-                <div className={styles.content}>
-                  {children}
-                </div>
-              ) : null}
-            </Fragment>
-          )}
-        </Animate>
-        {/*
-        {!loading && <PageHeader {...restProps} />}
+    return (
+      <div className={classnames(styles.container, {
+          [styles.exception]: exception
+        })}
+      >
+        {exception ? exception : (
+          <Animate
+            component=""
+            transitionName="fade"
+            transitionAppear
+            transitionLeave={false}
+          >
+            {loading ? (
+              <div
+                key={uniqKey.key('loading')}
+                className={styles.loading}
+              >
+                <Spin />
+              </div>
+            ): (
+              <Fragment>
+                <PageHeader
+                  key={uniqKey.key('page-header')}
+                  {...restProps}
+                />
 
-        {loading ? (
-          <div className={styles.loading}>
-            <Spin />
-          </div>
-        ) : (
-          children ? (
-            <div className={styles.content}>
-              {children}
-            </div>
-          ) : null
-        )} */}
+                {children ? (
+                  <div
+                    key={uniqKey.key('children')}
+                    className={styles.content}
+                  >
+                    {children}
+                  </div>
+                ) : null}
+              </Fragment>
+            )}
+          </Animate>
+        )}
 
         <GlobalFooter
           className={classnames(styles.globalFooter, { fixed })}

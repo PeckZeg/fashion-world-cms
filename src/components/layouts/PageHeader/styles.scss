@@ -52,6 +52,10 @@ $logo-border-radius:                    4px;
       // position: relative;
       display: block;
       @include size($logo-size);
+
+      &:global(.zoom-in) {
+        cursor: zoom-in;
+      }
     }
 
     ins {
@@ -76,5 +80,12 @@ $logo-border-radius:                    4px;
     font-weight: 500;
     line-height: $logo-size;
     color: $gray-darkest;
+  }
+}
+
+:local(.tabs) {
+  :global(.ant-tabs-bar) {
+    margin-bottom: 0;
+    border-bottom-color: transparent;
   }
 }

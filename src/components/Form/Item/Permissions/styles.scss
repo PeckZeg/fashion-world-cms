@@ -1,0 +1,21 @@
+@import "src/scss/global";
+
+$label-color: map-fetch($component-colors, grey-cascade, base);
+
+:local(.permission-group) {
+  margin-bottom: $padding-lg-horizontal;
+
+  &:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  :global {
+    .ant-form-item-label label {
+      color: $label-color;
+    }
+
+    .ant-checkbox-group {
+      line-height: inherit;
+    }
+  }
+}

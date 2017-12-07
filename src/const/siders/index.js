@@ -33,6 +33,15 @@ export const routeKeys = reduce(menus, (routeKeys, { key, items }) => {
   return routeKeys;
 }, {});
 
+// 路由 - 组件映射
+// export const routeComponents = reduce(menus, (routes, { items }) => {
+//   forEach(items, ({ key, component }) => {
+//     routes[key] = component;
+//   });
+//
+//   return routes;
+// }, {});
+
 // 菜单键 -> 基本查询映射表
 export const baseQueriesByRoute = reduce(menus, (queries, { items }) => {
   forEach(items, ({ key, baseQuery }) => {

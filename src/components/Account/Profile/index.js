@@ -1,14 +1,14 @@
 import DocumentTitle from 'react-document-title';
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Button } from 'antd';
+import { Route, Switch } from 'react-router-dom';
 
 import random from 'lodash/random';
 
-import removeHistoryListener from '~/src/utils/profile/removeHistoryListener';
-import addHistoryListener from '~/src/utils/profile/addHistoryListener';
+import historyListener from '~/src/utils/profile/historyListener';
 import toProcessImage from '~/src/utils/qiniu/toProcessImage';
 import mapMyToProps from '~/src/utils/connect/mapMyToProps';
 import setTimeoutAsync from '~/src/utils/setTimeoutAsync';
@@ -17,9 +17,10 @@ import initState from '~/src/utils/profile/initState';
 import injectProto from '~/src/utils/injectProto';
 import catchError from '~/src/utils/catchError';
 import injectApi from '~/src/utils/injectApi';
+import genRoutes from './genRoutes';
 
 import PageHeaderLayout from '~/src/components/layouts/PageHeaderLayout';
-import CardLayout from '~/src/components/layouts/CardLayout';
+import ImageViewer from '~/src/components/ImageViewer';
 import Exception from 'ant-design-pro/lib/Exception';
 import DescList from '~/src/components/DescList';
 
@@ -35,6 +36,7 @@ const TEST_ID = [
 @connect(mapMyToProps)
 @injectApi('account')
 @injectProto('ref', 'setStateAsync')
+@historyListener('setTabs')
 export default class AccountProfile extends PureComponent {
   constructor(props) {
     super(props);
@@ -43,16 +45,14 @@ export default class AccountProfile extends PureComponent {
       docTitle: '账号信息',
       entryProp: 'account',
       entryTitle: '账号',
-      entryNameProp: 'name'
+      entryNameProp: 'name',
+      defaultTab: props.location.pathname,
+      ...this.tabs()
     });
   }
 
-  componentDidMount() {
-    addHistoryListener(this);
-  }
-
-  componentWillUnmount() {
-    removeHistoryListener(this);
+  onTabChange = pathname => {
+    this.props.history.push(pathname);
   }
 
   fetchEntry = async () => {
@@ -63,54 +63,103 @@ export default class AccountProfile extends PureComponent {
       const { [entryProp]: entry } = await this.fetchAccountProfile(entryId);
 
       await setTimeoutAsync(random(256, 1024));
-
       await this.setStateAsync({
         docTitle: `账号 ${entry[entryNameProp]} 信息`,
         loading: false,
-        entry,
+        entry
       });
     }
 
     catch (err) {
       const { response } = catchError(this, err);
+      let state = { loading: false };
 
       if (response) {
-        this.setState({ exception: <Exception type={response.status} /> });
+        state.exception = <Exception type={response.status} />;
       }
 
-      this.setState({ loading: false });
+      this.setState(state);
     }
   };
 
   openImageViewer = () => {
-    console.log(this.entry);
+    const { entry } = this.state;
+
+    this.imageViewer.show(entry.avatar, (
+      <ImageViewer.Title
+        icon="user"
+        title={entry.name}
+        avatar={toProcessImage(entry.avatar, { w: 32, h: 32 })}
+      />
+    ));
+  }
+
+  setTabs = (opts = {}) => {
+    const { location, match } = opts;
+
+    this.setState(this.tabs(location, match));
+  }
+
+  tabs(location = this.props.location, match = this.props.match) {
+    const { pathname: defaultTab } = location;
+
+    if (!match) {
+      return { defaultTab, tabs: [] };
+    }
+
+    const { params: { accountId } } = match;
+
+    return {
+      defaultTab,
+      tabs: [
+        {
+          key: `/account/${accountId}`,
+          tab: '详情'
+        },
+        {
+          key: `/account/${accountId}/edit`,
+          tab: '编辑'
+        }
+      ]
+    };
+  }
+
+  renderRoute = Component => {
+    return (
+      <Component
+        entry={this.state.entry}
+      />
+    );
   }
 
   render() {
-    const { docTitle, loading, exception, entry } = this.state;
+    const {
+      docTitle, loading, exception, entry, defaultTab, tabs
+    } = this.state;
+    const routes = genRoutes(this);
     let logo, title, desc;
 
     if (entry) {
       title = entry.name;
-      // logo = toProcessImage(entry.avatar, { w: 64, h: 64 });
       logo = {
         url: entry.avatar,
         visible: true,
         icon: 'user',
         qiniu: true,
         openable: true,
+        zoomIn: true,
         onClick: this.openImageViewer
       };
       desc = (
         <DescList>
           <DescListItem label="激活时间">
-            {formatTimestamp(entry.activeAt)}
+            {formatTimestamp(entry.activeAt, { fromNow: true })}
           </DescListItem>
           <DescListItem label="删除时间">
-            {formatTimestamp(entry.removeAt)}
+            {formatTimestamp(entry.removeAt, { fromNow: true })}
           </DescListItem>
           <DescListItem label="创建时间">
-            {formatTimestamp(entry.createAt)}
+            {formatTimestamp(entry.createAt, { fromNow: true })}
           </DescListItem>
         </DescList>
       );
@@ -124,26 +173,32 @@ export default class AccountProfile extends PureComponent {
           title={title}
           content={desc}
           exception={exception}
+          tabs={tabs}
+          defaultTab={defaultTab ? defaultTab : void 0}
+          onTabChange={this.onTabChange}
         >
-          <CardLayout>
-            {exception ? exception : (
-              <Fragment>
-                <Button.Group>
-                  {TEST_ID.map(id => (
-                    <Button key={id}>
-                      <Link to={`/account/${id}`}>
-                        {id}
-                      </Link>
-                    </Button>
-                  ))}
-                </Button.Group>
+          <Button.Group style={{ marginBottom: '16px' }}>
+            {TEST_ID.map(id => (
+              <Button key={id}>
+                <Link to={`/account/${id}`}>
+                  {id}
+                </Link>
+              </Button>
+            ))}
+          </Button.Group>
 
-                <pre style={{ margin: '14px 0 0' }}>
-                  {JSON.stringify(this.state.entry, null, 2)}
-                </pre>
-              </Fragment>
-            )}
-          </CardLayout>
+          <Switch>
+            {routes.map(({ path, Component, ...restProps }) => (
+              <Route
+                key={path}
+                path={path}
+                render={this.renderRoute.bind(this, Component)}
+                {...restProps}
+              />
+            ))}
+          </Switch>
+
+          <ImageViewer ref={this.ref.bind(this, 'imageViewer')} />
         </PageHeaderLayout>
       </DocumentTitle>
     );

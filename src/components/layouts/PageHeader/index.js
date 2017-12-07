@@ -1,6 +1,7 @@
+import { Breadcrumb, Icon, Tabs } from 'antd';
 import React, { PureComponent } from 'react';
 import { withRouter } from 'react-router';
-import { Breadcrumb, Icon } from 'antd';
+import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import Animate from 'rc-animate';
 
@@ -16,10 +17,25 @@ import mounted from '~/src/utils/component/mounted';
 
 import styles from './styles.css';
 
+const { TabPane } = Tabs;
+
 @withRouter
 @mounted
 @injectProto('setStateAsync')
 export default class PageHeader extends PureComponent {
+  /**
+   *  属性类型
+   *  @property {string|object} logo logo 配置项
+   *  @property {string} logo.url logo 链接
+   *  @property {boolean} logo.visible 是否显示 logo
+   *  @property {boolean} logo.qiniu 是否使用七牛图片切割参数
+   *  @property {string} [logo.icon = 'picture'] 默认图标
+   *  @property {object[]} tabs 标签页
+   *  @property {string|ReactNode} tabs[].tab 选项卡头显示文字
+   *  @property {string} tabs[].key 对应 activeKey
+   *  @property {Function} onLogoClick 猛击 logo 的处理器
+   *  @property {Function} onTabChange 猛击标签的处理器
+   */
   static propTypes = {
     logo: PropTypes.oneOfType([
       PropTypes.string,
@@ -29,7 +45,23 @@ export default class PageHeader extends PureComponent {
         qiniu: PropTypes.bool,
         icon: PropTypes.string
       }),
-    ])
+    ]),
+
+    tabs: PropTypes.arrayOf(
+      PropTypes.shape({
+        tab: PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.element
+        ]),
+        key: PropTypes.string
+      })
+    ),
+
+    defaultTab: PropTypes.string,
+    // activeTab: PropTypes.string,
+
+    onLogoClick: PropTypes.func,
+    onTabChange: PropTypes.func
   };
 
   state = {
@@ -52,6 +84,45 @@ export default class PageHeader extends PureComponent {
   }
 
   /**
+   *  Logo 猛击事件处理器
+   *  @param {Event} e
+   */
+  onLogoClick = e => {
+    const { logo } = this.props;
+
+    if (isPlainObject(logo)) {
+      const { onClick } = logo;
+
+      if (isFunction(onClick)) {
+        e.preventDefault();
+        onClick(e);
+      }
+    }
+  }
+
+  /**
+   *  标签切换处理器
+   *  @param {string} key
+   */
+  onTabChange = key => {
+    if (isFunction(this.props.onTabChange)) {
+      this.props.onTabChange(key);
+    }
+  };
+
+  /**
+   *  加载 Logo
+   *  @param {string} logo
+   */
+  loadLogo = async logo => {
+    await lazyLoadImage(logo);
+
+    if (this.mounted) {
+      await this.setStateAsync({ logo });
+    }
+  };
+
+  /**
    *  渲染子面包屑
    *  @returns {React.Element}
    */
@@ -67,20 +138,11 @@ export default class PageHeader extends PureComponent {
     }
   }
 
-  onLogoClick = e => {
-    const { logo } = this.props;
-
-    if (isPlainObject(logo)) {
-      const { onClick } = logo;
-
-      if (isFunction(onClick)) {
-        e.preventDefault();
-        onClick(e);
-      }
-    }
-  }
-
-  logo() {
+  /**
+   *  渲染 Logo
+   *  @returns {React.Component}
+   */
+  renderLogo() {
     let { logo } = this.props;
 
     if (!logo) {
@@ -91,7 +153,7 @@ export default class PageHeader extends PureComponent {
       logo = { url: logo, visible: true };
     }
 
-    const { url, icon = 'picture', visible, qiniu, openable } = logo;
+    const { url, icon = 'picture', visible, qiniu, openable, zoomIn } = logo;
 
     if (visible) {
       const { logo } = this.state;
@@ -117,7 +179,12 @@ export default class PageHeader extends PureComponent {
           >
             {logo && (
               openable ? (
-                <a href={url} target="_blank" onClick={this.onLogoClick}>
+                <a
+                  className={classnames({ 'zoom-in': zoomIn })}
+                  href={url}
+                  target="_blank"
+                  onClick={this.onLogoClick}
+                >
                   <ins style={{ backgroundImage: `url(${logo})` }} />
                 </a>
               ) : (
@@ -130,16 +197,8 @@ export default class PageHeader extends PureComponent {
     }
   }
 
-  loadLogo = async logo => {
-    await lazyLoadImage(logo);
-
-    if (this.mounted) {
-      await this.setStateAsync({ logo });
-    }
-  };
-
   render() {
-    const { title, content, match } = this.props;
+    const { title, content, match, tabs, defaultTab } = this.props;
 
     return (
       <div className={styles.header}>
@@ -159,7 +218,7 @@ export default class PageHeader extends PureComponent {
         </Breadcrumb>
 
         <div className={styles.detail}>
-          {this.logo()}
+          {this.renderLogo()}
           <div className={styles.main}>
             <div className={styles.row}>
               {title && <h1 className={styles.title}>{title}</h1>}
@@ -169,6 +228,19 @@ export default class PageHeader extends PureComponent {
             </div>
           </div>
         </div>
+
+        {tabs && tabs.length && (
+          <Tabs
+            className={styles.tabs}
+            defaultActiveKey={defaultTab}
+            onChange={this.onTabChange}
+            animated={true}
+          >
+            {tabs.map(({ key, tab }) => (
+              <TabPane key={key} tab={tab} />
+            ))}
+          </Tabs>
+        )}
       </div>
     );
   }

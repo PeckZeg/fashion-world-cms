@@ -33,6 +33,8 @@
       display: block;
       width: 32px;
       height: 32px; }
+      :local(.header) .logo > a:global(.zoom-in) {
+        cursor: zoom-in; }
     :local(.header) .logo ins {
       position: absolute;
       z-index: 4;
@@ -51,3 +53,7 @@
     font-weight: 500;
     line-height: 32px;
     color: #333; }
+
+:local(.tabs) :global(.ant-tabs-bar) {
+  margin-bottom: 0;
+  border-bottom-color: transparent; }
