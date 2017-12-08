@@ -16,12 +16,20 @@
       vertical-align: middle; }
     :local .header .title h1 {
       display: inline;
+      font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace, Microsoft Yahei;
       vertical-align: middle; }
+      :local .header .title h1 :global(.ant-tag) {
+        margin-left: 0.75em;
+        vertical-align: middle;
+        font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace, Microsoft Yahei;
+        cursor: auto; }
   :local .header .desc {
     margin-top: 8px;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
     line-height: 1.75;
     color: #808080; }
+    :local .header .desc:last-child {
+      margin-bottom: 16px; }
 
 :local .global-footer {
   position: absolute;

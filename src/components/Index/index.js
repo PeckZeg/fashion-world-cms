@@ -1,3 +1,4 @@
+/*global __VERSION__:true*/
 import { Link, Route, Switch, Redirect } from 'react-router-dom';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
@@ -42,6 +43,9 @@ export default class Index extends PureComponent {
               {!collapsed && (
                 <h1>
                   {title}
+                  <small>
+                    {__VERSION__}
+                  </small>
                 </h1>
               )}
             </Link>

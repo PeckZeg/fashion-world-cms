@@ -6,6 +6,8 @@
 $logo-bg-color:                         #002140;
 $logo-height:                           32px;
 
+$version-bg-color:                      #000c17;
+
 $avatar-popover-width:                  200px;
 $avatar-popover-height:                 $padding-lg-horizontal * 1.25;
 
@@ -41,6 +43,17 @@ $avatar-popover-height:                 $padding-lg-horizontal * 1.25;
     font-weight: 600;
     color: $white;
     font-size: $font-size-h4;
+    vertical-align: middle;
+
+    small {
+      margin-left: 0.75em;
+      padding: 0.25em 0.5em;
+      border-radius: 4px;
+      background-color: $version-bg-color;
+      font-family: $font-family-code;
+      font-size: $font-size-small;
+      vertical-align: middle;
+    }
   }
 }
 

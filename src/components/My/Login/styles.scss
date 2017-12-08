@@ -6,6 +6,10 @@ $main-width:                                 368px;
   margin: 0 auto;
   width: $main-width;
 
+  :global(.ant-input-lg) {
+    top: 0;
+  }
+
   .prefix-icon {
     color: $gray-lighten;
   }

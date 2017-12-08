@@ -25,7 +25,16 @@
     vertical-align: middle;
     font-weight: 600;
     color: #ffffff;
-    font-size: 18px; }
+    font-size: 18px;
+    vertical-align: middle; }
+    :local .logo h1 small {
+      margin-left: 0.75em;
+      padding: 0.25em 0.5em;
+      border-radius: 4px;
+      background-color: #000c17;
+      font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace, Microsoft Yahei;
+      font-size: 12px;
+      vertical-align: middle; }
 
 :local(.main) {
   position: relative; }

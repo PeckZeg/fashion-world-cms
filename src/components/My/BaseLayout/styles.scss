@@ -24,14 +24,26 @@ $header-height:                              48px;
 
     h1 {
       display: inline;
+      font-family: $font-family-code;
       vertical-align: middle;
+
+      :global(.ant-tag) {
+        margin-left: 0.75em;
+        vertical-align: middle;
+        font-family: $font-family-code;
+        cursor: auto;
+      }
     }
   }
 
   .desc {
-    @include margin-y($padding-lg-horizontal / 2, $padding-lg-horizontal);
+    @include margin-y($padding-lg-horizontal / 2);
     line-height: 1.75;
     color: $gray;
+
+    &:last-child {
+      margin-bottom: $padding-lg-horizontal;
+    }
   }
 }
 

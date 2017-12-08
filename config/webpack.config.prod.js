@@ -11,6 +11,7 @@ const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
 const alias = require('./resolveAlias');
+const globalVars = require('./globalVars');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -156,7 +157,7 @@ module.exports = {
                   ]
                 ]
               ],
-              compact: true,
+              // compact: true,
             },
           },
           // The notation here is somewhat confusing.
@@ -238,9 +239,9 @@ module.exports = {
                       loader: require.resolve('css-loader'),
                       options: {
                         importLoaders: 1,
-                        modules: true,
-                        minimize: true,
-                        camelCase: true,
+                        // modules: true,
+                        // minimize: true,
+                        // camelCase: true,
                         sourceMap: shouldUseSourceMap,
                       },
                     },
@@ -321,6 +322,8 @@ module.exports = {
     // It is absolutely essential that NODE_ENV was set to production here.
     // Otherwise React will be compiled in the very slow development mode.
     new webpack.DefinePlugin(env.stringified),
+    // global variables
+    new webpack.DefinePlugin(globalVars),
     // Minify the code.
     new webpack.optimize.UglifyJsPlugin({
       compress: {
