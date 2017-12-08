@@ -17,6 +17,7 @@ import injectProto from '~/src/utils/injectProto';
 import catchError from '~/src/utils/catchError';
 import injectApi from '~/src/utils/injectApi';
 import genRoutes from './genRoutes';
+import genTabs from './genTabs';
 
 import PageHeaderLayout from '~/src/components/layouts/PageHeaderLayout';
 import SwitchButton from '~/src/components/SwitchButton';
@@ -41,7 +42,7 @@ export default class AccountProfile extends PureComponent {
       entryTitle: '账号',
       entryNameProp: 'name',
       defaultTab: props.location.pathname,
-      ...this.tabs()
+      ...genTabs(this)
     });
   }
 
@@ -131,34 +132,8 @@ export default class AccountProfile extends PureComponent {
   /**
    *  设置选项卡
    */
-  setTabs = (opts = {}) => {
-    const { location, match } = opts;
-
-    this.setState(this.tabs(location, match));
-  }
-
-  tabs(location = this.props.location, match = this.props.match) {
-    const { pathname: defaultTab } = location;
-
-    if (!match) {
-      return { defaultTab, tabs: [] };
-    }
-
-    const { params: { accountId } } = match;
-
-    return {
-      defaultTab,
-      tabs: [
-        {
-          key: `/account/${accountId}`,
-          tab: '详情'
-        },
-        {
-          key: `/account/${accountId}/edit`,
-          tab: '编辑'
-        }
-      ]
-    };
+  setTabs = ({ location, match } = {}) => {
+    this.setState(genTabs(this, location, match));
   }
 
   /**
