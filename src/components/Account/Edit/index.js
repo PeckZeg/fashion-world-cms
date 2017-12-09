@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 
 import isFunction from 'lodash/isFunction';
 
-import CardLayout from '~/src/components/layouts/CardLayout';
+import CardLayout from '@layout/CardLayout';
+
 import PermissionsItem from '@form-item/Permissions';
 import InputItem from '@form-item/Input';
 

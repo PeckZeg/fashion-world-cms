@@ -8,7 +8,7 @@ import {
   ACCOUNT_PUT_UPDATE_ACCOUNT_AVATAR,
   ACCOUNT_DEL_BLOCK_ACCOUNT,
   ACCOUNT_DEL_DESTROY_ACCOUNT
-} from '~/src/api/account';
+} from '@api/account';
 
 /**
  *  [GET] 获取账号列表
@@ -71,8 +71,8 @@ export function updateAccount(accountId, data) {
  *  @param {object} data 修改内容
  *  @returns {Promise}
  */
-export function updateAccountAvatar(accountId, data) {
-  return ACCOUNT_PUT_UPDATE_ACCOUNT_AVATAR(this.token(), accountId, data);
+export function updateAccountAvatar(accountId, key) {
+  return ACCOUNT_PUT_UPDATE_ACCOUNT_AVATAR(this.token(), accountId, key);
 }
 
 /**

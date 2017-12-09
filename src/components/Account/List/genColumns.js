@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+// import { Icon } from 'antd';
 import React from 'react';
 
 import SwitchAction from '@table-column/Actions/SwitchAction';
@@ -77,6 +78,12 @@ export default function(com, query) {
       render: (actions, entry) => {
         const more = (
           <ul>
+            {/* <li>
+              <Link to={`/account/${entry._id}/avatar`}>
+                <Icon type="user" />
+                编辑头像
+              </Link>
+            </li> */}
             <SwitchAction
               entry={entry}
               status={!entry.activeAt}

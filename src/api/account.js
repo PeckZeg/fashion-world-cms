@@ -95,11 +95,11 @@ export const ACCOUNT_PUT_UPDATE_ACCOUNT = (token, accountId, data) => shimData(
  *  @param {object} data 修改内容
  *  @returns {Promise}
  */
-export const ACCOUNT_PUT_UPDATE_ACCOUNT_AVATAR = (token, accountId, data) => (
+export const ACCOUNT_PUT_UPDATE_ACCOUNT_AVATAR = (token, accountId, key) => (
   shimData(
     instance.put(
       `/${accountId}/avatar`,
-      data,
+      { key },
       genConfig('admin:account:update-account-avatar', token)
     )
   )

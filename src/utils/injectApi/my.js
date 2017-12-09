@@ -2,7 +2,7 @@ import {
   MY_GET_FETCH_MY_PROFILE,
   MY_POST_LOGIN,
   MY_DEL_LOGOUT
-} from '~/src/api/my';
+} from '@api/my';
 
 /**
  *  [GET] 获取当前登录账号的信息

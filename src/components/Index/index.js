@@ -1,8 +1,9 @@
-/*global __VERSION__:true*/
+/* global __VERSION__: true, __UPDATE_TIME__: true */
 import { Link, Route, Switch, Redirect } from 'react-router-dom';
 import React, { PureComponent } from 'react';
+import { Icon, Layout, Tooltip } from 'antd';
 import { connect } from 'react-redux';
-import { Icon, Layout } from 'antd';
+import moment from 'moment';
 
 import keys from 'lodash/keys';
 
@@ -27,6 +28,7 @@ export default class Index extends PureComponent {
 
   render() {
     const { collapsed } = this.props;
+    const updateTime = moment(__UPDATE_TIME__).format('YYYY-MM-DD');
 
     return (
       <Layout className={styles.layout}>
@@ -44,7 +46,9 @@ export default class Index extends PureComponent {
                 <h1>
                   {title}
                   <small>
-                    {__VERSION__}
+                    <Tooltip title={`最后更新：${updateTime}`}>
+                      {__VERSION__}
+                    </Tooltip>
                   </small>
                 </h1>
               )}
