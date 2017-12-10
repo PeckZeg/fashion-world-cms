@@ -3,10 +3,12 @@ import reduce from 'lodash/reduce';
 import map from 'lodash/map';
 
 import * as account from './account';
+import * as channel from './channel';
 import { title } from '../config';
 
 // 菜单列表
 export const menus = [
+  channel,
   account
 ];
 

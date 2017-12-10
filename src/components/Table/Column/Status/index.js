@@ -37,7 +37,7 @@ export default class TableStatusColumn extends PureComponent {
       else {
         title = `将发布于 ${publishAt.format(format)}`;
         color = 'orange';
-        icon = 'clock-o';
+        icon = 'clock-circle-o';
       }
     }
 

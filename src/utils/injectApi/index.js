@@ -2,11 +2,13 @@ import forEach from 'lodash/forEach';
 import has from 'lodash/has';
 
 import * as account from './account';
+import * as channel from './channel';
 import * as qiniu from './qiniu';
 import * as my from './my';
 
 const METHOD_LIST = {
   account,
+  channel,
   qiniu,
   my
 };

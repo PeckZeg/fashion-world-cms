@@ -1,9 +1,7 @@
 import { Link } from 'react-router-dom';
-// import { Icon } from 'antd';
 import React from 'react';
 
 import SwitchAction from '@table-column/Actions/SwitchAction';
-import PermissionsCol from '@table-column/Permissions';
 import CreateAtCol from '@table-column/CreateAt';
 import ActionsCol from '@table-column/Actions';
 import StatusCol from '@table-column/Status';
@@ -28,46 +26,33 @@ export default function(com, query) {
       width: 64,
       render: (status, entry) => (
         <StatusCol
-          publishAt={entry.activeAt}
+          publishAt={entry.publishAt}
           removeAt={entry.removeAt}
         />
       )
     },
-    // {
-    //   dataIndex: '_id',
-    //   title: '编号',
-    //   // width: 213,
-    //   render: _id => <code>{_id}</code>
-    // },
     {
-      dataIndex: 'avatar',
-      title: '头像',
+      dataIndex: 'cover',
+      title: '封面',
       width: 80,
-      render: (avatar, entry) => (
+      render: (cover, entry) => (
         <CoverCol
-          icon="user"
-          value={avatar}
-          circular
+          value={cover}
           onClick={com.openImageViewer.bind(com, entry)}
         />
       )
     },
     {
       dataIndex: 'name',
-      title: '登录名',
-      width: 256,
+      title: '名称',
+      // width: 256,
       render: (name, entry) => (
         <TitleCol
           title={name}
           searchTitle={searchName}
-          link={`/account/${entry._id}`}
+          link={`/channel/${entry._id}`}
         />
       )
-    },
-    {
-      dataIndex: 'permissions',
-      title: '权限',
-      render: permissions => <PermissionsCol value={permissions} />
     },
     {
       dataIndex: 'createAt',
@@ -81,23 +66,17 @@ export default function(com, query) {
       title: '操作',
       width: 160,
       float: 'right',
-      render: (actions, entry) => {
+      render(actions, entry) {
         const more = (
           <ul>
-            {/* <li>
-              <Link to={`/account/${entry._id}/avatar`}>
-                <Icon type="user" />
-                编辑头像
-              </Link>
-            </li> */}
             <SwitchAction
               entry={entry}
-              status={!entry.activeAt}
-              yesLabel="激活"
+              status={!entry.publishAt}
+              yesLabel="发布"
               yesIcon="check"
               noIcon="lock"
               noLabel="冻结"
-              onYesClick={com.activeEntry}
+              onYesClick={com.publishEntry}
               onNoClick={com.blockEntry}
             />
             <SwitchAction
@@ -117,7 +96,7 @@ export default function(com, query) {
 
         return (
           <ActionsCol moreContent={more}>
-            <Link to={`/account/${entry._id}/edit`}>
+            <Link to={`/channel/${entry._id}/edit`}>
               编辑
             </Link>
           </ActionsCol>
