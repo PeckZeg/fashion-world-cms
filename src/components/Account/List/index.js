@@ -73,12 +73,12 @@ export default class List extends PureComponent {
    *  @param {number} offset 页面位移
    *  @param {number} limit 每页限制
    */
-  fetchEntryList = async (offset, limit) => {
+  fetchEntryList = async (offset, limit, loadingProp = 'loading') => {
     const { entriesProp } = this.state;
     const query = genQueryArgs(this, offset, limit, querySchema);
 
     try {
-      await this.setStateAsync({ loading: true });
+      await this.setStateAsync({ [loadingProp]: true });
       const {
         total,
         [entriesProp]: entries
@@ -87,7 +87,7 @@ export default class List extends PureComponent {
       await this.setStateAsync({
         total,
         entries,
-        loading: false,
+        [loadingProp]: false,
         offset: query.offset + 1,
         limit: query.limit,
         columns: genColumns(this, query)
@@ -101,9 +101,17 @@ export default class List extends PureComponent {
     }
 
     catch (err) {
-      catchError(this, err, { loading: true });
+      catchError(this, err, { loading: loadingProp });
     }
   }
+
+  /**
+   *  同步条目列表
+   */
+  onSyncEntryList = async () => {
+    const { offset, limit } = this.state;
+    await this.fetchEntryList(offset - 1, limit, 'tableLoading');
+  };
 
   /**
    *  激活多条条目
@@ -175,9 +183,13 @@ export default class List extends PureComponent {
 
   render() {
     const {
-      docTitle, total, loading, columns, entries, offset, limit,
+      docTitle, total, loading, tableLoading, columns, entries, offset, limit,
       selectedRowKeys, timeline
     } = this.state;
+
+    const filter = (
+      <Filter onSync={this.onSyncEntryList} />
+    );
 
     const toolbar = (
       <Toolbar
@@ -195,10 +207,10 @@ export default class List extends PureComponent {
     return (
       <DocumentTitle title={docTitle}>
         <PageHeaderLayout loading={loading}>
-          <CardLayout extra={<Filter />}>
+          <CardLayout extra={filter}>
             <EntryTable
               total={total}
-              loading={loading}
+              loading={tableLoading}
               columns={columns}
               dataSource={entries}
               pagination={genPagination({ total, offset, limit })}

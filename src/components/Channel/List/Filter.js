@@ -5,13 +5,17 @@ import { Input } from 'antd';
 import FilterLayout from '~/src/components/layouts/FilterLayout';
 
 import stringifyQuery from '~/src/utils/query/stringify';
+import injectProto from '~/src/utils/injectProto';
 import parseQuery from '~/src/utils/query/parse';
 
 const { SyncButton } = FilterLayout;
 
 @withRouter
+@injectProto('setStateAsync')
 export default class Filter extends PureComponent {
-  state = {};
+  state = {
+    syncing: false
+  };
 
   onSearchName = searchName => {
     const { location, history, match } = this.props;
@@ -37,7 +41,7 @@ export default class Filter extends PureComponent {
         <Input.Search
           style={{ width: 256 }}
           defaultValue={searchName}
-          placeholder="搜索登录名"
+          placeholder="搜索频道名"
           onSearch={this.onSearchName}
         />
 

@@ -1,0 +1,7 @@
+@import "src/scss/global";
+
+:local(.container) {
+  > *:not(:last-child) {
+    margin-right: $padding-lg-vertical;
+  }
+}

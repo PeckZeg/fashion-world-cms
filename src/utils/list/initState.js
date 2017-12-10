@@ -24,6 +24,7 @@ export default function(com, props, querySchema, extraState) {
     limit,                     // 每页条数
     total: 0,                  // 记录总数
     loading: true,             // 加载状态
+    tableLoading: false,       // 表格加载状态
     columns: [],               // 表格栏
     entries: [],               // 记录列表
     selectedRowKeys: [],       // 已选择行键
