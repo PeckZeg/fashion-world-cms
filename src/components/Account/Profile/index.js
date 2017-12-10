@@ -141,9 +141,12 @@ export default class AccountProfile extends PureComponent {
    *  @param {React.Component} Component 需要渲染的组件
    */
   renderRoute = Component => {
+    const { entry, entryProp, entryTitle, entryNameProp } = this.state;
+    const props = { entry, entryProp, entryTitle, entryNameProp };
+
     return (
       <Component
-        entry={this.state.entry}
+        {...props}
         onUpdate={this.onUpdate}
       />
     );

@@ -27,5 +27,18 @@
 
   .detail {
     width: 100%;
+
+    :global(.ant-avatar) {
+      margin-right: 0.5em;
+
+      > img {
+        display: inline-block;
+      }
+    }
+
+    .flex {
+      display: flex;
+      align-items: center;
+    }
   }
 }

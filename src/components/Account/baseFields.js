@@ -9,3 +9,7 @@ export const name = {
 export const permissions = {
   label: '权限'
 };
+
+export const avatar = {
+  label: '头像'
+};

@@ -16,10 +16,6 @@ export default function(com, location, match) {
       {
         key: `/account/${accountId}/edit`,
         tab: '编辑'
-      },
-      {
-        key: `/account/${accountId}/avatar`,
-        tab: '编辑头像'
       }
     ];
   }

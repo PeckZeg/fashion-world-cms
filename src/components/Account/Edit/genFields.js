@@ -20,6 +20,11 @@ export default function(com) {
         initialValue: entry[field]
       },
 
+      avatar: {
+        ...baseFields.avatar,
+        ...formItemLayout
+      },
+
       submit: submitFormLayout
     }), {})
   };
