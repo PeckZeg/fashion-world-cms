@@ -1,6 +1,7 @@
 import React, { PureComponent, Fragment } from 'react';
 import { Icon, Upload, Spin } from 'antd';
 import PropTypes from 'prop-types';
+import { findDOMNode } from 'react-dom';
 import Animate from 'rc-animate';
 
 import isFunction from 'lodash/isFunction';
@@ -8,6 +9,8 @@ import isBoolean from 'lodash/isBoolean';
 import random from 'lodash/random';
 
 import UniqKey from '~/src/utils/UniqKey';
+
+import toProcessImage from '~/src/utils/qiniu/toProcessImage';
 import setTimeoutAsync from '~/src/utils/setTimeoutAsync';
 import injectProto from '~/src/utils/injectProto';
 import styles from './styles.css';
@@ -27,6 +30,8 @@ export default class ImageUploader extends PureComponent {
   };
 
   static defaultProps = {
+    w: null,
+    h: null,
     tip: (
       <Fragment>
         只能上传图片文件，并且不超过 <code>2 MB</code>
@@ -42,6 +47,13 @@ export default class ImageUploader extends PureComponent {
     result: null,
     resultDesc: null,
   };
+
+  componentDidMount() {
+    const $dragger = findDOMNode(this);
+    const { offsetWidth: w, offsetHeight: h } = $dragger;
+
+    this.setState({ w, h });
+  }
 
   /**
    *  开始上传事件处理器
@@ -151,7 +163,7 @@ export default class ImageUploader extends PureComponent {
 
   render() {
     const { image } = this.props;
-    const { disabled, uploading } = this.state;
+    const { disabled, uploading, w, h } = this.state;
     const tip = this.renderTip();
     const result = this.renderResult();
     const customRequest = this.props.customRequest && this.customRequest;
@@ -175,8 +187,12 @@ export default class ImageUploader extends PureComponent {
           )}
 
           <div className={styles.main}>
-            {image ? (
-              <img className={styles.preview} src={image} alt="" />
+            {w && h && image ? (
+              <img
+                className={styles.preview}
+                src={toProcessImage(image, { mode: 2, w, h })}
+                alt=""
+              />
             ) :tip}
           </div>
         </div>

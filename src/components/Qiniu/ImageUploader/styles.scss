@@ -15,6 +15,9 @@ $z-index-tip:            4;
 $z-index-result:         2;
 
 :local(.dragger) {
+  display: block;
+  height: $container-height;
+
   .container {
     padding: $padding-lg-horizontal;
     height: $container-height;

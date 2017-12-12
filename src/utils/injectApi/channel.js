@@ -40,10 +40,11 @@ export function createChannel(data) {
 /**
  *  [POST] 发布频道
  *  @param {ObjectId} channelId 频道编号
+ *  @param {object} data body 数据
  *  @returns {Promise}
  */
-export function publishChannel(channelId) {
-  return CHANNEL_POST_PUBLISH_CHANNEL(this.token(), channelId);
+export function publishChannel(channelId, data) {
+  return CHANNEL_POST_PUBLISH_CHANNEL(this.token(), channelId, data);
 };
 
 /**

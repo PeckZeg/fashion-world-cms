@@ -8,7 +8,7 @@ import isFunction from 'lodash/isFunction';
 import ImageUploader from '@qiniu/ImageUploader';
 import CardLayout from '@layout/CardLayout';
 
-import PermissionsItem from '@form-item/Permissions';
+import InputNumber from '@form-item/InputNumber';
 import InputItem from '@form-item/Input';
 
 import validateFields from '~/src/utils/form/validateFields';
@@ -25,10 +25,9 @@ const { Item: FormItem } = Form;
 
 @Form.create()
 @connect(mapMyToProps)
-@injectApi('account', 'qiniu')
+@injectApi('channel', 'qiniu')
 @injectProto('setStateAsync')
 export default class Edit extends PureComponent {
-
   /**
    *  传递给 `props` 的类型检查
    *  @static
@@ -58,17 +57,17 @@ export default class Edit extends PureComponent {
    *  @param customReq 自定义请求参数
    */
   customRequest = (uploader, customReq) => {
-    customRequest(this, uploader, customReq, this.updateEntryAvatar);
+    customRequest(this, uploader, customReq, this.updateEntryCover);
   }
 
   /**
-   *  更新条目头像
+   *  更新频道封面
    *  @param {string} key 七牛存储键
-  */
-  updateEntryAvatar = async key => {
+   */
+  updateEntryCover = async key => {
     const { entry, entryProp } = this.props;
     const { _id: entryId } = entry;
-    const { [entryProp]: newEntry } = await this.updateAccountAvatar(entryId, key);
+    const { [entryProp]: newEntry } = await this.updateChannelCover(entryId, key);
 
     this.onUpdate(newEntry);
     message.success('更新头像成功');
@@ -102,8 +101,8 @@ export default class Edit extends PureComponent {
       const { form, entry, entryProp } = this.props;
       const { _id: entryId } = entry;
       await this.setStateAsync({ submitting: true });
-      const body = await validateFields(form, null, { group: 'permissions' });
-      const { [entryProp]: newEntry } = await this.updateAccount(entryId, body);
+      const body = await validateFields(form);
+      const { [entryProp]: newEntry } = await this.updateChannel(entryId, body);
 
       this.onUpdate(newEntry);
       message.success(`更新成功`);
@@ -113,7 +112,7 @@ export default class Edit extends PureComponent {
     catch (err) {
       catchError(this, err, { loading: 'submitting' });
     }
-  }
+  };
 
   render() {
     const { entry } = this.props;
@@ -124,16 +123,16 @@ export default class Edit extends PureComponent {
       <CardLayout>
         <Form className={globalStyles.form} onSubmit={this.onSubmit}>
           <Spin spinning={submitting}>
-            <FormItem {...fields.avatar}>
+            <FormItem {...fields.cover}>
               <ImageUploader
-                image={entry.avatar}
+                image={entry.cover}
                 customRequest={this.customRequest}
               />
             </FormItem>
 
             <InputItem {...fields.name} />
 
-            <PermissionsItem {...fields.permissions} />
+            <InputNumber {...fields.priority} />
           </Spin>
 
           <Form.Item {...fields.submit}>

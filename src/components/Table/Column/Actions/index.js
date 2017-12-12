@@ -2,9 +2,15 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types'
 import { Popover, Icon } from 'antd';
 
+import SwitchAction from './SwitchAction';
+import Action from './Action';
+
 import styles from './styles.css';
 
 export default class TableActionsColumn extends PureComponent {
+  static SwitchAction = SwitchAction;
+  static Action = Action;
+
   static propTypes = {
     moreLabel: PropTypes.oneOfType([
       PropTypes.element,

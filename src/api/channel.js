@@ -49,12 +49,13 @@ export const CHANNEL_POST_CREATE_CHANNEL = (token, data) => shimData(
  *  [POST] 发布频道
  *  @param {object} token 访问令牌
  *  @param {ObjectId} channelId 频道编号
+ *  @param {object} data body 数据
  *  @returns {Promise}
  */
-export const CHANNEL_POST_PUBLISH_CHANNEL = (token, channelId) => shimData(
+export const CHANNEL_POST_PUBLISH_CHANNEL = (token, channelId, data) => shimData(
   instance.post(
     `/${channelId}/publish`,
-    null,
+    data,
     genConfig('admin:channel:publish-channel', token)
   )
 );
@@ -97,7 +98,7 @@ export const CHANNEL_PUT_UPDATE_CHANNEL = (token, channelId, data) => shimData(
  */
 export const CHANNEL_PUT_UPDATE_CHANNEL_COVER = (token, channelId, key) => shimData(
   instance.put(
-    `/${channelId}`,
+    `/${channelId}/cover`,
     { key },
     genConfig('admin:channel:update-channel-cover', token)
   )

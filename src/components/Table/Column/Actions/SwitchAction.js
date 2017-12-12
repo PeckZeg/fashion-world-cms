@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'antd';
 
 import isFunction from 'lodash/isFunction';
+
+import Action from './Action';
 
 /**
  *  状态切换动作
@@ -84,16 +85,14 @@ export default class SwitchAction extends PureComponent {
     const label = status ? yesLabel : noLabel;
 
     return (
-      <li>
-        <Button
-          type={type}
-          icon={icon}
-          loading={loading}
-          onClick={this.onClick}
-        >
-          {label}
-        </Button>
-      </li>
+      <Action
+        type={type}
+        icon={icon}
+        loading={loading}
+        onClick={this.onClick}
+      >
+        {label}
+      </Action>
     );
   }
 }

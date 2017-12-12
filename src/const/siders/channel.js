@@ -1,3 +1,4 @@
+import Profile from '~/src/components/Channel/Profile';
 import List from '~/src/components/Channel/List';
 
 export const key = 'channel';
@@ -38,5 +39,11 @@ export const items = [
     label: '已删除的频道',
     component: List,
     baseQuery: { publishAt: 'off', removeAt: 'on' }
+  },
+  {
+    hidden: true,
+    key: '/channel/:channelId',
+    label: '频道信息',
+    component: Profile
   }
 ];

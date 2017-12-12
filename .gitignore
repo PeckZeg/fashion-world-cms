@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /proxy.json
+fw-config.json
 src/**/*.css
 
 # testing

@@ -1,10 +1,11 @@
+import React, { PureComponent, Fragment } from 'react';
 import DocumentTitle from 'react-document-title';
-import React, { PureComponent } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { Button } from 'antd';
+import { Button, Icon } from 'antd';
 
 import PageHeaderLayout from '~/src/components/layouts/PageHeaderLayout';
+import TimingPublishModal from '~/src/components/TimingPublishModal';
 import CardLayout from '~/src/components/layouts/CardLayout';
 import EntryTable from '~/src/components/layouts/EntryTable';
 import TimelineModal from '~/src/components/TimelineModal';
@@ -17,6 +18,7 @@ import addHistoryListener from '~/src/utils/list/addHistoryListener';
 import handleEntries from '~/src/utils/list/handleSelectedEntries';
 import genRowSelection from '~/src/utils/table/genRowSelection';
 import toProcessImage from '~/src/utils/qiniu/toProcessImage';
+import validateFields from '~/src/utils/form/validateFields';
 import mapMyToProps from '~/src/utils/connect/mapMyToProps';
 import onTableChange from '~/src/utils/table/onTableChange';
 import genPagination from '~/src/utils/table/genPagination';
@@ -25,6 +27,7 @@ import handleEntry from '~/src/utils/list/handleEntry';
 import initState from '~/src/utils/list/initState';
 import injectProto from '~/src/utils/injectProto';
 import catchError from '~/src/utils/catchError';
+import replace from '~/src/utils/array/replace';
 import injectApi from '~/src/utils/injectApi';
 import * as querySchema from './querySchema';
 import genColumns from './genColumns';
@@ -53,6 +56,22 @@ export default class List extends PureComponent {
   componentWillUnmount() {
     removeHistoryListener(this);
   }
+
+  /**
+   *  打开定时发布模态
+   *  @param {object} entry 待定时发布的条目
+   */
+  openTimingPublishModal = entry => this.timingPublishModal.open(entry, {
+    title: (
+      <Fragment>
+        <Icon type="clock-circle-o" />
+        定时发布{this.state.entryTitle}
+        <small>
+          {entry.name}
+        </small>
+      </Fragment>
+    )
+  });
 
   /**
    *  获取条目列表
@@ -91,9 +110,39 @@ export default class List extends PureComponent {
     }
   }
 
+  /**
+   *  同步条目列表
+   *  @returns {Promise}
+   */
   onSyncEntryList = async () => {
     const { offset, limit } = this.state;
     await this.fetchEntryList(offset - 1, limit, 'tableLoading');
+  };
+
+  /**
+   *  定时发布条目
+   *  @param {object} entry 条目
+   *  @returns {Promise}
+   */
+  publishTimingEntry = async (modal, form, entry) => {
+    const { entryProp } = this.state;
+    const { _id: entryId } = entry;
+
+    try {
+      await modal.startSubmit();
+      const body = await validateFields(form);
+      const { [entryProp]: newEntry } = await this.publishChannel(entryId, body);
+      const entries = replace(this.state.entries, entry, newEntry);
+
+      await this.setStateAsync({ entries });
+      await modal.endSubmit();
+      await modal.close();
+    }
+
+    catch (err) {
+      await modal.endSubmit();
+      catchError(this, err);
+    }
   };
 
   /**
@@ -211,6 +260,11 @@ export default class List extends PureComponent {
             <TimelineModal ref={this.ref.bind(this, 'timelineModal')}>
               {timeline}
             </TimelineModal>
+
+            <TimingPublishModal
+              onRef={this.ref.bind(this, 'timingPublishModal')}
+              onSubmit={this.publishTimingEntry}
+            />
           </CardLayout>
         </PageHeaderLayout>
       </DocumentTitle>

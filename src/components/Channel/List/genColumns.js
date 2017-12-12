@@ -1,14 +1,15 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
 
-import SwitchAction from '@table-column/Actions/SwitchAction';
 import CreateAtCol from '@table-column/CreateAt';
 import ActionsCol from '@table-column/Actions';
-import StatusCol from '@table-column/Status';
+import StatusCol from '@table-column/Status'
 import TitleCol from '@table-column/Title';
 import CoverCol from '@table-column/Cover';
 
 import genSorter from '~/src/utils/table/genSorter';
+
+const { Action, SwitchAction } = ActionsCol;
 
 /**
  *  生成表格栏参数
@@ -55,6 +56,12 @@ export default function(com, query) {
       )
     },
     {
+      dataIndex: 'priority',
+      title: '排序值',
+      ...genSorter(query, 'priority'),
+      render: priority => <code>{priority}</code>
+    },
+    {
       dataIndex: 'createAt',
       title: '创建时间',
       ...genSorter(query, 'createAt'),
@@ -79,6 +86,14 @@ export default function(com, query) {
               onYesClick={com.publishEntry}
               onNoClick={com.blockEntry}
             />
+            {!entry.publishAt && (
+              <Action
+                icon="clock-circle-o"
+                onClick={com.openTimingPublishModal.bind(com, entry)}
+              >
+                定时发布
+              </Action>
+            )}
             <SwitchAction
               entry={entry}
               status={!entry.removeAt}
