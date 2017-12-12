@@ -51,5 +51,5 @@ module.exports = {
   appNodeModules: resolveApp('node_modules'),
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
-  devServerProxy: resolveApp('proxy.json')
+  fwConfig: resolveApp('fw.config.json')
 };
