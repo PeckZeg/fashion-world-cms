@@ -7,13 +7,14 @@ import moment from 'moment';
 
 import keys from 'lodash/keys';
 
+import ChangeLog from '~/src/components/ChangeLog';
+import Header from './Header';
+import Sider from './Sider';
+
 import { routes, routeKeys } from '~/src/const/siders';
 import { logo, title } from '~/src/const/config';
 import * as actions from '~/src/actions/layout';
 import styles from './styles.css';
-
-import Header from './Header';
-import Sider from './Sider';
 
 @connect(
   ({ reducers }) => ({ collapsed: reducers.layout.collapsed }),
@@ -70,6 +71,7 @@ export default class Index extends PureComponent {
 
           <Layout.Content className={styles.content}>
             <Switch>
+              <Route path="/changelog" exact component={ChangeLog} />
               {routes.map(({ key, component }) => (
                 <Route key={key} path={key} component={component} />
               ))}

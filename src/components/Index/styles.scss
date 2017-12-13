@@ -82,36 +82,43 @@ $avatar-popover-height:                 $padding-lg-horizontal * 1.25;
   }
 }
 
-:local .trigger,
-:local .action {
-  cursor: pointer;
-  @include enable-transition();
+:local {
+  .trigger, .action, .link-action {
+    cursor: pointer;
+    @include enable-transition();
 
-  &:hover,
-  &:global(.active) {
-    background-color: $header-item-hover-bg-color;
-  }
-}
-
-:local .action {
-  float: left;
-  display: flex;
-  padding: 0 $padding-base-horizontal;
-  justify-content: center;
-  align-items: center;
-
-  :global(.ant-avatar) {
-    margin-right: 0.25em;
+    &:hover,
+    &:global(.active) {
+      background-color: $header-item-hover-bg-color;
+    }
   }
 
-  a {
+  .action, .link-action {
+    float: left;
+    display: flex;
+    padding: 0 $padding-base-horizontal;
+    justify-content: center;
+    align-items: center;
+
+    :global {
+      .ant-avatar {
+        margin-right: 0.25em;
+      }
+
+      .anticon {
+        margin-right: 0.5em;
+      }
+    }
+  }
+
+  .action a, .link-action {
     text-decoration: none;
     font-size: $font-size-medium;
     color: $gray-darken;
+  }
 
-    :global .anticon {
-      margin-right: 0.5em;
-    }
+  .link-action:focus {
+    text-decoration: none;
   }
 }
 

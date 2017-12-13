@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const snakeCase = require('lodash/snakeCase');
 const toUpper = require('lodash/toUpper');
 const forEach = require('lodash/forEach');
@@ -7,7 +9,8 @@ const packageJSON = require(paths.appPackageJson);
 
 const vars = {
   version: packageJSON.version,
-  updateTime: +new Date()
+  updateTime: +new Date(),
+  changelog: fs.readFileSync(paths.changelog, 'utf8')
 };
 
 forEach(vars, (value, key) => {

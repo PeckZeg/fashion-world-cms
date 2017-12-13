@@ -1,6 +1,6 @@
-import React, { PureComponent } from 'react';
 import DocumentTitle from 'react-document-title';
 import { Route, Switch } from 'react-router-dom';
+import React, { PureComponent } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 

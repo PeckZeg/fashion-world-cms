@@ -61,29 +61,30 @@
       display: table;
       clear: both; }
 
-:local .trigger,
-:local .action {
+:local .trigger, :local .action, :local .link-action {
   cursor: pointer;
   transition: all 0.2s ease-out; }
-  :local .trigger:hover, :local .trigger:global(.active),
-  :local .action:hover,
-  :local .action:global(.active) {
+  :local .trigger:hover, :local .trigger:global(.active), :local .action:hover, :local .action:global(.active), :local .link-action:hover, :local .link-action:global(.active) {
     background-color: #e6f7ff; }
 
-:local .action {
+:local .action, :local .link-action {
   float: left;
   display: flex;
   padding: 0 12px;
   justify-content: center;
   align-items: center; }
-  :local .action :global(.ant-avatar) {
+  :local .action :global .ant-avatar, :local .link-action :global .ant-avatar {
     margin-right: 0.25em; }
-  :local .action a {
-    text-decoration: none;
-    font-size: 16px;
-    color: #666; }
-    :local .action a :global .anticon {
-      margin-right: 0.5em; }
+  :local .action :global .anticon, :local .link-action :global .anticon {
+    margin-right: 0.5em; }
+
+:local .action a, :local .link-action {
+  text-decoration: none;
+  font-size: 16px;
+  color: #666; }
+
+:local .link-action:focus {
+  text-decoration: none; }
 
 :local .avatar-action > span {
   display: flex;
