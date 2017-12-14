@@ -1,3 +1,6 @@
+:local(.container) .head {
+  font-size: 12px; }
+
 :local(.container) h4, :local(.container) .desc {
   position: relative;
   overflow: hidden;

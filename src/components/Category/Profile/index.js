@@ -15,9 +15,9 @@ import historyListener from '~/src/utils/profile/historyListener';
 import toProcessImage from '~/src/utils/qiniu/toProcessImage';
 import validateFields from '~/src/utils/form/validateFields';
 import mapMyToProps from '~/src/utils/connect/mapMyToProps';
-import renderRoute from '~/src/utils/profile/renderRoute';
 import setTimeoutAsync from '~/src/utils/setTimeoutAsync';
 import handleEntry from '~/src/utils/profile/handleEntry';
+import renderRoute from '~/src/utils/profile/renderRoute';
 import initState from '~/src/utils/profile/initState';
 import injectProto from '~/src/utils/injectProto';
 import catchError from '~/src/utils/catchError';
@@ -26,19 +26,23 @@ import genHeaderItems from './genHeaderItems';
 import genRoutes from './genRoutes';
 import genTabs from './genTabs';
 
+/**
+ *  分类资料页
+ *  @class
+ */
 @withRouter
 @connect(mapMyToProps)
-@injectApi('channel')
+@injectApi('category')
 @injectProto('ref', 'setStateAsync')
 @historyListener('setTabs')
 export default class Profile extends PureComponent {
   constructor(props) {
     super(props);
 
-    initState(this, props, 'channelId', {
-      docTitle: '频道信息',
-      entryProp: 'channel',
-      entryTitle: '频道',
+    initState(this, props, 'categoryId', {
+      docTitle: '分类信息',
+      entryProp: 'category',
+      entryTitle: '分类',
       entryNameProp: 'name',
       defaultTab: props.location.pathname,
       ...genTabs(this)
@@ -58,36 +62,6 @@ export default class Profile extends PureComponent {
    *  @param {object} entry 更新后的条目
    */
   onUpdate = entry => this.setState({ entry, entryId: entry._id });
-
-  /**
-   *  获取条目信息
-   */
-  fetchEntry = async () => {
-    const { entryId, entryProp, entryNameProp } = this.state;
-
-    try {
-      await this.setStateAsync({ loading: true, entry: null, exception: null });
-      const { [entryProp]: entry } = await this.fetchChannelProfile(entryId);
-
-      await setTimeoutAsync(random(256, 1024));
-      await this.setStateAsync({
-        docTitle: `账号 ${entry[entryNameProp]} 信息`,
-        loading: false,
-        entry
-      });
-    }
-
-    catch (err) {
-      const { response } = catchError(this, err);
-      let state = { loading: false };
-
-      if (response) {
-        state.exception = <Exception type={response.status} />;
-      }
-
-      this.setState(state);
-    }
-  };
 
   /**
    *  打开图片预览器
@@ -117,6 +91,36 @@ export default class Profile extends PureComponent {
   }
 
   /**
+   *  获取条目信息
+   */
+  fetchEntry = async () => {
+    const { entryTitle, entryId, entryProp, entryNameProp } = this.state;
+
+    try {
+      await this.setStateAsync({ loading: true, entry: null, exception: null });
+      const { [entryProp]: entry } = await this.fetchCategoryProfile(entryId);
+
+      await setTimeoutAsync(random(256, 1024));
+      await this.setStateAsync({
+        docTitle: `${entryTitle} ${entry[entryNameProp]} 信息`,
+        loading: false,
+        entry
+      });
+    }
+
+    catch (err) {
+      const { response } = catchError(this, err);
+      let state = { loading: false };
+
+      if (response) {
+        state.exception = <Exception type={response.status} />;
+      }
+
+      this.setState(state);
+    }
+  };
+
+  /**
    *  定时发布条目
    *  @param {React.Component} modal 模态实例
    *  @param form 表单
@@ -128,7 +132,7 @@ export default class Profile extends PureComponent {
     try {
       await modal.startSubmit();
       const body = await validateFields(form);
-      const { [entryProp]: newEntry } = await this.publishChannel(entryId, body);
+      const { [entryProp]: newEntry } = await this.publishCategory(entryId, body);
 
       this.onUpdate(newEntry);
       await modal.endSubmit();
@@ -145,25 +149,25 @@ export default class Profile extends PureComponent {
    *  发布条目
    *  @param {React.Component} btn 按钮
    */
-  publishEntry = btn => handleEntry(this, btn, '发布', 'publishChannel');
+  publishEntry = btn => handleEntry(this, btn, '发布', 'publishCategory');
 
   /**
    *  恢复条目
    *  @param {React.Component} btn 按钮
    */
-  recoverEntry = btn => handleEntry(this, btn, '恢复', 'recoverChannel');
+  recoverEntry = btn => handleEntry(this, btn, '恢复', 'recoverCategory');
 
   /**
    *  冻结条目
    *  @param {React.Component} btn 按钮
    */
-  blockEntry = btn => handleEntry(this, btn, '冻结', 'blockChannel');
+  blockEntry = btn => handleEntry(this, btn, '冻结', 'blockCategory');
 
   /**
    *  删除条目
    *  @param {React.Component} btn 按钮
    */
-  destroyEntry = btn => handleEntry(this, btn, '删除', 'destroyChannel');
+  destroyEntry = btn => handleEntry(this, btn, '删除', 'destroyCategory');
 
   render() {
     const {
@@ -205,4 +209,4 @@ export default class Profile extends PureComponent {
       </DocumentTitle>
     );
   }
-}
+};

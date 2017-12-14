@@ -1,8 +1,33 @@
 @import "src/scss/global";
 
+$close-size: 56px;
+
 :local(.modal) {
   :global {
+    .ant-modal-header {
+      padding-right: $close-size;
+    }
+
     .ant-modal-title {
+      position: relative;
+      overflow: hidden;
+      white-space: nowrap;
+
+      &:after {
+        content: '';
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        right: 0;
+        width: 1.75em;
+        height: 100%;
+        background: linear-gradient(
+          to right,
+          rgba($white, 0),
+          $white
+        );
+      }
+
       > .anticon {
         margin-right: 0.5em;
       }

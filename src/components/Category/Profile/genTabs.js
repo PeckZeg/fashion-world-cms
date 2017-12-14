@@ -12,15 +12,15 @@ export default function(com, location, match) {
   let tabList = { defaultTab, tabs: [] };
 
   if (match) {
-    const { params: { channelId } } = match;
+    const { params: { categoryId } } = match;
 
     tabList.tabs = [
       {
-        key: `/channel/${channelId}`,
+        key: `/category/${categoryId}`,
         tab: '详情'
       },
       {
-        key: `/channel/${channelId}/edit`,
+        key: `/category/${categoryId}/edit`,
         tab: '编辑'
       }
     ];

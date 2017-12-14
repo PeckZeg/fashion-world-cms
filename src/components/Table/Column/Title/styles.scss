@@ -5,6 +5,10 @@ $base-height:                                1.5em;
 $hover-bg-color:                             #ecf6fd;
 
 :local(.container) {
+  .head {
+    font-size: $font-size-small;
+  }
+
   h4, .desc {
     position: relative;
     overflow: hidden;
@@ -55,7 +59,7 @@ $hover-bg-color:                             #ecf6fd;
 
   h4 {
     margin: 0;
-    
+
     &, a {
       font-weight: normal;
       font-size: $font-size-medium;

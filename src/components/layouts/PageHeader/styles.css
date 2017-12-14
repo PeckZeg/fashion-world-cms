@@ -1,5 +1,5 @@
 :local(.header) {
-  padding: 16px 32px 0 32px;
+  padding: 16px 32px 0;
   border-bottom: 1px solid #e8e8e8;
   background-color: #ffffff; }
   :local(.header) .title, :local(.header) .main {
@@ -53,9 +53,25 @@
   :local(.header) .title {
     font-size: 20px;
     font-weight: 500;
+    height: 32px;
     line-height: 32px;
-    color: #333; }
+    color: #333;
+    word-break: break-all;
+    position: relative;
+    overflow: hidden; }
+    :local(.header) .title:after {
+      content: '';
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      right: 0;
+      width: 4em;
+      height: 100%;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0), #ffffff); }
   :local(.header) .action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-left: 48px;
     text-align: right; }
     :local(.header) .action :global .ant-btn-group:not(:last-child),

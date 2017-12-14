@@ -11,11 +11,12 @@
   .label,
   .detail {
     display: table-cell;
-    padding-bottom: $padding-lg-horizontal / 2;
-    line-height: $font-size-base * 1.75;
+    padding-bottom: $padding-lg-horizontal;
+    line-height: $font-size-h3;
   }
 
   .label {
+    vertical-align: top;
     white-space: nowrap;
     color: $gray;
 
@@ -27,18 +28,26 @@
 
   .detail {
     width: 100%;
-
-    :global(.ant-avatar) {
-      margin-right: 0.5em;
-
-      > img {
-        display: inline-block;
-      }
-    }
+    word-break: break-all;
 
     .flex {
       display: flex;
       align-items: center;
+
+      :global(.ant-avatar) {
+        flex: 0 0 auto;
+        margin-right: 0.5em;
+
+        > img {
+          display: inline-block;
+        }
+      }
+
+      code {
+        width: 100%;
+        height: $font-size-h3;
+        @include color-ellipsis();
+      }
     }
   }
 }

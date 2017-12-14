@@ -21,6 +21,12 @@ export default function(com, query) {
   const { searchName } = query;
 
   return [
+    // {
+    //   dataIndex: '_id',
+    //   title: '编号',
+    //   // width: 213,
+    //   render: _id => <code>{_id}</code>
+    // },
     {
       dataIndex: 'status',
       title: '状态',
@@ -49,9 +55,10 @@ export default function(com, query) {
       // width: 256,
       render: (name, entry) => (
         <TitleCol
+          head={entry.channelId}
           title={name}
           searchTitle={searchName}
-          link={`/channel/${entry._id}`}
+          link={`/category/${entry._id}`}
         />
       )
     },
@@ -112,7 +119,7 @@ export default function(com, query) {
 
         return (
           <ActionsCol moreContent={more}>
-            <Link to={`/channel/${entry._id}/edit`}>
+            <Link to={`/category/${entry._id}/edit`}>
               编辑
             </Link>
           </ActionsCol>

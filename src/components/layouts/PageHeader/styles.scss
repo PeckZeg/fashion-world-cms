@@ -4,10 +4,7 @@ $logo-size:                             32px;
 $logo-border-radius:                    4px;
 
 :local(.header) {
-  padding: $padding-lg-horizontal
-           $padding-lg-horizontal * 2
-           0
-           $padding-lg-horizontal * 2;
+  padding: $padding-lg-horizontal ($padding-lg-horizontal * 2) 0;
   border-bottom: 1px solid #e8e8e8;
   background-color: $white;
 
@@ -82,11 +79,17 @@ $logo-border-radius:                    4px;
   .title {
     font-size: $font-size-xlg;
     font-weight: 500;
+    height: $logo-size;
     line-height: $logo-size;
     color: $gray-darkest;
+    word-break: break-all;
+    @include color-ellipsis();
   }
 
   .action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-left: $padding-lg-horizontal * 3;
     text-align: right;
 

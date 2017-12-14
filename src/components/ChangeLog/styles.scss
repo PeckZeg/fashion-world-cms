@@ -1,0 +1,5 @@
+@import "src/scss/global";
+
+:local(.markdown):global(.markdown-body) {
+  font-size: $font-size-base;
+}

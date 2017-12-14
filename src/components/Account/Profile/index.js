@@ -12,6 +12,7 @@ import mapMyToProps from '~/src/utils/connect/mapMyToProps';
 import setTimeoutAsync from '~/src/utils/setTimeoutAsync';
 import formatTimestamp from '~/src/utils/formatTimestamp';
 import handleEntry from '~/src/utils/profile/handleEntry';
+import renderRoute from '~/src/utils/profile/renderRoute';
 import initState from '~/src/utils/profile/initState';
 import injectProto from '~/src/utils/injectProto';
 import catchError from '~/src/utils/catchError';
@@ -136,22 +137,6 @@ export default class AccountProfile extends PureComponent {
     this.setState(genTabs(this, location, match));
   }
 
-  /**
-   *  渲染路由
-   *  @param {React.Component} Component 需要渲染的组件
-   */
-  renderRoute = Component => {
-    const { entry, entryProp, entryTitle, entryNameProp } = this.state;
-    const props = { entry, entryProp, entryTitle, entryNameProp };
-
-    return (
-      <Component
-        {...props}
-        onUpdate={this.onUpdate}
-      />
-    );
-  }
-
   render() {
     const {
       docTitle, loading, exception, entry, defaultTab, tabs
@@ -224,7 +209,7 @@ export default class AccountProfile extends PureComponent {
               <Route
                 key={path}
                 path={path}
-                render={this.renderRoute.bind(this, Component)}
+                render={renderRoute.bind(this, Component)}
                 {...restProps}
               />
             ))}

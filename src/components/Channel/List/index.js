@@ -13,10 +13,9 @@ import ImageViewer from '~/src/components/ImageViewer';
 import Toolbar from '@table/Toolbar';
 import Filter from './Filter';
 
-import removeHistoryListener from '~/src/utils/list/removeHistoryListener';
-import addHistoryListener from '~/src/utils/list/addHistoryListener';
 import handleEntries from '~/src/utils/list/handleSelectedEntries';
 import genRowSelection from '~/src/utils/table/genRowSelection';
+import historyListener from '~/src/utils/list/historyListener';
 import toProcessImage from '~/src/utils/qiniu/toProcessImage';
 import validateFields from '~/src/utils/form/validateFields';
 import mapMyToProps from '~/src/utils/connect/mapMyToProps';
@@ -36,6 +35,7 @@ import genColumns from './genColumns';
 @connect(mapMyToProps)
 @injectApi('channel')
 @injectProto('ref', 'setStateAsync')
+@historyListener(querySchema)
 export default class List extends PureComponent {
   constructor(props) {
     super(props);
@@ -47,14 +47,6 @@ export default class List extends PureComponent {
       entryTitle: '频道',
       entryNameProp: 'name'
     });
-  }
-
-  componentDidMount() {
-    addHistoryListener(this, querySchema);
-  }
-
-  componentWillUnmount() {
-    removeHistoryListener(this);
   }
 
   /**
@@ -169,18 +161,30 @@ export default class List extends PureComponent {
    */
   destroyEntry = btn => handleEntry(this, btn, '删除', 'destroyChannel');
 
+  /**
+   *  激活已选择条目
+   */
   publishEntries = () => handleEntries(this, '激活', 'publishChannel', {
     shouldIgnore: entry => entry.publishAt
   });
 
+  /**
+   *  恢复已选择条目
+   */
   recoverEntries = () => handleEntries(this, '恢复', 'recoverChannel', {
     shouldIgnore: entry => !entry.removeAt
   });
 
+  /**
+   *  冻结已选择条目
+   */
   blockEntries = () => handleEntries(this, '冻结', 'blockChannel', {
     shouldIgnore: entry => !entry.publishAt
   });
 
+  /**
+   *  删除已选择条目
+   */
   destroyEntries = () => handleEntries(this, '删除', 'destroyChannel', {
     shouldIgnore: entry => entry.removeAt
   });

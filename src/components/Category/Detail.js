@@ -1,6 +1,9 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Avatar } from 'antd';
+
+import isEmpty from 'lodash/isEmpty';
 
 import CardLayout from '~/src/components/layouts/CardLayout';
 import DescList from '~/src/components/DescList';
@@ -10,12 +13,12 @@ import toProcessImage from '~/src/utils/qiniu/toProcessImage';
 const { Item: DescListItem } = DescList;
 
 /**
- *  频道详情页
+ *  分类详情页
  *  @class
  */
 export default class Detail extends PureComponent {
   /**
-   *  传递给 `props` 的类型检查
+   *  `props` 类型检查
    *  @static
    *  @property {object} entry
    *  @property {entryProp} 条目属性
@@ -33,6 +36,7 @@ export default class Detail extends PureComponent {
 
   render() {
     const { entry } = this.props;
+    const { channel } = entry;
 
     return (
       <CardLayout>
@@ -50,12 +54,25 @@ export default class Detail extends PureComponent {
             <code>{entry.name}</code>
           </DescListItem>
 
+          <DescListItem label="所属频道" flex>
+            {!isEmpty(channel) && (
+              <Fragment>
+                <Avatar
+                  icon="picture"
+                  size="small"
+                  src={toProcessImage(channel.cover, { w: 64, h: 64 })}
+                />
+                <Link to={`/channel/${channel._id}`}>
+                  {channel.name}
+                </Link>
+              </Fragment>
+            )}
+          </DescListItem>
+
           <DescListItem label="排序值">
             <code>{entry.priority}</code>
           </DescListItem>
         </DescList>
-
-        {/* <Divider /> */}
       </CardLayout>
     );
   }
