@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { Form, InputNumber } from 'antd';
 import PropTypes from 'prop-types';
 
+import isUndefined from 'lodash/isUndefined';
 import isFunction from 'lodash/isFunction';
 import isString from 'lodash/isString';
 
@@ -56,7 +57,7 @@ export default class FormInputNumberItem extends PureComponent {
         {getFieldDecorator(field, {
           ...fieldProps,
           rules,
-          ...initialValue && { initialValue }
+          ...!isUndefined(initialValue) ? { initialValue } : null
         }) (
           <InputNumber
             placeholder={placeholder}

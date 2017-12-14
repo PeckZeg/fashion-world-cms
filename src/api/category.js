@@ -108,7 +108,7 @@ export const CATEGORY_PUT_UPDATE_CATEGORY = (token, categoryId, data) => (
 export const CATEGORY_PUT_UPDATE_CATEGORY_COVER = (token, categoryId, key) => (
   shimData(
     instance.put(
-      `/${categoryId}`,
+      `/${categoryId}/cover`,
       { key },
       genConfig('admin:category:update-category-cover', token)
     )

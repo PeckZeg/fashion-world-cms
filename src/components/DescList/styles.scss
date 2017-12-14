@@ -6,6 +6,10 @@
     font-size: $font-size-medium;
     font-weight: 500;
     color: $gray-darkest;
+
+    :global(.anticon) {
+      margin-right: $padding-base-vertical;
+    }
   }
 
   .label,

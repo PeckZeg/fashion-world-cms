@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Input } from 'antd';
 
+import isUndefined from 'lodash/isUndefined';
 import isFunction from 'lodash/isFunction';
 import isString from 'lodash/isString';
 
@@ -25,7 +26,6 @@ export default class FormInputItem extends PureComponent {
   render() {
     const {
       form,
-      // field: { field, ...extraFieldOpts } = {},
       rules, initialValue, inputProps,
       placeholder = '输入点什么吧',
       ...restProps
@@ -39,7 +39,7 @@ export default class FormInputItem extends PureComponent {
         {getFieldDecorator(field, {
           ...extraFieldOpts,
           rules,
-          ...initialValue ? { initialValue } : {}
+          ...!isUndefined(initialValue) ? { initialValue } : null
         })(
           <Input
             placeholder={placeholder}

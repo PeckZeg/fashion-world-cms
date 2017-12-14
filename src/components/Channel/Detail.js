@@ -45,6 +45,7 @@ export default class Detail extends PureComponent {
             <Avatar
               icon="picture"
               size="small"
+              shape="square"
               src={toProcessImage(entry.cover, { w: 64, h: 64 })}
             />
             <code>{entry.name}</code>

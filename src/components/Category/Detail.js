@@ -10,7 +10,7 @@ import DescList from '~/src/components/DescList';
 
 import toProcessImage from '~/src/utils/qiniu/toProcessImage';
 
-const { Item: DescListItem } = DescList;
+const { Item: DescListItem, Channel: ChannelDescList } = DescList;
 
 /**
  *  分类详情页
@@ -49,17 +49,19 @@ export default class Detail extends PureComponent {
             <Avatar
               icon="picture"
               size="small"
+              shape="square"
               src={toProcessImage(entry.cover, { w: 64, h: 64 })}
             />
             <code>{entry.name}</code>
           </DescListItem>
 
-          <DescListItem label="所属频道" flex>
+          {/* <DescListItem label="所属频道" flex>
             {!isEmpty(channel) && (
               <Fragment>
                 <Avatar
                   icon="picture"
                   size="small"
+                  shape="square"
                   src={toProcessImage(channel.cover, { w: 64, h: 64 })}
                 />
                 <Link to={`/channel/${channel._id}`}>
@@ -67,12 +69,14 @@ export default class Detail extends PureComponent {
                 </Link>
               </Fragment>
             )}
-          </DescListItem>
+          </DescListItem> */}
 
           <DescListItem label="排序值">
             <code>{entry.priority}</code>
           </DescListItem>
         </DescList>
+
+        <ChannelDescList value={channel} />
       </CardLayout>
     );
   }
