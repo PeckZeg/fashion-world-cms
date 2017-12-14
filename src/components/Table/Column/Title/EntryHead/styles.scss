@@ -1,0 +1,29 @@
+@import "src/scss/global";
+
+:local(.head) {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  // > * {
+  //   vertical-align: middle;
+  //   display: table-cell;
+  // }
+
+  .cover {
+    margin-right: $padding-md-vertical;
+
+    :global(.ant-avatar) {
+      display: block;
+
+      &:global(.ant-avatar-sm) {
+        font-size: $font-size-small;
+      }
+    }
+  }
+
+  .title {
+    // overflow: hidden;
+    // height: $font-size-h1;
+    // line-height: $font-size-h1;
+  }
+}

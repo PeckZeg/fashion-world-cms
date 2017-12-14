@@ -2,10 +2,11 @@
 
 $ellipsis-width:                             4em;
 $base-height:                                1.5em;
-$hover-bg-color:                             #ecf6fd;
+$hover-bg-color:                             #e6f7ff;
 
 :local(.container) {
   .head {
+    margin-bottom: $padding-xxs-horizontal;
     font-size: $font-size-small;
   }
 

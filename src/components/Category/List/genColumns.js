@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
 
+import isEmptry from 'lodash/isEmpty';
+
 import CreateAtCol from '@table-column/CreateAt';
 import ActionsCol from '@table-column/Actions';
 import StatusCol from '@table-column/Status'
@@ -8,6 +10,8 @@ import TitleCol from '@table-column/Title';
 import CoverCol from '@table-column/Cover';
 
 import genSorter from '~/src/utils/table/genSorter';
+
+const { EntryHead } = TitleCol;
 
 const { Action, SwitchAction } = ActionsCol;
 
@@ -53,14 +57,27 @@ export default function(com, query) {
       dataIndex: 'name',
       title: '名称',
       // width: 256,
-      render: (name, entry) => (
-        <TitleCol
-          head={entry.channelId}
-          title={name}
-          searchTitle={searchName}
-          link={`/category/${entry._id}`}
-        />
-      )
+      render: (name, entry) => {
+        const { channel } = entry;
+        const head = !isEmptry(channel) && (
+          <EntryHead
+            coverVisible
+            shape="square"
+            cover={channel.cover}
+            link={`/channel/${channel._id}`}
+            title={channel.name}
+          />
+        );
+
+        return (
+          <TitleCol
+            head={head}
+            title={name}
+            searchTitle={searchName}
+            link={`/category/${entry._id}`}
+          />
+        );
+      }
     },
     {
       dataIndex: 'priority',

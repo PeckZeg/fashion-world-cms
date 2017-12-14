@@ -25,9 +25,9 @@ export default class Filter extends PureComponent {
 
     return (
       <FilterLayout>
-        <InputSearch field="name" placeholder="搜索频道名" />
+        <InputSearch field="name" placeholder="搜索分类名" />
         <SyncButton onClick={onSync} />
       </FilterLayout>
     );
   }
-}
+};

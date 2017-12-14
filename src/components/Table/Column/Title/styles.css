@@ -1,4 +1,5 @@
 :local(.container) .head {
+  margin-bottom: 6px;
   font-size: 12px; }
 
 :local(.container) h4, :local(.container) .desc {
@@ -17,7 +18,7 @@
     transition: all 0.3s; }
   :local(.container) h4:before, :local(.container) .desc:before {
     opacity: 0;
-    background: linear-gradient(to left, #ecf6fd, rgba(236, 246, 253, 0)); }
+    background: linear-gradient(to left, #e6f7ff, rgba(230, 247, 255, 0)); }
   :local(.container) h4:after, :local(.container) .desc:after {
     background: linear-gradient(to left, #ffffff, rgba(255, 255, 255, 0)); }
   :global(.ant-table-tbody) > tr:hover > td :local(.container) h4:before,

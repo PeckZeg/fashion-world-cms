@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 
 import isArray from 'lodash/isArray';
 
+import EntryHead from './EntryHead';
+
 import styles from './styles.css';
 
 /**
@@ -14,6 +16,12 @@ import styles from './styles.css';
  */
 @withRouter
 export default class TableTitleColumn extends PureComponent {
+  /**
+   *  条目标题
+   *  @static
+   */
+  static EntryHead = EntryHead;
+
   /**
    *  `props` 类型检查
    *  @static

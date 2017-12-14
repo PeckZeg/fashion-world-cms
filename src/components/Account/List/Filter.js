@@ -1,46 +1,31 @@
 import React, { PureComponent } from 'react';
 import { withRouter } from 'react-router';
-import { Input } from 'antd';
+import PropTypes from 'prop-types';
 
 import FilterLayout from '~/src/components/layouts/FilterLayout';
 
-import stringifyQuery from '~/src/utils/query/stringify';
-import parseQuery from '~/src/utils/query/parse';
+const { InputSearch, SyncButton } = FilterLayout;
 
-const { SyncButton } = FilterLayout;
-
+/**
+ *  过滤器
+ *  @class
+ */
 @withRouter
 export default class Filter extends PureComponent {
-  state = {};
-
-  onSearchName = searchName => {
-    const { location, history, match } = this.props;
-    const { search: prevSearch } = location;
-    const search = stringifyQuery({
-      ...parseQuery(prevSearch),
-      searchName,
-      ...searchName ? { offset: null, limit: null } : null
-    });
-
-    if (prevSearch !== search) {
-      history.push(`${match.url}${search}`);
-    }
-  }
+  /**
+   *  `props` 类型检查
+   *  @property {Function} onSync 同步方法
+   */
+  static propTypes = {
+    onSync: PropTypes.func
+  };
 
   render() {
     const { onSync } = this.props;
-    const query = parseQuery(this.props.location.search);
-    const { searchName } = query;
 
     return (
       <FilterLayout>
-        <Input.Search
-          style={{ width: 256 }}
-          defaultValue={searchName}
-          placeholder="搜索登录名"
-          onSearch={this.onSearchName}
-        />
-
+        <InputSearch field="name" placeholder="搜索登录名" />
         <SyncButton onClick={onSync} />
       </FilterLayout>
     );

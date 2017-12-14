@@ -11,7 +11,7 @@ import EntryTable from '~/src/components/layouts/EntryTable';
 import TimelineModal from '~/src/components/TimelineModal';
 import ImageViewer from '~/src/components/ImageViewer';
 import Toolbar from '@table/Toolbar';
-// import Filter from './Filter';
+import Filter from './Filter';
 
 // import removeHistoryListener from '~/src/utils/list/removeHistoryListener';
 // import addHistoryListener from '~/src/utils/list/addHistoryListener';
@@ -33,6 +33,10 @@ import injectApi from '~/src/utils/injectApi';
 import * as querySchema from './querySchema';
 import genColumns from './genColumns';
 
+/**
+ *  分类列表
+ *  @class
+ */
 @withRouter
 @connect(mapMyToProps)
 @injectApi('category')
@@ -96,6 +100,15 @@ export default class List extends PureComponent {
    *  清空已选择行处理器
    */
   onEmptyRowKeys = () => this.setState({ selectedRowKeys: [] });
+
+  /**
+   *  同步条目列表
+   *  @returns {Promise}
+   */
+  onSyncEntryList = async () => {
+    const { offset, limit } = this.state;
+    await this.fetchEntryList(offset - 1, limit, 'tableLoading');
+  };
 
   /**
    *  获取条目列表
@@ -222,8 +235,8 @@ export default class List extends PureComponent {
     } = this.state;
 
     const filter = (
-      '[PH : Filter]'
-      // <Filter onSync={this.onSyncEntryList} />
+      // '[PH : Filter]'
+      <Filter onSync={this.onSyncEntryList} />
     );
 
     const toolbar = (

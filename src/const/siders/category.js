@@ -2,7 +2,7 @@ import Profile from '~/src/components/Category/Profile';
 import List from '~/src/components/Category/List';
 
 export const key = 'category';
-export const icon = 'tag-o';
+export const icon = 'pushpin-o';
 export const label = '分类管理';
 export const indexRoute = '/categories';
 export const items = [
