@@ -19,9 +19,9 @@ export const keys = map(menus, 'key');
 
 // 菜单路由列表
 export const routes = reduce(menus, (routes, { items }) => {
-  forEach(items, ({ key, component }) => {
+  forEach(items, ({ key, component, permission }) => {
     if (key && component) {
-      routes.push({ key, component });
+      routes.push({ key, component, permission });
     }
   });
 

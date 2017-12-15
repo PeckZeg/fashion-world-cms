@@ -13,8 +13,6 @@ import ImageViewer from '~/src/components/ImageViewer';
 import Toolbar from '@table/Toolbar';
 import Filter from './Filter';
 
-// import removeHistoryListener from '~/src/utils/list/removeHistoryListener';
-// import addHistoryListener from '~/src/utils/list/addHistoryListener';
 import handleEntries from '~/src/utils/list/handleSelectedEntries';
 import genRowSelection from '~/src/utils/table/genRowSelection';
 import historyListener from '~/src/utils/list/historyListener';
@@ -40,7 +38,7 @@ import genColumns from './genColumns';
 @withRouter
 @connect(mapMyToProps)
 @injectApi('category')
-@injectProto('ref', 'setStateAsync')
+@injectProto('ref', 'setStateAsync', 'hasPermission')
 @historyListener(querySchema)
 export default class List extends PureComponent {
   constructor(props) {

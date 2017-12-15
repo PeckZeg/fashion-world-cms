@@ -6,6 +6,16 @@ export const name = {
   ]
 };
 
+export const password = {
+  label: '密码',
+  rules: [
+    { max: 32, message: '密码最长 32 位' }
+  ],
+  inputProps: {
+    type: 'password'
+  }
+};
+
 export const permissions = {
   label: '权限'
 };

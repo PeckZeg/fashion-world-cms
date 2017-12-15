@@ -15,6 +15,10 @@ import styles from './styles.css';
 
 const { Item: DescListItem } = DescList;
 
+/**
+ *  详细页面
+ *  @class
+ */
 export default class Detail extends PureComponent {
   /**
    *  传递给 `props` 的类型检查

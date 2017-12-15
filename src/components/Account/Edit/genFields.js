@@ -7,6 +7,11 @@ import formItemLayout from '~/src/const/form/itemLayout';
 
 const BASE_PROPS = ['name', 'permissions'];
 
+/**
+ *  生成字段字典
+ *  @param {React.Component} 当前组件实例
+ *  @returns {object[]} 字段字典
+ */
 export default function(com) {
   const { form, entry } = com.props;
 
@@ -18,6 +23,13 @@ export default function(com) {
         field,
         form,
         initialValue: entry[field]
+      },
+
+      password: {
+        ...baseFields.password,
+        ...formItemLayout,
+        field: 'password',
+        form
       },
 
       avatar: {

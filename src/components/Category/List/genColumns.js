@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import React from 'react';
 
 import isEmptry from 'lodash/isEmpty';
@@ -13,7 +12,7 @@ import genSorter from '~/src/utils/table/genSorter';
 
 const { EntryHead } = TitleCol;
 
-const { Action, SwitchAction } = ActionsCol;
+const { Action, SwitchAction, EditLink } = ActionsCol;
 
 /**
  *  生成表格栏参数
@@ -102,6 +101,7 @@ export default function(com, query) {
         const more = (
           <ul>
             <SwitchAction
+              disabled={!com.hasPermission('UPDATE_CATEGORY')}
               entry={entry}
               status={!entry.publishAt}
               yesLabel="发布"
@@ -113,6 +113,7 @@ export default function(com, query) {
             />
             {!entry.publishAt && (
               <Action
+                disabled={!com.hasPermission('UPDATE_CATEGORY')}
                 icon="clock-circle-o"
                 onClick={com.openTimingPublishModal.bind(com, entry)}
               >
@@ -120,6 +121,7 @@ export default function(com, query) {
               </Action>
             )}
             <SwitchAction
+              disabled={!com.hasPermission('DESTROY_CATEGORY')}
               entry={entry}
               status={!entry.removeAt}
               yesType="danger"
@@ -136,9 +138,10 @@ export default function(com, query) {
 
         return (
           <ActionsCol moreContent={more}>
-            <Link to={`/category/${entry._id}/edit`}>
-              编辑
-            </Link>
+            <EditLink
+               to={`/category/${entry._id}/edit`}
+               disabled={!com.hasPermission('UPDATE_CATEGORY')}
+            />
           </ActionsCol>
         );
       }

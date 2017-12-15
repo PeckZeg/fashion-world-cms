@@ -25,6 +25,7 @@ export default class SwitchAction extends PureComponent {
   /**
    *  `props` 属性类型
    *  @static
+   *  @property {boolean} disabled 禁止状态
    *  @property {boolean} status 显示状态
    *  @property {string} yesType `status=true` 时 `<Button />` 的 `type` 值
    *  @property {string} yesIcon `status=true` 时 `<Button />` 的 `icon` 值
@@ -38,6 +39,7 @@ export default class SwitchAction extends PureComponent {
    *  @property {Function} onNoClick `status=false` 时 `<Button />` `onClick`
    */
   static propTypes = {
+    disabled: PropTypes.bool,
     status: PropTypes.bool.isRequired,
     yesType: PropTypes.string,
     yesIcon: PropTypes.string,
@@ -52,7 +54,7 @@ export default class SwitchAction extends PureComponent {
       PropTypes.string,
       PropTypes.element
     ]),
-    onNoClick: PropTypes.func
+    onNoClick: PropTypes.func,
   };
 
   state = {
@@ -75,7 +77,7 @@ export default class SwitchAction extends PureComponent {
 
   render() {
     const {
-      status,
+      status, disabled,
       yesType, yesIcon, yesLabel,
       noType, noIcon, noLabel
     } = this.props;
@@ -86,6 +88,7 @@ export default class SwitchAction extends PureComponent {
 
     return (
       <Action
+        disabled={disabled}
         type={type}
         icon={icon}
         loading={loading}

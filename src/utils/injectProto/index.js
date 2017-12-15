@@ -1,22 +1,24 @@
 import forEach from 'lodash/forEach';
 import has from 'lodash/has';
 
+import hasPermission from './hasPermission';
 import setStateAsync from './setStateAsync';
 import ref from './ref';
 
 const METHOD_LIST = {
+  hasPermission,
   setStateAsync,
   ref
 };
 
-export default function(...methods) {
-  return function(Com) {
-    forEach(methods, name => {
-      if (!has(Com.prototype, name) && has(METHOD_LIST, name)) {
-        Com.prototype[name] = METHOD_LIST[name];
-      }
-    });
-
-    return Com;
-  };
-}
+/**
+ *  注入原型
+ *  @param {...string} names 注入的方法
+ */
+export default (...names) => ({ prototype }) => {
+  forEach(names, name => {
+    if (!has(prototype, name) && has(METHOD_LIST, name)) {
+      prototype[name] = METHOD_LIST[name];
+    }
+  });
+};

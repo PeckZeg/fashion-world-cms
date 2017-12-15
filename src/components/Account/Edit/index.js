@@ -11,6 +11,7 @@ import CardLayout from '@layout/CardLayout';
 import PermissionsItem from '@form-item/Permissions';
 import InputItem from '@form-item/Input';
 
+import * as fieldSchema from '~/src/components/Account/fieldSchema';
 import validateFields from '~/src/utils/form/validateFields';
 import customRequest from '~/src/utils/qiniu/customRequest';
 import mapMyToProps from '~/src/utils/connect/mapMyToProps';
@@ -23,6 +24,10 @@ import globalStyles from '~/src/index.css';
 
 const { Item: FormItem } = Form;
 
+/**
+ *  编辑页面
+ *  @class
+ */
 @Form.create()
 @connect(mapMyToProps)
 @injectApi('account', 'qiniu')
@@ -48,6 +53,9 @@ export default class Edit extends PureComponent {
     onUpdate: PropTypes.func
   };
 
+  /**
+   *  状态字典
+   */
   state = {
     submitting: false
   };
@@ -102,7 +110,7 @@ export default class Edit extends PureComponent {
       const { form, entry, entryProp } = this.props;
       const { _id: entryId } = entry;
       await this.setStateAsync({ submitting: true });
-      const body = await validateFields(form, null, { group: 'permissions' });
+      const body = await validateFields(form, fieldSchema, { group: 'permissions' });
       const { [entryProp]: newEntry } = await this.updateAccount(entryId, body);
 
       this.onUpdate(newEntry);
@@ -124,6 +132,8 @@ export default class Edit extends PureComponent {
       <CardLayout>
         <Form className={globalStyles.form} onSubmit={this.onSubmit}>
           <Spin spinning={submitting}>
+
+            {/* 封面 */}
             <FormItem {...fields.avatar}>
               <ImageUploader
                 image={entry.avatar}
@@ -131,8 +141,13 @@ export default class Edit extends PureComponent {
               />
             </FormItem>
 
+            {/* 登录名 */}
             <InputItem {...fields.name} />
 
+            {/* 密码 */}
+            <InputItem {...fields.password} />
+
+            {/* 权限 */}
             <PermissionsItem {...fields.permissions} />
           </Spin>
 

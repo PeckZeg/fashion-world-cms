@@ -22,6 +22,9 @@
       font-size: small; }
   :local(.actions) a:focus {
     text-decoration: none; }
+  :local(.actions) a:global(.disabled) {
+    color: #95A5A6;
+    cursor: not-allowed; }
 
 :local(.popover) :global .ant-popover-inner {
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.2); }

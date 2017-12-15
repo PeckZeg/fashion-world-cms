@@ -1,8 +1,5 @@
-import { Link } from 'react-router-dom';
-// import { Icon } from 'antd';
 import React from 'react';
 
-import SwitchAction from '@table-column/Actions/SwitchAction';
 import PermissionsCol from '@table-column/Permissions';
 import CreateAtCol from '@table-column/CreateAt';
 import ActionsCol from '@table-column/Actions';
@@ -11,6 +8,8 @@ import TitleCol from '@table-column/Title';
 import CoverCol from '@table-column/Cover';
 
 import genSorter from '~/src/utils/table/genSorter';
+
+const { SwitchAction, EditLink } = ActionsCol;
 
 /**
  *  生成表格栏参数
@@ -82,6 +81,7 @@ export default function(com, query) {
       width: 160,
       float: 'right',
       render: (actions, entry) => {
+        const disabled = !com.hasPermission('UPDATE_ACCOUNT');
         const more = (
           <ul>
             {/* <li>
@@ -91,6 +91,7 @@ export default function(com, query) {
               </Link>
             </li> */}
             <SwitchAction
+              disabled={disabled}
               entry={entry}
               status={!entry.activeAt}
               yesLabel="激活"
@@ -101,6 +102,7 @@ export default function(com, query) {
               onNoClick={com.blockEntry}
             />
             <SwitchAction
+              disabled={disabled}
               entry={entry}
               status={!entry.removeAt}
               yesType="danger"
@@ -117,9 +119,10 @@ export default function(com, query) {
 
         return (
           <ActionsCol moreContent={more}>
-            <Link to={`/account/${entry._id}/edit`}>
-              编辑
-            </Link>
+            <EditLink
+              to={`/account/${entry._id}/edit`}
+              disabled={disabled}
+            />
           </ActionsCol>
         );
       }

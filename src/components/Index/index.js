@@ -5,24 +5,39 @@ import { Icon, Layout, Tooltip } from 'antd';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
+import filter from 'lodash/filter';
 import keys from 'lodash/keys';
 
 import ChangeLog from '~/src/components/ChangeLog';
 import Header from './Header';
 import Sider from './Sider';
 
+import mapMyToProps from '~/src/utils/connect/mapMyToProps';
 import { routes, routeKeys } from '~/src/const/siders';
+import injectProto from '~/src/utils/injectProto';
 import { logo, title } from '~/src/const/config';
 import * as actions from '~/src/actions/layout';
 import styles from './styles.css';
 
+/**
+ *  首页
+ *  @class
+ */
 @connect(
-  ({ reducers }) => ({ collapsed: reducers.layout.collapsed }),
+  ({ reducers }) => ({
+    collapsed: reducers.layout.collapsed,
+    ...mapMyToProps({ reducers })
+  }),
   dispatch => ({
     onCollapsed: collapsed => dispatch(actions.setLayoutCollapsed(collapsed))
   })
 )
+@injectProto('hasPermission')
 export default class Index extends PureComponent {
+  state = {
+    routes
+  };
+
   toggle = () => {
     this.props.onCollapsed(!this.props.collapsed);
   }
@@ -30,6 +45,13 @@ export default class Index extends PureComponent {
   render() {
     const { collapsed } = this.props;
     const updateTime = moment(__UPDATE_TIME__).format('YYYY-MM-DD');
+    const routes = filter(this.state.routes, ({ permission }) => {
+      if (permission) {
+        return this.hasPermission(permission);
+      }
+
+      return true;
+    });
 
     return (
       <Layout className={styles.layout}>

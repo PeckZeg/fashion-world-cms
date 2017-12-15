@@ -1,14 +1,20 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types'
 import { Popover, Icon } from 'antd';
+import PropTypes from 'prop-types'
 
 import SwitchAction from './SwitchAction';
+import EditLink from './EditLink';
 import Action from './Action';
 
 import styles from './styles.css';
 
+/**
+ *  表格动作栏
+ *  @class
+ */
 export default class TableActionsColumn extends PureComponent {
   static SwitchAction = SwitchAction;
+  static EditLink = EditLink;
   static Action = Action;
 
   static propTypes = {

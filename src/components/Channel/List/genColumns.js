@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import React from 'react';
 
 import CreateAtCol from '@table-column/CreateAt';
@@ -9,7 +8,7 @@ import CoverCol from '@table-column/Cover';
 
 import genSorter from '~/src/utils/table/genSorter';
 
-const { Action, SwitchAction } = ActionsCol;
+const { Action, SwitchAction, EditLink } = ActionsCol;
 
 /**
  *  生成表格栏参数
@@ -78,6 +77,7 @@ export default function(com, query) {
         const more = (
           <ul>
             <SwitchAction
+              disabled={!com.hasPermission('UPDATE_CHANNEL')}
               entry={entry}
               status={!entry.publishAt}
               yesLabel="发布"
@@ -90,12 +90,14 @@ export default function(com, query) {
             {!entry.publishAt && (
               <Action
                 icon="clock-circle-o"
+                disabled={!com.hasPermission('UPDATE_CHANNEL')}
                 onClick={com.openTimingPublishModal.bind(com, entry)}
               >
                 定时发布
               </Action>
             )}
             <SwitchAction
+              disabled={!com.hasPermission('DESTROY_CHANNEL')}
               entry={entry}
               status={!entry.removeAt}
               yesType="danger"
@@ -112,9 +114,10 @@ export default function(com, query) {
 
         return (
           <ActionsCol moreContent={more}>
-            <Link to={`/channel/${entry._id}/edit`}>
-              编辑
-            </Link>
+            <EditLink
+              to={`/channel/${entry._id}/edit`}
+              disabled={!com.hasPermission('UPDATE_CHANNEL')}
+            />
           </ActionsCol>
         );
       }

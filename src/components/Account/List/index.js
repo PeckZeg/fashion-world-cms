@@ -31,7 +31,7 @@ import genColumns from './genColumns';
 @withRouter
 @connect(mapMyToProps)
 @injectApi('account')
-@injectProto('ref', 'setStateAsync')
+@injectProto('ref', 'setStateAsync', 'hasPermission')
 @historyListener(querySchema)
 export default class List extends PureComponent {
   constructor(props) {

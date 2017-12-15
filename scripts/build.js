@@ -19,6 +19,7 @@ const chalk = require('chalk');
 const fs = require('fs-extra');
 const webpack = require('webpack');
 const copyBuildFolder = require('../config/copyBuildFolder');
+const gzipBuildFiles = require('../config/gzipBuildFiles');
 const config = require('../config/webpack.config.prod');
 const paths = require('../config/paths');
 const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
@@ -93,6 +94,7 @@ measureFileSizesBeforeBuild(paths.appBuild)
       useYarn
     );
   })
+  .then(gzipBuildFiles)
   .then(copyBuildFolder)
   .catch(err => {
     console.log(chalk.red('Failed to compile.\n'));

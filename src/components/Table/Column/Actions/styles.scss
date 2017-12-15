@@ -33,8 +33,15 @@ $popover-btn-height:                    40px;
     }
   }
 
-  a:focus {
-    text-decoration: none;
+  a {
+    &:focus {
+      text-decoration: none;
+    }
+
+    &:global(.disabled) {
+      color: map-fetch($component-colors, grey-cascade, base);
+      cursor: not-allowed;
+    }
   }
 }
 

@@ -1,13 +1,19 @@
-import React, { PureComponent } from 'react';
 import { withRouter, matchPath } from 'react-router';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import { Icon, Menu } from 'antd';
 
 import isFunction from 'lodash/isFunction';
 import forEach from 'lodash/forEach';
+import filter from 'lodash/filter';
 
+import mapMyToProps from '~/src/utils/connect/mapMyToProps';
 import { menus, keys, routeKeys } from '~/src/const/siders';
+import injectProto from '~/src/utils/injectProto';
 
 @withRouter
+@connect(mapMyToProps)
+@injectProto('hasPermission')
 export default class Sider extends PureComponent {
   constructor(props) {
     super(props);
@@ -17,6 +23,7 @@ export default class Sider extends PureComponent {
 
     this.state = {
       historyListener: null,
+      menus,
       openKeys,
       selectedKeys
     };
@@ -81,8 +88,25 @@ export default class Sider extends PureComponent {
     };
   }
 
+  items = items => {
+    return filter(items, ({ permission, hidden }) => {
+      if (permission) {
+        return !hidden && this.hasPermission(permission);
+      }
+
+      return !hidden;
+    });
+  };
+
   render() {
     const { openKeys, selectedKeys } = this.state;
+    const menus = filter(this.state.menus, ({ permission }) => {
+      if (permission) {
+        return this.hasPermission(permission);
+      }
+
+      return true;
+    });
 
     return (
       <Menu
@@ -98,7 +122,7 @@ export default class Sider extends PureComponent {
             key={key}
             title={<span><Icon type={icon} /><span>{label}</span></span>}
           >
-            {items.filter(({ hidden }) => !hidden).map(({ key, icon, label }) => (
+            {this.items(items).map(({ key, icon, label }) => (
               <Menu.Item key={key}>
                 <a href="javascript:;">
                   <Icon type={icon} />
