@@ -17,12 +17,16 @@ Variable          | Note
 :---------------- | :-----
 `__VERSION__`     | 应用版本
 `__UPDATE_TIME__` | 最后更新时间 / 打包时间
+`__CHANGELOG__`   | 更新文档
 
 ## 路径简写
 
 Variable        | Shortcut                      | Note
 :-------------- | :---------------------------- | :----
 `~`             | ``                            | 根目录
+`@components`   | `src/components`              | 组件目录
+`@api`          | `src/api`                     | 基础接口
+`@util`         | `src/utils`                   | 工具箱
 `@qiniu`        | `src/components/Qiniu`        | 七牛
 `@table`        | `src/components/Table`        | 表格
 `@table-column` | `src/components/Table/Column` | 表格栏

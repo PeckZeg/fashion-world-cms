@@ -1,5 +1,5 @@
-import Profile from '~/src/components/Category/Profile';
-import List from '~/src/components/Category/List';
+import Profile from '@components/Category/Profile';
+import List from '@components/Category/List';
 
 export const key = 'category';
 export const icon = 'pushpin-o';

@@ -103,6 +103,10 @@ $avatar-popover-height:                 $padding-lg-horizontal * 1.25;
     :global {
       .ant-avatar {
         margin-right: 0.25em;
+
+        .anticon {
+          margin-right: 0;
+        }
       }
 
       .anticon {

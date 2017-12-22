@@ -233,7 +233,6 @@ export default class List extends PureComponent {
     } = this.state;
 
     const filter = (
-      // '[PH : Filter]'
       <Filter onSync={this.onSyncEntryList} />
     );
 

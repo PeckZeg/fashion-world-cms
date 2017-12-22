@@ -1,0 +1,16 @@
+@import "src/scss/global";
+
+:local(.container) {
+  text-align: center;
+
+  :global {
+    .ant-tag {
+      margin-right: 0;
+      cursor: default;
+    }
+
+    // .anticon {
+    //   margin-right: 0.25em;
+    // }
+  }
+}

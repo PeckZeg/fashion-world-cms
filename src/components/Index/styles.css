@@ -75,6 +75,8 @@
   align-items: center; }
   :local .action :global .ant-avatar, :local .link-action :global .ant-avatar {
     margin-right: 0.25em; }
+    :local .action :global .ant-avatar .anticon, :local .link-action :global .ant-avatar .anticon {
+      margin-right: 0; }
   :local .action :global .anticon, :local .link-action :global .anticon {
     margin-right: 0.5em; }
 

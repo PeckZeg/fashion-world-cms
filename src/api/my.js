@@ -11,7 +11,7 @@ const instance = axios.create({ baseURL: '/api/admin/my' });
  *  @returns {Promise}
  */
 export const MY_GET_FETCH_MY_PROFILE = token => shimData(
-  instance.get('/', genConfig('admin:my:fetch-my-profile', token))
+  instance.get('', genConfig('admin:my:fetch-my-profile', token))
 );
 
 /**

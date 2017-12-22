@@ -6,10 +6,12 @@ import * as account from './account';
 import * as channel from './channel';
 import * as banner from './banner';
 import * as video from './video';
+import * as user from './user';
 
 // 权限列表
 export const permissions = [
   account,
+  user,
   banner,
   channel,
   category,

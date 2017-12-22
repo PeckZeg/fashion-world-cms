@@ -15,6 +15,7 @@ import * as fieldSchema from '~/src/components/Account/fieldSchema';
 import validateFields from '~/src/utils/form/validateFields';
 import customRequest from '~/src/utils/qiniu/customRequest';
 import mapMyToProps from '~/src/utils/connect/mapMyToProps';
+import { setMyProfile } from '~/src/actions/my';
 import injectProto from '~/src/utils/injectProto';
 import catchError from '~/src/utils/catchError';
 import injectApi from '~/src/utils/injectApi';
@@ -29,7 +30,10 @@ const { Item: FormItem } = Form;
  *  @class
  */
 @Form.create()
-@connect(mapMyToProps)
+@connect(
+  mapMyToProps,
+  dispatch => ({ onProfile: profile => dispatch(setMyProfile(profile)) })
+)
 @injectApi('account', 'qiniu')
 @injectProto('setStateAsync')
 export default class Edit extends PureComponent {
@@ -87,6 +91,13 @@ export default class Edit extends PureComponent {
    *  @param {object} newEntry 新的条目信息
    */
   onUpdate = newEntry => {
+    const { _id: entryId } = this.props.my.profile;
+    const { _id: newEntryId } = newEntry;
+
+    if (entryId === newEntryId) {
+      this.props.onProfile(newEntry);
+    }
+
     if (isFunction(this.props.onUpdate)) {
       this.props.onUpdate(newEntry);
     }

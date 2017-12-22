@@ -26,7 +26,7 @@ export default class TableActionsColumn extends PureComponent {
     moreContent: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.string
-    ]).isRequired,
+    ]),
 
     moreIcon: PropTypes.string.isRequired
   };
@@ -53,20 +53,22 @@ export default class TableActionsColumn extends PureComponent {
         {children && <li>{children}</li>}
 
         {/* 更多 */}
-        <li>
-          <Popover
-            overlayClassName={styles.popover}
-            trigger="click"
-            visible={visible}
-            onVisibleChange={this.onVisibleChange}
-            content={moreContent}
-            placement="bottomRight"
-          >
-            <a href="javascript:;">
-              {moreLabel} <Icon type={moreIcon} />
-            </a>
-          </Popover>
-        </li>
+        {moreContent && (
+          <li>
+            <Popover
+              overlayClassName={styles.popover}
+              trigger="click"
+              visible={visible}
+              onVisibleChange={this.onVisibleChange}
+              content={moreContent}
+              placement="bottomRight"
+            >
+              <a href="javascript:;">
+                {moreLabel} <Icon type={moreIcon} />
+              </a>
+            </Popover>
+          </li>
+        )}
       </ul>
     );
   }

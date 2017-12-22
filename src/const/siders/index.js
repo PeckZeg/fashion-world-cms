@@ -5,10 +5,12 @@ import map from 'lodash/map';
 import * as category from './category';
 import * as account from './account';
 import * as channel from './channel';
+import * as user from './user';
 import { title } from '../config';
 
 // 菜单列表
 export const menus = [
+  user,
   channel,
   category,
   account

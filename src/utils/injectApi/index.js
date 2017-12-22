@@ -5,6 +5,7 @@ import * as category from './category';
 import * as account from './account';
 import * as channel from './channel';
 import * as qiniu from './qiniu';
+import * as user from './user';
 import * as my from './my';
 
 const METHOD_LIST = {
@@ -12,6 +13,7 @@ const METHOD_LIST = {
   account,
   channel,
   qiniu,
+  user,
   my
 };
 
