@@ -27,6 +27,7 @@ Variable        | Shortcut                      | Note
 `@components`   | `src/components`              | 组件目录
 `@api`          | `src/api`                     | 基础接口
 `@util`         | `src/utils`                   | 工具箱
+`@const`        | `src/const`                   | 常量集
 `@qiniu`        | `src/components/Qiniu`        | 七牛
 `@table`        | `src/components/Table`        | 表格
 `@table-column` | `src/components/Table/Column` | 表格栏

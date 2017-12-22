@@ -8,25 +8,28 @@ import isFunction from 'lodash/isFunction';
 import ImageUploader from '@qiniu/ImageUploader';
 import CardLayout from '@layout/CardLayout';
 
-import InputNumber from '@form-item/InputNumber';
 import InputItem from '@form-item/Input';
 
-import validateFields from '~/src/utils/form/validateFields';
-import customRequest from '~/src/utils/qiniu/customRequest';
-import mapMyToProps from '~/src/utils/connect/mapMyToProps';
-import injectProto from '~/src/utils/injectProto';
-import catchError from '~/src/utils/catchError';
-import injectApi from '~/src/utils/injectApi';
+import validateFields from '@util/form/validateFields';
+import customRequest from '@util/qiniu/customRequest';
+import mapMyToProps from '@util/connect/mapMyToProps';
+import injectProto from '@util/injectProto';
+import catchError from '@util/catchError';
+import injectApi from '@util/injectApi';
 import genFields from './genFields';
 
 import globalStyles from '~/src/index.css';
 
 const { Item: FormItem } = Form;
 
-@Form.create()
-@connect(mapMyToProps)
-@injectApi('channel', 'qiniu')
-@injectProto('setStateAsync')
+/**
+ *  编辑用户
+ *  @class
+ */
+ @Form.create()
+ @connect(mapMyToProps)
+ @injectApi('user', 'qiniu')
+ @injectProto('setStateAsync')
 export default class Edit extends PureComponent {
   /**
    *  传递给 `props` 的类型检查
@@ -57,20 +60,22 @@ export default class Edit extends PureComponent {
    *  @param customReq 自定义请求参数
    */
   customRequest = (uploader, customReq) => {
-    customRequest(this, uploader, customReq, this.updateEntryCover);
+    customRequest(this, uploader, customReq, this.updateEntryAvatar);
   }
 
   /**
-   *  更新频道封面
+   *  上传头像
    *  @param {string} key 七牛存储键
    */
-  updateEntryCover = async key => {
+  updateEntryAvatar = async key => {
     const { entry, entryProp } = this.props;
     const { _id: entryId } = entry;
-    const { [entryProp]: newEntry } = await this.updateChannelCover(entryId, key);
+    const {
+      [entryProp]: newEntry
+    } = await this.updateUserAvatar(entryId, { key });
 
     this.onUpdate(newEntry);
-    message.success('更新封面成功');
+    message.success('更新头像成功');
   };
 
   /**
@@ -102,7 +107,7 @@ export default class Edit extends PureComponent {
       const { _id: entryId } = entry;
       await this.setStateAsync({ submitting: true });
       const body = await validateFields(form);
-      const { [entryProp]: newEntry } = await this.updateChannel(entryId, body);
+      const { [entryProp]: newEntry } = await this.updateUser(entryId, body);
 
       this.onUpdate(newEntry);
       message.success(`更新成功`);
@@ -123,16 +128,14 @@ export default class Edit extends PureComponent {
       <CardLayout>
         <Form className={globalStyles.form} onSubmit={this.onSubmit}>
           <Spin spinning={submitting}>
-            <FormItem {...fields.cover}>
+            <FormItem {...fields.avatar}>
               <ImageUploader
-                image={entry.cover}
+                image={entry.avatar}
                 customRequest={this.customRequest}
               />
             </FormItem>
 
             <InputItem {...fields.name} />
-
-            <InputNumber {...fields.priority} />
           </Spin>
 
           <Form.Item {...fields.submit}>
