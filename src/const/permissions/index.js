@@ -6,6 +6,7 @@ import * as account from './account';
 import * as channel from './channel';
 import * as banner from './banner';
 import * as video from './video';
+import * as about from './about';
 import * as user from './user';
 
 // 权限列表
@@ -15,7 +16,8 @@ export const permissions = [
   banner,
   channel,
   category,
-  video
+  video,
+  about
 ];
 
 // 权限键列表

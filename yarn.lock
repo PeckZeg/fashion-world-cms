@@ -7697,9 +7697,9 @@ timers-browserify@^2.0.2:
   dependencies:
     setimmediate "^1.0.4"
 
-"tiny-qiniu@https://github.com/PeckZeg/tiny-qiniu.git":
-  version "0.3.1"
-  resolved "https://github.com/PeckZeg/tiny-qiniu.git#f311e61af88ae6fd033dc57283adae31fbecfd0c"
+tiny-qiniu@^0.4.0:
+  version "0.4.0"
+  resolved "http://registry.npm.taobao.org/tiny-qiniu/download/tiny-qiniu-0.4.0.tgz#7c5882ccdced3471671fb6bcafa2363246d6d996"
 
 tmp@^0.0.33:
   version "0.0.33"

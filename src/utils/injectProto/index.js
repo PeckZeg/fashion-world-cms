@@ -3,11 +3,13 @@ import has from 'lodash/has';
 
 import hasPermission from './hasPermission';
 import setStateAsync from './setStateAsync';
+import genLink from './genLink';
 import ref from './ref';
 
 const METHOD_LIST = {
   hasPermission,
   setStateAsync,
+  genLink,
   ref
 };
 

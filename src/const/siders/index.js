@@ -5,6 +5,7 @@ import map from 'lodash/map';
 import * as category from './category';
 import * as account from './account';
 import * as channel from './channel';
+import * as about from './about';
 import * as user from './user';
 import { title } from '../config';
 
@@ -13,6 +14,7 @@ export const menus = [
   user,
   channel,
   category,
+  about,
   account
 ];
 
