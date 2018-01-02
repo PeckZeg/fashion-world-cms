@@ -8,6 +8,7 @@ import isFunction from 'lodash/isFunction';
 import ImageUploader from '@qiniu/ImageUploader';
 import CardLayout from '@layout/CardLayout';
 
+import GenderSelectItem from '@form-item/GenderSelect';
 import InputItem from '@form-item/Input';
 
 import validateFields from '@util/form/validateFields';
@@ -136,6 +137,8 @@ export default class Edit extends PureComponent {
             </FormItem>
 
             <InputItem {...fields.name} />
+
+            <GenderSelectItem {...fields.gender} />
           </Spin>
 
           <Form.Item {...fields.submit}>

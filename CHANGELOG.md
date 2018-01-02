@@ -1,5 +1,11 @@
 # 更新文档
 
+## `3.0.6`
+
+* 组件
+  * 新增 `FormGenderSelectItem` 性别选择器
+  * 新增 `FilterLayout.GenderSelect` 性别过滤器
+
 ## `3.0.5`
 
 > 更新于 `2017-12-29`

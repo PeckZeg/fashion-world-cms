@@ -1,10 +1,15 @@
 import React, { PureComponent } from 'react';
 
+import GenderSelect from './GenderSelect';
 import InputSearch from './InputSearch';
 import SyncButton from './SyncButton';
 
 import styles from './styles.css';
 
+/**
+ *  过滤器视图
+ *  @class
+ */
 export default class FilterLayout extends PureComponent {
   /**
    *  搜索框
@@ -17,6 +22,12 @@ export default class FilterLayout extends PureComponent {
    *  @static
    */
   static SyncButton = SyncButton;
+
+  /**
+   *  性别选择器
+   *  @static
+   */
+  static GenderSelect = GenderSelect;
 
   render() {
     const { children } = this.props;

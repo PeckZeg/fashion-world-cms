@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import FilterLayout from '@layout/FilterLayout';
 
-const { InputSearch, SyncButton } = FilterLayout;
+const { InputSearch, GenderSelect, SyncButton } = FilterLayout;
 
 /**
  *  过滤器
@@ -26,6 +26,7 @@ export default class Filter extends PureComponent {
     return (
       <FilterLayout>
         <InputSearch field="name" placeholder="搜索用户名" />
+        <GenderSelect />
         <SyncButton onClick={onSync} />
       </FilterLayout>
     );

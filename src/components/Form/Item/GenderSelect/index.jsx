@@ -1,12 +1,24 @@
 import React, { PureComponent } from 'react';
+import { Form, Select } from 'antd';
 import PropTypes from 'prop-types';
-import { Form, Input } from 'antd';
 
 import isUndefined from 'lodash/isUndefined';
 import isFunction from 'lodash/isFunction';
 import isString from 'lodash/isString';
+import map from 'lodash/map';
 
-export default class FormInputItem extends PureComponent {
+import Option from './Option';
+
+import { GENDERS } from '@const/genders';
+
+const { Option: SelectOption } = Select;
+const { Item: FormItem } = Form;
+
+/**
+ *  性别选择器
+ *  @class
+ */
+export default class FormGenderSelectItem extends PureComponent {
   /**
    *  `props` 类型检查
    */
@@ -21,6 +33,10 @@ export default class FormInputItem extends PureComponent {
     onChange: PropTypes.func
   };
 
+  /**
+   *  值改变处理器
+   *  @param {string} value 改变的值
+   */
   onChange = value => {
     if (isFunction(this.props.onChange)) {
       this.props.onChange(value);
@@ -31,27 +47,28 @@ export default class FormInputItem extends PureComponent {
     const {
       form,
       rules, initialValue, inputProps,
-      placeholder = '输入点什么吧',
-      ...restProps
+      ...formItemProps
     } = this.props;
     const { getFieldDecorator } = form;
     const { field, ...extraFieldOpts } = isString(this.props.field) ?
         { field: this.props.field } : this.props.field || {};
 
     return (
-      <Form.Item {...restProps}>
+      <FormItem {...formItemProps}>
         {getFieldDecorator(field, {
           ...extraFieldOpts,
           rules,
           ...!isUndefined(initialValue) ? { initialValue } : null
         })(
-          <Input
-            placeholder={placeholder}
-            {...inputProps}
-            onChange={this.onChange}
-          />
+          <Select onChange={this.onChange}>
+            {map(GENDERS, option => (
+              <SelectOption key={option.key}>
+                <Option {...option} />
+              </SelectOption>
+            ))}
+          </Select>
         )}
-      </Form.Item>
+      </FormItem>
     );
   }
 }

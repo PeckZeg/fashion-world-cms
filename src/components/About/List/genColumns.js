@@ -39,7 +39,7 @@ export default function(com, query) {
           title={name}
           searchTitle={searchName}
           desc={entry.value}
-          link={`/about/${entry._id}`}
+          link={com.genLink(entry)}
         />
       )
     },
@@ -104,7 +104,7 @@ export default function(com, query) {
         return (
           <ActionsCol moreContent={more}>
             <EditLink
-              to={`/channel/${entry._id}/edit`}
+              to={com.genLink(entry, '/edit')}
               disabled={!com.hasPermission('UPDATE_CHANNEL')}
             />
           </ActionsCol>

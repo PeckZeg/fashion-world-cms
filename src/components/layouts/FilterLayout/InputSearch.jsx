@@ -5,8 +5,8 @@ import { Input } from 'antd';
 
 import camelCase from 'lodash/camelCase';
 
-import stringifyQuery from '~/src/utils/query/stringify';
-import parseQuery from '~/src/utils/query/parse';
+import stringifyQuery from '@util/query/stringify';
+import parseQuery from '@util/query/parse';
 
 const { Search } = Input;
 
