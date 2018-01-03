@@ -19,12 +19,13 @@ const { Item: DescListItem } = DescList;
 export default function(com, entry) {
   let args = {};
 
+
   if (entry) {
     const title = entry.name;
     const logo = {
       url: entry.avatar,
       visible: true,
-      icon: 'picture',
+      icon: 'user',
       qiniu: true,
       openable: true,
       zoomIn: true,

@@ -48,7 +48,7 @@ export default function(com, query) {
           title={name}
           searchTitle={searchName}
           link={`/user/${entry._id}`}
-          head={<code>{formatMobile(entry.mobile)}</code>}
+          head={entry.mobile && <code>{formatMobile(entry.mobile)}</code>}
         />
       )
     },

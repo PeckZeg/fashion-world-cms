@@ -163,7 +163,7 @@ export default class PageHeader extends PureComponent {
         logoUrl = toProcessImage(logoUrl, { w: 64, h: 64 });
       }
 
-      if (logo && logo !== logoUrl) {
+      if (logoUrl && logo !== logoUrl) {
         this.loadLogo(logoUrl);
       }
 
