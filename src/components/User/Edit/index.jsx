@@ -33,7 +33,7 @@ const { Item: FormItem } = Form;
  @injectProto('setStateAsync')
 export default class Edit extends PureComponent {
   /**
-   *  传递给 `props` 的类型检查
+   *  `props` 类型检查
    *  @static
    *  @property {object} form
    *  @property {object} entry
