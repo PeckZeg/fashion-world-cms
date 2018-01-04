@@ -1,51 +1,55 @@
-:local(.container) .head {
-  margin-bottom: 6px;
-  font-size: 12px; }
-
-:local(.container) h4, :local(.container) .desc {
-  position: relative;
-  overflow: hidden;
-  height: 1.5em;
-  white-space: normal;
-  line-height: 1.5em; }
-  :local(.container) h4:before, :local(.container) h4:after, :local(.container) .desc:before, :local(.container) .desc:after {
-    content: '';
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 4em;
-    height: 1.5em;
-    transition: all 0.3s; }
-  :local(.container) h4:before, :local(.container) .desc:before {
-    opacity: 0;
-    background: linear-gradient(to left, #e6f7ff, rgba(230, 247, 255, 0)); }
-  :local(.container) h4:after, :local(.container) .desc:after {
-    background: linear-gradient(to left, #ffffff, rgba(255, 255, 255, 0)); }
-  :global(.ant-table-tbody) > tr:hover > td :local(.container) h4:before,
-  :global(.ant-table-tbody) > tr:global(.ant-table-row-hover) > td :local(.container) h4:before,
-  :global(.ant-select-dropdown-menu-item:hover) :local(.container) h4:before,
-  :global(.ant-select-dropdown-menu-item-active) :local(.container) h4:before, :global(.ant-table-tbody) > tr:hover > td :local(.container) .desc:before,
-  :global(.ant-table-tbody) > tr:global(.ant-table-row-hover) > td :local(.container) .desc:before,
-  :global(.ant-select-dropdown-menu-item:hover) :local(.container) .desc:before,
-  :global(.ant-select-dropdown-menu-item-active) :local(.container) .desc:before {
-    opacity: 1; }
-  :global(.ant-table-tbody) > tr:hover > td :local(.container) h4:after,
-  :global(.ant-table-tbody) > tr:global(.ant-table-row-hover) > td :local(.container) h4:after,
-  :global(.ant-select-dropdown-menu-item:hover) :local(.container) h4:after,
-  :global(.ant-select-dropdown-menu-item-active) :local(.container) h4:after, :global(.ant-table-tbody) > tr:hover > td :local(.container) .desc:after,
-  :global(.ant-table-tbody) > tr:global(.ant-table-row-hover) > td :local(.container) .desc:after,
-  :global(.ant-select-dropdown-menu-item:hover) :local(.container) .desc:after,
-  :global(.ant-select-dropdown-menu-item-active) :local(.container) .desc:after {
-    opacity: 0; }
-
-:local(.container) h4 {
-  margin: 0; }
-  :local(.container) h4, :local(.container) h4 a {
-    font-weight: normal;
-    font-size: 16px;
-    color: #666; }
-  :local(.container) h4 a:hover {
-    color: #8f8f8f; }
-
-:local(.container) .desc {
-  color: #808080; }
+:local(.container) {
+  display: flex;
+  align-items: center; }
+  :local(.container) .main {
+    flex: auto; }
+  :local(.container) .addon {
+    flex: 0 0 auto; }
+  :local(.container) .head {
+    margin-bottom: 6px;
+    font-size: 12px; }
+  :local(.container) h4, :local(.container) .desc {
+    position: relative;
+    overflow: hidden;
+    height: 21px;
+    line-height: 21px;
+    white-space: normal; }
+    :local(.container) h4:before, :local(.container) h4:after, :local(.container) .desc:before, :local(.container) .desc:after {
+      content: '';
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 4em;
+      height: 21px;
+      transition: all 0.3s; }
+    :local(.container) h4:before, :local(.container) .desc:before {
+      opacity: 0;
+      background: linear-gradient(to left, #e6f7ff, rgba(230, 247, 255, 0)); }
+    :local(.container) h4:after, :local(.container) .desc:after {
+      background: linear-gradient(to left, #ffffff, rgba(255, 255, 255, 0)); }
+    :global(.ant-table-tbody) > tr:hover > td :local(.container) h4:before,
+    :global(.ant-table-tbody) > tr:global(.ant-table-row-hover) > td :local(.container) h4:before,
+    :global(.ant-select-dropdown-menu-item:hover) :local(.container) h4:before,
+    :global(.ant-select-dropdown-menu-item-active) :local(.container) h4:before, :global(.ant-table-tbody) > tr:hover > td :local(.container) .desc:before,
+    :global(.ant-table-tbody) > tr:global(.ant-table-row-hover) > td :local(.container) .desc:before,
+    :global(.ant-select-dropdown-menu-item:hover) :local(.container) .desc:before,
+    :global(.ant-select-dropdown-menu-item-active) :local(.container) .desc:before {
+      opacity: 1; }
+    :global(.ant-table-tbody) > tr:hover > td :local(.container) h4:after,
+    :global(.ant-table-tbody) > tr:global(.ant-table-row-hover) > td :local(.container) h4:after,
+    :global(.ant-select-dropdown-menu-item:hover) :local(.container) h4:after,
+    :global(.ant-select-dropdown-menu-item-active) :local(.container) h4:after, :global(.ant-table-tbody) > tr:hover > td :local(.container) .desc:after,
+    :global(.ant-table-tbody) > tr:global(.ant-table-row-hover) > td :local(.container) .desc:after,
+    :global(.ant-select-dropdown-menu-item:hover) :local(.container) .desc:after,
+    :global(.ant-select-dropdown-menu-item-active) :local(.container) .desc:after {
+      opacity: 0; }
+  :local(.container) h4 {
+    margin: 0; }
+    :local(.container) h4, :local(.container) h4 a {
+      font-weight: normal;
+      font-size: 16px;
+      color: #666; }
+    :local(.container) h4 a:hover {
+      color: #8f8f8f; }
+  :local(.container) .desc {
+    color: #808080; }

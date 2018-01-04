@@ -13,7 +13,6 @@ import formatTimestamp from '@util/formatTimestamp';
 import formatMobile from '@util/formatMobile';
 
 import { getGender } from '@const/genders';
-import * as colors from '@const/colors';
 
 const { Item: DescListItem } = DescList;
 
@@ -76,7 +75,7 @@ export default class Detail extends PureComponent {
           <DescListItem label="第三方登录">
             <Tag
               style={{ fontSize: '14px' }}
-              color={!isNil(openid) ? colors.wechat : null}
+              color={!isNil(openid) ? 'green' : null}
             >
               <Icon type="wechat" />
             </Tag>

@@ -37,6 +37,11 @@ export default class TableTitleColumn extends PureComponent {
       PropTypes.element
     ]),
 
+    addon: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.element
+    ]),
+
     title: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.element
@@ -70,24 +75,27 @@ export default class TableTitleColumn extends PureComponent {
   }
 
   render() {
-    const { desc, link, head } = this.props;
+    const { addon, desc, link, head } = this.props;
     const title = this.title();
 
     return (
       <div className={styles.container}>
-        {head && <div className={styles.head}>{head}</div>}
-        <h4>
-          {link ? (
-            <Link to={link}>
-              {title}
-            </Link>
-          ) : title}
-        </h4>
-        {desc && (
-          <div className={styles.desc}>
-            {desc}
-          </div>
-        )}
+        {addon && <div className={styles.addon}>{addon}</div>}
+        <div className={styles.main}>
+          {head && <div className={styles.head}>{head}</div>}
+          <h4>
+            {link ? (
+              <Link to={link}>
+                {title}
+              </Link>
+            ) : title}
+          </h4>
+          {desc && (
+            <div className={styles.desc}>
+              {desc}
+            </div>
+          )}
+        </div>
       </div>
     );
   }

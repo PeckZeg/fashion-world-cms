@@ -1,4 +1,7 @@
+import { Icon, Tag, Tooltip } from 'antd';
 import React from 'react';
+
+import get from 'lodash/get';
 
 import CreateAtCol from '@table-column/CreateAt';
 import ActionsCol from '@table-column/Actions';
@@ -45,6 +48,13 @@ export default function(com, query) {
       title: '名称',
       render: (name, entry) => (
         <TitleCol
+          addon={get(entry, 'thirdParty.weixin.openid') && !entry.mobile && (
+            <Tooltip title="微信注册用户">
+              <Tag color="green">
+                  <Icon type="wechat" />
+              </Tag>
+            </Tooltip>
+          )}
           title={name}
           searchTitle={searchName}
           link={`/user/${entry._id}`}

@@ -1,10 +1,21 @@
 @import "src/scss/global";
 
 $ellipsis-width:                             4em;
-$base-height:                                1.5em;
+$base-height:                                $font-size-base * 1.5;
 $hover-bg-color:                             #e6f7ff;
 
 :local(.container) {
+  display: flex;
+  align-items: center;
+
+  .main {
+    flex: auto;
+  }
+
+  .addon {
+    flex: 0 0 auto;
+  }
+
   .head {
     margin-bottom: $padding-xxs-horizontal;
     font-size: $font-size-small;
@@ -14,8 +25,8 @@ $hover-bg-color:                             #e6f7ff;
     position: relative;
     overflow: hidden;
     height: $base-height;
-    white-space: normal;
     line-height: $base-height;
+    white-space: normal;
 
     &:before,
     &:after {

@@ -7,7 +7,11 @@
   * 新增 `FilterLayout.GenderSelect` 性别过滤器
   * 更新 `antd` 至 `v3.1.0`
   * 修正 `PageHeader` 的 `logo` 属性无法作用的问题
+* CSS
+  * 新增工具函数 `@function strip-unit($number)`
 * 用户管理
+  * 用户列表
+    * 新增通过微信渠道注册的用户标记
   * 用户信息
     * 增加微信绑定账号信息的显示
 
