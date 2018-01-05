@@ -6,6 +6,7 @@ import * as category from './category';
 import * as account from './account';
 import * as channel from './channel';
 import * as about from './about';
+import * as video from './video';
 import * as user from './user';
 import { title } from '../config';
 
@@ -14,6 +15,7 @@ export const menus = [
   user,
   channel,
   category,
+  video,
   about,
   account
 ];

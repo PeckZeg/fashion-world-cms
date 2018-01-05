@@ -62,6 +62,7 @@ export default function(com, query) {
           <EntryHead
             coverVisible
             shape="square"
+            icon="appstore-o"
             cover={channel.cover}
             link={`/channel/${channel._id}`}
             title={channel.name}

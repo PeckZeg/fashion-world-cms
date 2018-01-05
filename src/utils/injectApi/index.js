@@ -1,11 +1,14 @@
 import forEach from 'lodash/forEach';
 import has from 'lodash/has';
 
+import setStateAsync from '@util/injectProto/setStateAsync';
+
 import * as category from './category';
 import * as account from './account';
 import * as channel from './channel';
 import * as qiniu from './qiniu';
 import * as about from './about';
+import * as video from './video';
 import * as user from './user';
 import * as my from './my';
 
@@ -13,6 +16,7 @@ const METHOD_LIST = {
   category,
   account,
   channel,
+  video,
   qiniu,
   about,
   user,
@@ -24,11 +28,7 @@ const GLOBAL_METHOD = {
     return this.props.token;
   },
 
-  setStateAsync(...args) {
-    return new Promise(resolve => {
-      this.setState(...args, () => resolve(this.state));
-    });
-  }
+  setStateAsync
 };
 
 /**
