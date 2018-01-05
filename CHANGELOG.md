@@ -5,6 +5,7 @@
 * 组件
   * 新增 `FormGenderSelectItem` 性别选择器
   * 新增 `FilterLayout.GenderSelect` 性别过滤器
+  * 新增 `FilterLayout.ChannelSelect` 频道选择器
   * 更新 `antd` 至 `v3.1.0`
   * 修正 `PageHeader` 的 `logo` 属性无法作用的问题
 * CSS

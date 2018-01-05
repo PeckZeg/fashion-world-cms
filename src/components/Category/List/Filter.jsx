@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 
-import FilterLayout from '~/src/components/layouts/FilterLayout';
+import FilterLayout from '@layout/FilterLayout';
 
-const { InputSearch, SyncButton } = FilterLayout;
+const { InputSearch, SyncButton, ChannelSelect } = FilterLayout;
 
 /**
  *  过滤器
@@ -26,6 +26,7 @@ export default class Filter extends PureComponent {
     return (
       <FilterLayout>
         <InputSearch field="name" placeholder="搜索分类名" />
+        <ChannelSelect />
         <SyncButton onClick={onSync} />
       </FilterLayout>
     );

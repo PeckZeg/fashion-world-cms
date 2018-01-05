@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 
+import ChannelSelect from './ChannelSelect';
 import GenderSelect from './GenderSelect';
 import InputSearch from './InputSearch';
 import SyncButton from './SyncButton';
@@ -28,6 +29,12 @@ export default class FilterLayout extends PureComponent {
    *  @static
    */
   static GenderSelect = GenderSelect;
+
+  /**
+   *  频道选择器
+   *  @static
+   */
+  static ChannelSelect = ChannelSelect;
 
   render() {
     const { children } = this.props;

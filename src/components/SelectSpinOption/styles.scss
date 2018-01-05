@@ -1,0 +1,7 @@
+@import "src/scss/global";
+
+:local(.container) {
+  > :global(.ant-spin) {
+    margin-right: $font-size-base * 0.5;
+  }
+}
