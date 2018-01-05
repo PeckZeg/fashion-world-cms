@@ -3,7 +3,7 @@ import * as baseFields from '~/src/components/Category/baseFields';
 import submitFormLayout from '~/src/const/form/submitLayout';
 import formItemLayout from '~/src/const/form/itemLayout';
 
-const BASE_PROPS = ['name', 'priority'];
+const BASE_PROPS = ['name', 'channelId', 'priority'];
 
 export default com => ({
   ...reduceBaseProps(com, BASE_PROPS, baseFields),

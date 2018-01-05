@@ -8,15 +8,16 @@ import isFunction from 'lodash/isFunction';
 import ImageUploader from '@qiniu/ImageUploader';
 import CardLayout from '@layout/CardLayout';
 
+import ChannelSelectItem from '@form-item/ChannelSelect';
 import InputNumber from '@form-item/InputNumber';
 import InputItem from '@form-item/Input';
 
-import validateFields from '~/src/utils/form/validateFields';
-import customRequest from '~/src/utils/qiniu/customRequest';
-import mapMyToProps from '~/src/utils/connect/mapMyToProps';
-import injectProto from '~/src/utils/injectProto';
-import catchError from '~/src/utils/catchError';
-import injectApi from '~/src/utils/injectApi';
+import validateFields from '@util/form/validateFields';
+import customRequest from '@util/qiniu/customRequest';
+import mapMyToProps from '@util/connect/mapMyToProps';
+import injectProto from '@util/injectProto';
+import catchError from '@util/catchError';
+import injectApi from '@util/injectApi';
 import genFields from './genFields';
 
 import globalStyles from '~/src/index.css';
@@ -139,6 +140,9 @@ export default class Edit extends PureComponent {
 
             {/* 名称 */}
             <InputItem {...fields.name} />
+
+            {/* 频道 */}
+            <ChannelSelectItem {...fields.channelId} />
 
             {/* 排序值 */}
             <InputNumber {...fields.priority} />

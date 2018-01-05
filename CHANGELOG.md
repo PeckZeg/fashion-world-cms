@@ -6,6 +6,7 @@
   * 新增 `FormGenderSelectItem` 性别选择器
   * 新增 `FilterLayout.GenderSelect` 性别过滤器
   * 新增 `FilterLayout.ChannelSelect` 频道选择器
+  * 新增 `@form-item/ChannelSelect` 频道选择
   * 更新 `antd` 至 `v3.1.0`
   * 修正 `PageHeader` 的 `logo` 属性无法作用的问题
 * CSS
@@ -15,6 +16,11 @@
     * 新增通过微信渠道注册的用户标记
   * 用户信息
     * 增加微信绑定账号信息的显示
+* 分类管理
+  * 分类列表
+    * 新增 `频道过滤器`
+  * 分类信息
+    * 现在能够编辑 `频道` 了
 
 ## `3.0.5`
 

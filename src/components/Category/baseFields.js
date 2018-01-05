@@ -1,5 +1,8 @@
 export const channelId = {
-  label: '频道'
+  label: '频道',
+  rules: [
+    { required: true, message: '频道是必需的' }
+  ]
 };
 
 export const cover = {

@@ -1,3 +1,4 @@
+import Highlighter from 'react-highlight-words';
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Avatar } from 'antd';
@@ -16,11 +17,12 @@ export default class ChannelSelectOption extends PureComponent {
    *  @static
    */
   static propTypes = {
-    entry: PropTypes.object.isRequired
+    entry: PropTypes.object.isRequired,
+    searchName: PropTypes.string
   };
 
   render() {
-    const { entry } = this.props;
+    const { entry, searchName } = this.props;
     const { cover, name } = entry;
 
     return (
@@ -32,7 +34,12 @@ export default class ChannelSelectOption extends PureComponent {
           src={toProcessImage(cover, { w: 64, h: 64 })}
         />
         <h4>
-          {name}
+          {searchName ? (
+            <Highlighter
+              textToHighlight={name}
+              searchWords={[searchName]}
+            />
+          ) : name}
         </h4>
       </div>
     );

@@ -51,7 +51,7 @@ export default class FormGenderSelectItem extends PureComponent {
     } = this.props;
     const { getFieldDecorator } = form;
     const { field, ...extraFieldOpts } = isString(this.props.field) ?
-        { field: this.props.field } : this.props.field || {};
+        { field: this.props.field } : (this.props.field || {});
 
     return (
       <FormItem {...formItemProps}>
