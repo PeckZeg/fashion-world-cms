@@ -1,0 +1,17 @@
+@import "src/scss/global";
+
+:local {
+  .head {
+    display: flex;
+    align-items: center;
+
+    > :global(.ant-avatar) {
+      margin-right: $font-size-base / 2;
+    }
+  }
+
+  .next {
+    @include margin-x($font-size-base / 2);
+    color: $gray-lighten;
+  }
+}

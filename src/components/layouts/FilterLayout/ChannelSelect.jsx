@@ -31,6 +31,10 @@ const DEFAULT_ENTRIES = [];
 @injectApi('channel')
 @injectProto('setStateAsync')
 export default class ChannelSelect extends PureComponent {
+  /**
+   *  `props` 类型检查
+   *  @static
+   */
   static propTypes = {
     field: PropTypes.string.isRequired,
     width: PropTypes.number,
@@ -39,6 +43,10 @@ export default class ChannelSelect extends PureComponent {
     onChange: PropTypes.func
   };
 
+  /**
+   *  `props` 默认值
+   *  @static
+   */
   static defaultProps = {
     field: 'channelId',
     width: 213,
@@ -47,8 +55,11 @@ export default class ChannelSelect extends PureComponent {
   };
 
   state = {
+    historyListener: null,
     fetching: false,
     searchName: null,
+    value: void 0,
+    location: this.props.location,
 
     entries: DEFAULT_ENTRIES,
     entryProp: 'channel',
@@ -56,10 +67,27 @@ export default class ChannelSelect extends PureComponent {
   };
 
   componentDidMount() {
-    const { channelId } = parseQuery(this.props.location.search);
+    const { location, history } = this.props;
+    const { channelId } = parseQuery(location.search);
+
+    this.setState({
+      historyListener: history.listen(location => {
+        this.setState({ location });
+      })
+    });
 
     if (channelId) {
+      this.setState({ value: channelId });
       this.fetchEntryList({ channelId });
+    }
+  }
+
+  componentWillUnmount() {
+    const { historyListener } = this.state;
+
+    if (isFunction(historyListener)) {
+      historyListener();
+      this.setState({ historyListener: null });
     }
   }
 
@@ -120,8 +148,10 @@ export default class ChannelSelect extends PureComponent {
    *  @param {string} channelId 频道编号
    */
   onChange = channelId => {
-    const { location, history, match, field, onChange } = this.props;
-    const { entries } = this.state;
+    const { history, match, field, onChange } = this.props;
+    const { location, entries } = this.state;
+
+    this.setState({ value: channelId });
 
     if (channelId === void 0) {
       this.setState({ entries: DEFAULT_ENTRIES });
@@ -144,9 +174,8 @@ export default class ChannelSelect extends PureComponent {
   }
 
   render() {
-    const { location, width, placeholder, notFoundContent } = this.props;
-    const { fetching, entries, searchName } = this.state;
-    const { channelId } = parseQuery(location.search);
+    const { width, placeholder, notFoundContent } = this.props;
+    const { fetching, entries, searchName, value } = this.state;
 
     return (
       <Select
@@ -155,12 +184,12 @@ export default class ChannelSelect extends PureComponent {
         filterOption={false}
         notFoundContent={fetching ? <SelectSpinOption /> : notFoundContent}
         placeholder={placeholder}
+        value={value}
         style={{ width }}
         onFocus={this.onFocus}
         onSearch={this.onSearch}
         onSelect={this.onSelect}
         onChange={this.onChange}
-        defaultValue={channelId}
       >
         {entries.map(entry => (
           <SelectOption key={entry._id}>

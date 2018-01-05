@@ -1,0 +1,11 @@
+@import "src/scss/global";
+
+:local(.container) {
+  text-align: center;
+
+  :global {
+    .ant-tag {
+      margin: auto;
+    }
+  }
+}

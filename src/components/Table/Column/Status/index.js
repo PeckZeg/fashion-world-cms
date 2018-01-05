@@ -45,7 +45,7 @@ export default class TableStatusColumn extends PureComponent {
       <div className={styles.container}>
         <Tooltip title={title}>
           <Tag color={color}>
-              <Icon type={icon} />
+            <Icon type={icon} />
           </Tag>
         </Tooltip>
       </div>

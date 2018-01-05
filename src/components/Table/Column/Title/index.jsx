@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 import isArray from 'lodash/isArray';
 
+import ChannelHead from './ChannelHead';
 import EntryHead from './EntryHead';
 
 import styles from './styles.css';
@@ -21,6 +22,11 @@ export default class TableTitleColumn extends PureComponent {
    *  @static
    */
   static EntryHead = EntryHead;
+
+  /**
+   *  频道分类头
+   */
+  static ChannelHead = ChannelHead;
 
   /**
    *  `props` 类型检查
