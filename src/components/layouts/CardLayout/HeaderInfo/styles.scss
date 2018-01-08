@@ -1,0 +1,30 @@
+@import "src/scss/global";
+
+:local(.header-info) {
+  text-align: center;
+
+  h4, p {
+    margin-bottom: 0;
+  }
+
+  h4 {
+    font-weight: 400;
+    color: map-fetch($component-colors, grey-silver, base);
+  }
+
+  p {
+    font-size: $font-size-h3;
+  }
+
+  [class^="ant-col-"] {
+    position: relative;
+
+    em {
+      position: absolute;
+      top: 0;
+      right: 0;
+      @include size(1px, 100%);
+      background-color: map-fetch($component-colors, default, base);
+    }
+  }
+}

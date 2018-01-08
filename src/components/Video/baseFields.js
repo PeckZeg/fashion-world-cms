@@ -42,6 +42,34 @@ export const summary = {
   ]
 };
 
+export const originalTitle = {
+  label: '源标题',
+  rules: [
+    { max: 65535, message: '简介最长为 65535 个字符' }
+  ]
+};
+
+export const rightsOwner = {
+  label: '版权',
+  rules: [
+    { max: 65535, message: '简介最长为 65535 个字符' }
+  ]
+};
+
+export const productionCountry = {
+  label: '产地',
+  rules: [
+    { max: 65535, message: '简介最长为 65535 个字符' }
+  ]
+};
+
+export const originalLanguage = {
+  label: '源语言',
+  rules: [
+    { max: 65535, message: '简介最长为 65535 个字符' }
+  ]
+};
+
 export const views = {
   label: '浏览数',
   rules: [

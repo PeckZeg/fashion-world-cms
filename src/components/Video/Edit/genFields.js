@@ -4,12 +4,17 @@ import formItemLayout from '@const/form/itemLayout';
 import * as baseFields from '../baseFields';
 
 const BASE_PROPS = [
+  'channelId',
+  'categoryId',
   'title',
   'subtitle',
   'abstract',
   'summary',
-  'channelId',
-  'categoryId',
+  'originalTitle',
+  'originalLanguage',
+  'rightsOwner',
+  'productionCountry',
+  'priority',
   'views'
 ];
 

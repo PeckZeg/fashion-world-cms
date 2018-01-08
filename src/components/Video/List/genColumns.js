@@ -65,6 +65,13 @@ export default function(com, query) {
       )
     },
     {
+      dataIndex: 'priority',
+      title: '排序值',
+      width: 128,
+      ...genSorter(query, 'priority'),
+      render: priority => <code>{priority}</code>
+    },
+    {
       dataIndex: 'createAt',
       title: '创建时间',
       ...genSorter(query, 'createAt'),

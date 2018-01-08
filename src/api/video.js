@@ -83,7 +83,7 @@ export const VIDEO_POST_RECOMMEND_VIDEO = (token, videoId, data) => shimData(
  *  @returns {Promise}
  */
 export const VIDEO_PUT_UPDATE_VIDEO = (token, videoId, data) => shimData(
-  instance.post(
+  instance.put(
     `/${videoId}`,
     data,
     genConfig('admin:video:update-video', token)

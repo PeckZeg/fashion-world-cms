@@ -139,6 +139,9 @@ export default class Edit extends PureComponent {
               />
             </FormItem>
 
+            {/* 排序值 */}
+            <InputNumberItem {...fields.priority} />
+
             {/* 频道 */}
             <ChannelSelectItem {...fields.channelId} />
 
@@ -153,6 +156,18 @@ export default class Edit extends PureComponent {
 
             {/* 简介 */}
             <TextAreaItem {...fields.summary} />
+
+            {/* 源标题 */}
+            <InputItem {...fields.originalTitle} />
+
+            {/* 源语言 */}
+            <InputItem {...fields.originalLanguage} />
+
+            {/* 版权 */}
+            <InputItem {...fields.rightsOwner} />
+
+            {/* 产地 */}
+            <InputItem {...fields.productionCountry} />
 
             {/* 浏览数 */}
             <InputNumberItem {...fields.views} />
