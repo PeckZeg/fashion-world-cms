@@ -9,7 +9,7 @@ import CoverCol from '@table-column/Cover';
 
 import genSorter from '@util/table/genSorter';
 
-const { Action, EditLink } = ActionsCol;
+const { Action, EditLink, SwitchAction } = ActionsCol;
 const { ChannelHead } = TitleCol;
 
 /**
@@ -79,9 +79,59 @@ export default function(com, query) {
       render(actions, entry) {
         const more = (
           <ul>
-            <Action icon="wechat" disabled >
-              解除微信绑定
-            </Action>
+            <SwitchAction
+              disabled={!com.hasPermission('UPDATE_VIDEO')}
+              entry={entry}
+              status={!entry.publishAt}
+              yesLabel="发布"
+              yesIcon="check"
+              noIcon="lock"
+              noLabel="冻结"
+              onYesClick={com.publishEntry}
+              onNoClick={com.blockEntry}
+            />
+            {!entry.publishAt && (
+              <Action
+                icon="clock-circle-o"
+                disabled={!com.hasPermission('UPDATE_VIDEO')}
+                onClick={com.openTimingPublishModal.bind(com, entry)}
+              >
+                定时发布
+              </Action>
+            )}
+            <SwitchAction
+              disabled={!com.hasPermission('UPDATE_VIDEO')}
+              entry={entry}
+              status={!entry.recommendAt}
+              yesLabel="推荐"
+              yesIcon="like"
+              noLabel="取消推荐"
+              noIcon="like-o"
+              onYesClick={com.recommendEntry}
+              onNoClick={com.supplantEntry}
+            />
+            {!entry.recommendAt && (
+              <Action
+                icon="clock-circle-o"
+                disabled={!com.hasPermission('UPDATE_VIDEO')}
+                onClick={com.openTimingRecommendModal.bind(com, entry)}
+              >
+                定时推荐
+              </Action>
+            )}
+            <SwitchAction
+              disabled={!com.hasPermission('DESTROY_VIDEO')}
+              entry={entry}
+              status={!entry.removeAt}
+              yesType="danger"
+              yesLabel="删除"
+              yesIcon="delete"
+              noType="default"
+              noIcon="rollback"
+              noLabel="恢复"
+              onYesClick={com.destroyEntry}
+              onNoClick={com.recoverEntry}
+            />
           </ul>
         );
 

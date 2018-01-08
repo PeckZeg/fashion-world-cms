@@ -34,6 +34,7 @@ export default class TimeingPublishModal extends PureComponent {
    *  @property {Function} onSubmit Function(modal, form, entry)
    */
   static propTypes = {
+    field: PropTypes.string.isRequired,
     title: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.string
@@ -42,6 +43,7 @@ export default class TimeingPublishModal extends PureComponent {
   };
 
   static defaultProps = {
+    field: 'publishAt',
     title: (
       <Fragment>
         <Icon type="clock-circle-o" />
@@ -121,7 +123,7 @@ export default class TimeingPublishModal extends PureComponent {
   afterClose = () => this.props.form.resetFields();
 
   render() {
-    const { form } = this.props;
+    const { field, form } = this.props;
     const { visible, submitting } = this.state;
     const { getFieldDecorator } = form;
     const title = this.state.title || this.props.title;
@@ -142,7 +144,7 @@ export default class TimeingPublishModal extends PureComponent {
               label="选择时间"
               {...formItemLayout}
             >
-              {getFieldDecorator('publishAt', {
+              {getFieldDecorator(field, {
                 rules: [
                   { required: true, message: '需要选择一个时间' }
                 ]
