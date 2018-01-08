@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { Icon, Row } from 'antd';
 
+import Definitions from './Definitions';
 import Channel from './Channel';
 import Item from './Item';
 
@@ -13,6 +14,12 @@ import styles from './styles.css';
  *  @class
  */
 export default class DescList extends PureComponent {
+  /**
+   *  清晰度列表
+   *  @static
+   */
+  static Definitions = Definitions;
+
   /**
    *  频道描述列表
    *  @static

@@ -4,6 +4,7 @@
 
 * 组件
   * 修正了 `FilterLayout.ChannelSelect` 在地址改变时无法作用的问题
+  * 新增 `@form-item/TextArea` 表单多行输入框项
 * 新增 `视频管理` 模块
 
 ## `3.0.6`

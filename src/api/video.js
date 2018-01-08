@@ -94,13 +94,13 @@ export const VIDEO_PUT_UPDATE_VIDEO = (token, videoId, data) => shimData(
  *  [PUT] 更新视频封面
  *  @param {object} token 访问令牌
  *  @param {ObjectId} videoId 视频编号
- *  @param {object} [data] 内容数据
+ *  @param {string} key 七牛存储键
  *  @returns {Promise}
  */
-export const VIDEO_PUT_UPDATE_VIDEO_COVER = (token, videoId, data) => shimData(
-  instance.post(
+export const VIDEO_PUT_UPDATE_VIDEO_COVER = (token, videoId, key) => shimData(
+  instance.put(
     `/${videoId}/cover`,
-    data,
+    { key },
     genConfig('admin:video:update-video-cover', token)
   )
 );
