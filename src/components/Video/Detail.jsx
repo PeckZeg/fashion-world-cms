@@ -7,6 +7,7 @@ import get from 'lodash/get';
 
 import CardLayout from '@components/layouts/CardLayout';
 import DescList from '@components/DescList';
+// import AvInfo from './AvInfo';
 
 import toProcessImage from '@util/qiniu/toProcessImage';
 

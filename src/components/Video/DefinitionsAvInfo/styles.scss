@@ -1,0 +1,32 @@
+@import "src/scss/global";
+
+$base-height: 256px;
+
+:local(.exception):global(.antd-pro-exception-exception) :global {
+  .antd-pro-exception-imgEle {
+    height: $base-height;
+  }
+
+  .antd-pro-exception-content {
+    .antd-pro-exception-desc {
+      margin-bottom: 0;
+    }
+
+    h1, .antd-pro-exception-actions {
+      display: none;
+    }
+  }
+}
+
+:local(.tabpane) {
+  position: relative;
+  min-height: $base-height;
+
+  :global(.ant-spin) {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%);
+  }
+}

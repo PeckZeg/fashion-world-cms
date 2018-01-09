@@ -1,4 +1,5 @@
 import Detail from '../Detail';
+import AvInfo from '../Avinfo';
 import Edit from '../Edit';
 
 /**
@@ -14,6 +15,11 @@ export default function(com) {
       path: url,
       exact: true,
       Component: Detail
+    },
+    {
+      path: `${url}/avinfo`,
+      exact: true,
+      Component: AvInfo
     },
     {
       path: `${url}/edit`,

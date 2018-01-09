@@ -25,7 +25,7 @@ export default class Definitions extends PureComponent {
           <Definition
             key={key}
             label={key}
-            exists={findIndex(value, ['definition', key]) > 0}
+            exists={findIndex(value, ['definition', key]) > -1}
           />
         ))}
       </Fragment>

@@ -2,7 +2,7 @@ import React, { PureComponent, Fragment } from 'react';
 import DocumentTitle from 'react-document-title';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { Button, Icon } from 'antd';
+import { Icon } from 'antd';
 
 import TimingPublishModal from '@components/TimingPublishModal';
 import PageHeaderLayout from '@layout/PageHeaderLayout';
@@ -10,7 +10,6 @@ import TimelineModal from '@components/TimelineModal';
 import ImageViewer from '@components/ImageViewer';
 import CardLayout from '@layout/CardLayout';
 import EntryTable from '@layout/EntryTable';
-import Toolbar from '@table/Toolbar';
 import Filter from './Filter';
 
 import handleEntries from '@util/list/handleSelectedEntries';
@@ -31,6 +30,7 @@ import injectApi from '@util/injectApi';
 
 import * as querySchema from './querySchema';
 import genColumns from './genColumns';
+import genToolbar from './genToolbar';
 
 /**
  *  视频列表
@@ -218,6 +218,14 @@ export default class List extends PureComponent {
   });
 
   /**
+   *  推荐已选择条目
+   *  @this 当前组件实例
+   */
+  recommendEntries = () => handleEntries(this, '推荐', 'recommendVideo', {
+    shouldIgnore: entry => entry.recommendAt
+  });
+
+  /**
    *  恢复已选择条目
    *  @this 当前组件实例
    */
@@ -231,6 +239,14 @@ export default class List extends PureComponent {
    */
   blockEntries = () => handleEntries(this, '冻结', 'blockVideo', {
     shouldIgnore: entry => !entry.publishAt
+  });
+
+  /**
+   *  取消推荐已选择条目
+   *  @this 当前组件实例
+   */
+  supplantEntries = () => handleEntries(this, '取消推荐', 'supplantVideo', {
+    shouldIgnore: entry => !entry.recommendAt
   });
 
   /**
@@ -301,23 +317,12 @@ export default class List extends PureComponent {
 
   render() {
     const {
-      docTitle, total, tableLoading, loading, columns, entries, offset, limit,
-      selectedRowKeys, timeline
+      docTitle, total, tableLoading, loading, columns, entries,
+      offset, limit, timeline
     } = this.state;
 
-    const filter = (
-      <Filter onSync={this.onSyncEntryList} />
-    );
-
-    const toolbar = (
-      <Toolbar
-        visible={!!selectedRowKeys.length}
-        extra={`已选择 ${selectedRowKeys.length} 个项目`}
-      >
-        <Button type="primary" disabled>解除微信绑定</Button>
-        <Button onClick={this.onEmptyRowKeys}>取消</Button>
-      </Toolbar>
-    );
+    const filter = <Filter onSync={this.onSyncEntryList} />;
+    const toolbar = genToolbar(this);
 
     return (
       <DocumentTitle title={docTitle}>

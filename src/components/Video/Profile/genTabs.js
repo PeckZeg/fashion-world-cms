@@ -20,6 +20,10 @@ export default function(com, location, match) {
         tab: '详情'
       },
       {
+        key: `/video/${videoId}/avinfo`,
+        tab: '视频元信息'
+      },
+      {
         key: `/video/${videoId}/edit`,
         tab: '编辑'
       }

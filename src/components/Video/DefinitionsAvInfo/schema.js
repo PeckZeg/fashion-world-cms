@@ -1,0 +1,229 @@
+export const format = [
+  {
+    key: 'format.filename',
+    label: '文件名'
+  },
+  {
+    key: 'format.nb_streams',
+    label: '流的数目'
+  },
+  {
+    key: 'format.format_name',
+    label: '格式名'
+  },
+  {
+    key: 'format.format_long_name',
+    label: '格式名全称'
+  },
+  {
+    key: 'format.start_time',
+    label: '首帧时间'
+  },
+  {
+    key: 'format.duration',
+    label: '时长'
+  },
+  {
+    key: 'format.size',
+    label: '文件大小'
+  },
+  {
+    key: 'format.bit_rate',
+    label: '码率'
+  },
+  {
+    key: 'format.tags.major_brand',
+    label: '主品牌'
+  },
+  {
+    key: 'format.tags.minor_version',
+    label: '次要版本'
+  },
+  {
+    key: 'format.tags.compatible_brands',
+    label: '兼容性品牌'
+  },
+  {
+    key: 'format.tags.creation_time',
+    label: '创建时间'
+  }
+];
+
+export const streams = [
+  [
+    {
+      key: 'index',
+      label: '流索引号'
+    },
+    {
+      key: 'codec_name',
+      label: '编码器名'
+    },
+    // {
+    //   key: 'codec_long_name',
+    //   label: '编码器名全称'
+    // },
+    {
+      key: 'codec_type',
+      label: '编码器类型'
+    },
+    {
+      key: 'codec_time_base',
+      label: '编码器每帧时长'
+    },
+    {
+      key: 'codec_tag_string',
+      label: '编码器标签名'
+    },
+    {
+      key: 'codec_tag',
+      label: '编码器标签'
+    },
+    {
+      key: 'width',
+      label: '宽度'
+    },
+    {
+      key: 'height',
+      label: '高度'
+    },
+    {
+      key: 'has_b_frames',
+      label: '记录帧缓存大小'
+    },
+    {
+      key: 'sample_aspect_ratio',
+      label: '采样率'
+    },
+    {
+      key: 'display_aspect_ratio',
+      label: '比率'
+    },
+    {
+      key: 'pix_fmt',
+      label: '像素个数'
+    },
+    {
+      key: 'level',
+      label: '级别'
+    },
+    {
+      key: 'r_frame_rate',
+      label: '真实基础帧率'
+    },
+    {
+      key: 'avg_frame_rate',
+      label: '平均帧率'
+    },
+    {
+      key: 'time_base',
+      label: '每帧时长'
+    },
+    {
+      key: 'start_time',
+      label: '首帧时间'
+    },
+    {
+      key: 'duration',
+      label: '文件总时间'
+    },
+    {
+      key: 'nb_frames',
+      label: '帧数'
+    },
+    {
+      key: 'tags.creation_time',
+      label: '创建时间'
+    },
+    {
+      key: 'tags.language',
+      label: '语言'
+    },
+    {
+      key: 'tags.handler_name',
+      label: '处理器名字'
+    }
+  ],
+  [
+    {
+      key: 'index',
+      label: '流索引号'
+    },
+    {
+      key: 'codec_name',
+      label: '编码器名'
+    },
+    // {
+    //   key: 'codec_long_name',
+    //   label: '编码器名全称'
+    // },
+    {
+      key: 'codec_type',
+      label: '编码器类型'
+    },
+    {
+      key: 'codec_time_base',
+      label: '编码器每帧时长'
+    },
+    {
+      key: 'codec_tag_string',
+      label: '编码器标签名'
+    },
+    {
+      key: 'codec_tag',
+      label: '编码器标签'
+    },
+    {
+      key: 'sample_fmt',
+      label: '采样格式'
+    },
+    {
+      key: 'sample_rate',
+      label: '采样率'
+    },
+    {
+      key: 'channels',
+      label: '音频数'
+    },
+    {
+      key: 'bits_per_sample',
+      label: '采样码率'
+    },
+    {
+      key: 'r_frame_rate',
+      label: '真实基础帧率'
+    },
+    {
+      key: 'avg_frame_rate',
+      label: '平均帧率'
+    },
+    {
+      key: 'time_base',
+      label: '每帧时长'
+    },
+    {
+      key: 'start_time',
+      label: '首帧时间'
+    },
+    {
+      key: 'duration',
+      label: '文件总时间'
+    },
+    {
+      key: 'nb_frames',
+      label: '帧数'
+    },
+    {
+      key: 'tags.creation_time',
+      label: '创建时间'
+    },
+    {
+      key: 'tags.language',
+      label: '语言'
+    },
+    {
+      key: 'tags.handler_name',
+      label: '处理器名字'
+    }
+  ]
+];
