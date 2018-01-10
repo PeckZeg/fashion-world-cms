@@ -19,6 +19,10 @@ import styles from './styles.css';
 const { Item: DescListItem } = DescList;
 const { TabPane } = Tabs;
 
+/**
+ *  视频信息标签面板
+ *  @class
+ */
 @injectProto('setStateAsync')
 export default class AvInfoTabPane extends PureComponent {
   state = {
@@ -39,25 +43,25 @@ export default class AvInfoTabPane extends PureComponent {
    *  @returns {Promise}
    */
   load = async () => {
-    try {
-      const { definition } = this.props;
-      const { inited } = this.state;
+    const { definition } = this.props;
+    const { inited } = this.state;
 
-      if (!inited) {
+    if (!inited) {
+      try {
         await this.setStateAsync({ loading: true, status: null, avinfo: null });
         const avinfo = await fetchAvinfo(definition.url);
         await setTimeoutAsync(random(256, 1024));
         await this.setStateAsync({ loading: false, status: 'success', avinfo });
       }
-    }
 
-    catch (err) {
-      catchError(this, err);
-      await this.setStateAsync({ loading: false, status: 'exception' });
-    }
+      catch (err) {
+        catchError(this, err);
+        await this.setStateAsync({ loading: false, status: 'exception' });
+      }
 
-    finally {
-      await this.setStateAsync({ inited: true });
+      finally {
+        await this.setStateAsync({ inited: true });
+      }
     }
   }
 
@@ -86,7 +90,9 @@ export default class AvInfoTabPane extends PureComponent {
                 <DescList title="格式" key={this.animKeys.key('format')}>
                   {schema.format.map(({ key, label }) => (
                     <DescListItem key={key} label={label}>
-                      <code>{get(avinfo, key, '-')}</code>
+                      <code>
+                        {get(avinfo, `format.${key}`, '-')}
+                      </code>
                     </DescListItem>
                   ))}
                 </DescList>

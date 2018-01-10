@@ -12,6 +12,10 @@ import TabPane from './TabPane';
 import { definitionsReverse as DEFINITIONS } from '@const/video/definitions';
 import styles from './styles.css';
 
+/**
+ *  各个清晰度的视频信息
+ *  @class
+ */
 export default class DefinitionsAvInfo extends PureComponent {
   componentDidMount() {
     const { definitions } = this.props;

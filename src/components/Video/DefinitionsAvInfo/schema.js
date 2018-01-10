@@ -1,50 +1,53 @@
+import filesize from 'filesize';
+
 export const format = [
   {
-    key: 'format.filename',
+    key: 'filename',
     label: '文件名'
   },
   {
-    key: 'format.nb_streams',
+    key: 'nb_streams',
     label: '流的数目'
   },
   {
-    key: 'format.format_name',
+    key: 'format_name',
     label: '格式名'
   },
   {
-    key: 'format.format_long_name',
+    key: 'format_long_name',
     label: '格式名全称'
   },
   {
-    key: 'format.start_time',
+    key: 'start_time',
     label: '首帧时间'
   },
   {
-    key: 'format.duration',
+    key: 'duration',
     label: '时长'
   },
   {
-    key: 'format.size',
-    label: '文件大小'
+    key: 'size',
+    label: '文件大小',
+    format: size => filesize(size)
   },
   {
-    key: 'format.bit_rate',
+    key: 'bit_rate',
     label: '码率'
   },
   {
-    key: 'format.tags.major_brand',
+    key: 'tags.major_brand',
     label: '主品牌'
   },
   {
-    key: 'format.tags.minor_version',
+    key: 'tags.minor_version',
     label: '次要版本'
   },
   {
-    key: 'format.tags.compatible_brands',
+    key: 'tags.compatible_brands',
     label: '兼容性品牌'
   },
   {
-    key: 'format.tags.creation_time',
+    key: 'tags.creation_time',
     label: '创建时间'
   }
 ];
