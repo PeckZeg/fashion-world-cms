@@ -106,6 +106,23 @@ export const VIDEO_PUT_UPDATE_VIDEO_COVER = (token, videoId, key) => shimData(
 );
 
 /**
+ *  [PUT] 更新视频字幕信息
+ *  @param {object} token 访问令牌
+ *  @param {ObjectId} videoId 视频编号
+ *  @param {object} [data] 内容数据
+ *  @returns {Promise}
+ */
+export const VIDEO_PUT_UPDATE_VIDEO_SUBTITLE_FILES = (token, videoId, data) => (
+  shimData(
+    instance.put(
+      `/${videoId}/subtitle-files`,
+      data,
+      genConfig('admin:video:update-video-subtitle-files', token)
+    )
+  )
+);
+
+/**
  *  [DEL] 冻结视频
  *  @param {object} token 访问令牌
  *  @param {ObjectId} videoId 视频编号

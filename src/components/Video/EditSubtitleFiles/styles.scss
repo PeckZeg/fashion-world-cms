@@ -1,0 +1,16 @@
+@import "src/scss/global";
+
+:local(.subtitle-file) {
+  display: flex;
+  // align-items: baseline;
+
+  .language {
+    flex: 0 0 128px;
+    margin-right: $padding-md-vertical;
+  }
+
+  .subtitle {
+    flex: 1 1 auto;
+    text-align: left;
+  }
+}

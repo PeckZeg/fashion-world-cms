@@ -26,6 +26,10 @@ export default function(com, location, match) {
       {
         key: `/video/${videoId}/edit`,
         tab: '编辑'
+      },
+      {
+        key: `/video/${videoId}/edit/subtitle-files`,
+        tab: '编辑字幕文件'
       }
     ];
   }

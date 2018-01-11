@@ -6,6 +6,7 @@ import {
   VIDEO_POST_RECOVER_VIDEO,
   VIDEO_PUT_UPDATE_VIDEO,
   VIDEO_PUT_UPDATE_VIDEO_COVER,
+  VIDEO_PUT_UPDATE_VIDEO_SUBTITLE_FILES,
   VIDEO_DEL_BLOCK_VIDEO,
   VIDEO_DEL_SUPPLANT_VIDEO,
   VIDEO_DEL_DESTROY_VIDEO
@@ -83,6 +84,17 @@ export function updateVideo(videoId, data) {
  */
 export function updateVideoCover(videoId, data) {
   return VIDEO_PUT_UPDATE_VIDEO_COVER(this.token(), videoId, data);
+};
+
+/**
+ *  [PUT] 更新视频字幕文件
+ *  @this 当前组件实例
+ *  @param {ObjectId} videoId 视频编号
+ *  @param {object} [data] 内容数据
+ *  @returns {Promise}
+ */
+export function updateVideoSubtitleFiles(videoId, data) {
+  return VIDEO_PUT_UPDATE_VIDEO_SUBTITLE_FILES(this.token(), videoId, data);
 };
 
 /**

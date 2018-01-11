@@ -29,10 +29,10 @@ const { Item: FormItem } = Form;
  *  编辑视频信息
  *  @class
  */
- @Form.create()
- @connect(mapMyToProps)
- @injectApi('video', 'qiniu')
- @injectProto('setStateAsync')
+@Form.create()
+@connect(mapMyToProps)
+@injectApi('video', 'qiniu')
+@injectProto('setStateAsync')
 export default class Edit extends PureComponent {
   /**
    *  `props` 类型检查
@@ -94,9 +94,7 @@ export default class Edit extends PureComponent {
   /**
    *  重置表单
    */
-  onReset = () => {
-    this.props.form.resetFields();
-  }
+  onReset = () => this.props.form.resetFields();
 
   /**
    *  提交表单

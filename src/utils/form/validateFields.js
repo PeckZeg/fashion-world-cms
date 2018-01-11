@@ -37,7 +37,16 @@ export default (form, fields, opts = {}) => new Promise((resolve, reject) => {
         let value = [];
 
         forEach(filter(keys(values), key => startsWith(key, group)), key => {
-          value = [...value, ...values[key]];
+          const val = values[key];
+
+          if (isArray(val)) {
+            value = [...value, ...val];
+          }
+
+          else {
+            value = [...value, val];
+          }
+          
           unset(values, key);
         });
 

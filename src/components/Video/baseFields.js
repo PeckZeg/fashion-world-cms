@@ -82,6 +82,10 @@ export const views = {
   }
 };
 
+export const subtitleFiles = {
+  label: '字幕文件'
+};
+
 export const priority = {
   label: '排序值',
   inputProps: {

@@ -2,11 +2,11 @@
 //  Mixins - Color Ellipsis
 //  --------------------------------------------------
 
-@mixin color-ellipsis($color: $white) {
+@mixin color-ellipsis($color: $white, $direction: after) {
   position: relative;
   overflow: hidden;
 
-  &:after {
+  &:#{$direction} {
     content: '';
     position: absolute;
     z-index: 1;
