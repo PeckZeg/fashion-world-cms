@@ -237,8 +237,8 @@ export default class PageHeader extends PureComponent {
             onChange={this.onTabChange}
             animated={true}
           >
-            {tabs.map(({ key, tab }) => (
-              <TabPane key={key} tab={tab} />
+            {tabs.map(({ key, ...tabProps }) => (
+              <TabPane key={key} {...tabProps} />
             ))}
           </Tabs>
         )}

@@ -20,6 +20,10 @@ export default function(com, location, match) {
         tab: '详情'
       },
       {
+        key: `/video/${videoId}/player`,
+        tab: '视频预览'
+      },
+      {
         key: `/video/${videoId}/avinfo`,
         tab: '视频元信息'
       },
@@ -29,7 +33,8 @@ export default function(com, location, match) {
       },
       {
         key: `/video/${videoId}/edit/subtitle-files`,
-        tab: '编辑字幕文件'
+        tab: '编辑字幕文件',
+        disabled: true
       }
     ];
   }

@@ -10,9 +10,10 @@ import map from 'lodash/map';
 import CardLayout from '@layout/CardLayout';
 
 import SubtitleFileItem from './SubtitleFile';
+import CreateModal from './CreateModal';
 
 import validateFields from '@util/form/validateFields';
-import customRequest from '@util/qiniu/customRequest';
+// import customRequest from '@util/qiniu/customRequest';
 import mapMyToProps from '@util/connect/mapMyToProps';
 import injectProto from '@util/injectProto';
 import catchError from '@util/catchError';
@@ -32,7 +33,7 @@ const { Item: FormItem } = Form;
 @Form.create()
 @connect(mapMyToProps)
 @injectApi('video', 'qiniu')
-@injectProto('setStateAsync')
+@injectProto('setStateAsync', 'ref')
 export default class EditSubtitleFiles extends PureComponent {
   /**
    *  `props` 类型检查
@@ -166,6 +167,10 @@ export default class EditSubtitleFiles extends PureComponent {
             </FormItem>
           </Spin>
         </Form>
+
+        <CreateModal
+          ref={this.ref.bind(this, 'createModal')}
+        />
       </CardLayout>
     );
   }

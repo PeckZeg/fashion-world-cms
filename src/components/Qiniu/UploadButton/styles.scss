@@ -1,0 +1,13 @@
+@import "src/scss/global";
+
+:local(.upload) {
+  display: block;
+
+  > :global(.ant-upload) {
+    width: 100%;
+  }
+
+  :global(.ant-btn) {
+    text-align: left;
+  }
+}

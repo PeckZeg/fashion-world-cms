@@ -1,6 +1,7 @@
-import EditSubtitleFiles from '../EditSubtitleFiles';
+// import EditSubtitleFiles from '../EditSubtitleFiles';
 import Detail from '../Detail';
 import AvInfo from '../Avinfo';
+import Player from '../Player';
 import Edit from '../Edit';
 
 /**
@@ -27,10 +28,15 @@ export default function(com) {
       exact: true,
       Component: Edit
     },
+    // {
+    //   path: `${url}/edit/subtitle-files`,
+    //   exact: true,
+    //   Component: EditSubtitleFiles
+    // },
     {
-      path: `${url}/edit/subtitle-files`,
+      path: `${url}/player`,
       exact: true,
-      Component: EditSubtitleFiles
+      Component: Player
     }
   ];
 };
