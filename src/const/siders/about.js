@@ -2,7 +2,7 @@ import Profile from '@components/About/Profile';
 import List from '@components/About/List';
 
 export const key = 'about';
-export const icon = 'copyright';
+export { about as icon } from '@const/icons';
 export const label = '关于管理';
 export const indexRoute = '/abouts';
 export const permission = 'VIEW_ABOUT';

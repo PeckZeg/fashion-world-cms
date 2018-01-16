@@ -85,8 +85,6 @@ export default (form, fields, opts = {}) => new Promise((resolve, reject) => {
         }
       }
 
-      console.log({key,value});
-
       values[key] = value;
 
       return values;

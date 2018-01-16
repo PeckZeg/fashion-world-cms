@@ -1,8 +1,9 @@
 import Profile from '@components/Video/Profile';
 import List from '@components/Video/List';
 
+
 export const key = 'video';
-export const icon = 'video-camera';
+export { video as icon } from '@const/icons';
 export const label = '视频管理';
 export const indexRoute = '/videos';
 export const permission = 'VIEW_VIDEO';

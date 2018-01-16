@@ -2,7 +2,7 @@ import Profile from '@components/Category/Profile';
 import List from '@components/Category/List';
 
 export const key = 'category';
-export const icon = 'pushpin-o';
+export { category as icon } from '@const/icons';
 export const label = '分类管理';
 export const indexRoute = '/categories';
 export const permission = 'VIEW_CATEGORY';

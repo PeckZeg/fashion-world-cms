@@ -2,7 +2,7 @@ import Profile from '~/src/components/Account/Profile';
 import List from '~/src/components/Account/List';
 
 export const key = 'account';
-export const icon = 'key';
+export { account as icon } from '@const/icons';
 export const label = '账号管理';
 export const indexRoute = '/accounts';
 export const permission = 'VIEW_ACCOUNT';

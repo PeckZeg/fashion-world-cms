@@ -2,7 +2,7 @@ import Profile from '~/src/components/Channel/Profile';
 import List from '~/src/components/Channel/List';
 
 export const key = 'channel';
-export const icon = 'appstore-o';
+export { channel as icon } from '@const/icons';
 export const label = '频道管理';
 export const indexRoute = '/channels';
 export const permission = 'VIEW_CHANNEL';

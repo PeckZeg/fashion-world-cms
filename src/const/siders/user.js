@@ -2,7 +2,7 @@ import Profile from '@components/User/Profile';
 import List from '@components/User/List';
 
 export const key = 'user';
-export const icon = 'user';
+export { user as icon } from '@const/icons';
 export const label = '用户管理';
 export const indexRoute = '/users';
 export const permission = 'VIEW_USER';
