@@ -8,6 +8,7 @@ import isFunction from 'lodash/isFunction';
 import ImageUploader from '@qiniu/ImageUploader';
 import CardLayout from '@layout/CardLayout';
 
+import CategorySelectItem from '@form-item/CategorySelect';
 import ChannelSelectItem from '@form-item/ChannelSelect';
 import InputNumberItem from '@form-item/InputNumber';
 import TextAreaItem from '@form-item/TextArea';
@@ -53,9 +54,17 @@ export default class Edit extends PureComponent {
     onUpdate: PropTypes.func
   };
 
-  state = {
-    submitting: false
-  };
+  constructor(props) {
+    super(props);
+
+    const { entry = {} } = props;
+    const { channelId } = entry;
+
+    this.state = {
+      channelId,
+      submitting: false
+    };
+  }
 
   /**
    *  自定义上传请求
@@ -107,7 +116,7 @@ export default class Edit extends PureComponent {
       const { form, entry, entryProp } = this.props;
       const { _id: entryId } = entry;
       await this.setStateAsync({ submitting: true });
-      const body = await validateFields(form);
+      const body = await validateFields(form, null, { nil: true });
       const { [entryProp]: newEntry } = await this.updateVideo(entryId, body);
 
       this.onUpdate(newEntry);
@@ -120,9 +129,11 @@ export default class Edit extends PureComponent {
     }
   };
 
+  onChannelChange = channelId => this.setState({ channelId });
+
   render() {
     const { entry } = this.props;
-    const { submitting } = this.state;
+    const { channelId, submitting } = this.state;
     const fields = genFields(this);
 
     return (
@@ -141,7 +152,16 @@ export default class Edit extends PureComponent {
             <InputNumberItem {...fields.priority} />
 
             {/* 频道 */}
-            <ChannelSelectItem {...fields.channelId} />
+            <ChannelSelectItem
+              {...fields.channelId}
+              onChange={this.onChannelChange}
+            />
+
+            {/* 分类 */}
+            <CategorySelectItem
+              channelId={channelId}
+              {...fields.categoryId}
+            />
 
             {/* 标题 */}
             <InputItem {...fields.title} />

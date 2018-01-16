@@ -7,6 +7,7 @@ import forEach from 'lodash/forEach';
 import compact from 'lodash/compact';
 import reduce from 'lodash/reduce';
 import filter from 'lodash/filter';
+import isNil from 'lodash/isNil';
 import unset from 'lodash/unset';
 import keys from 'lodash/keys';
 import uniq from 'lodash/uniq';
@@ -18,9 +19,13 @@ import String from '~/src/dataTypes/String';
  *  验证表单值
  *  @param from antd form 对象实例
  *  @param {object} [fields = {}] 验证字段模型
+ *  @param {object} [opts = {}] 配置项
+ *  @param {boolean} [opts.nil = false] 将空值转换成 `null`
  *  @returns {object} 值字典
  */
 export default (form, fields, opts = {}) => new Promise((resolve, reject) => {
+  const { nil = false } = opts;
+
   fields = fields || {};
 
   form.validateFieldsAndScroll((err, values) => {
@@ -46,7 +51,7 @@ export default (form, fields, opts = {}) => new Promise((resolve, reject) => {
           else {
             value = [...value, val];
           }
-          
+
           unset(values, key);
         });
 
@@ -55,7 +60,13 @@ export default (form, fields, opts = {}) => new Promise((resolve, reject) => {
     }
 
     values = reduce(values, (values, value, key) => {
-      if (isUndefined(value)) {
+      if (nil) {
+        if (isNil(value)) {
+          value = null;
+        }
+      }
+
+      else if (isUndefined(value)) {
         return values;
       }
 
@@ -73,6 +84,8 @@ export default (form, fields, opts = {}) => new Promise((resolve, reject) => {
             // ...
         }
       }
+
+      console.log({key,value});
 
       values[key] = value;
 

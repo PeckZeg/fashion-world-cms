@@ -1,0 +1,22 @@
+@import "src/scss/global";
+
+:local(.option) {
+  display: flex;
+  align-items: center;
+
+  > h4 {
+    margin: 0;
+    font-weight: 400;
+    padding-left: $font-size-base / 2;
+
+    small {
+      margin-left: $font-size-base / 2;
+      color: map-fetch($component-colors, grey-salt, base);
+
+      &:before {
+        content: '-';
+        margin-right: $font-size-base / 2;
+      }
+    }
+  }
+}

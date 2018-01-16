@@ -3,14 +3,13 @@ import { connect } from 'react-redux';
 import { Form, Select } from 'antd';
 import PropTypes from 'prop-types';
 
-import isUndefined from 'lodash/isUndefined';
-import isFunction from 'lodash/isFunction';
 import isString from 'lodash/isString';
 import isEmpty from 'lodash/isEmpty';
 import random from 'lodash/random';
+import isNil from 'lodash/isNil';
 
 import SelectSpinOption from '@components/SelectSpinOption';
-import ChannelOption from './Option';
+import CategoryOption from './Option';
 
 import mapMyToProps from '@util/connect/mapMyToProps';
 import setTimeoutAsync from '@util/setTimeoutAsync';
@@ -23,13 +22,13 @@ const { Item: FormItem } = Form;
 const DEFAULT_ENTRIES = [];
 
 /**
- *  表单频道选择器
+ *  表单分类选择器
  *  @class
  */
 @connect(mapMyToProps)
-@injectApi('channel')
+@injectApi('category')
 @injectProto('setStateAsync')
-export default class FormChannelSelectItem extends PureComponent {
+export default class FormCategorySelectItem extends PureComponent {
   /**
    *  `props` 类型检查
    *  @static
@@ -42,7 +41,8 @@ export default class FormChannelSelectItem extends PureComponent {
     selectProps: PropTypes.object,
     notFoundContent: PropTypes.node,
     placeholder: PropTypes.string,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    channelId: PropTypes.string,
   };
 
   /**
@@ -50,9 +50,9 @@ export default class FormChannelSelectItem extends PureComponent {
    *  @static
    */
   static defaultProps = {
-    field: 'channelId',
+    field: 'categoryId',
     notFoundContent: '空空如也...',
-    placeholder: '选择一个频道'
+    placeholder: '选择一个分类'
   };
 
   state = {
@@ -60,15 +60,36 @@ export default class FormChannelSelectItem extends PureComponent {
     searchName: null,
 
     entries: DEFAULT_ENTRIES,
-    entryProp: 'channel',
-    entriesProp: 'channels',
+    entryProp: 'category',
+    entriesProp: 'categories',
   };
 
   componentDidMount() {
-    const { initialValue: channelId } = this.props;
+    const { initialValue: categoryId } = this.props;
 
-    if (channelId) {
-      this.fetchEntryList({ channelId });
+    if (categoryId) {
+      this.fetchEntryList(this.query({ categoryId }));
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { channelId } = nextProps;
+    const { channelId: prevChannelId } = this.props;
+
+    if (channelId !== prevChannelId) {
+      this.setState({
+        channelId,
+        ...!channelId ? { entries: DEFAULT_ENTRIES } : null
+      });
+
+      if (!channelId) {
+        const { form } = this.props;
+        const { setFieldsValue } = form;
+        const field = isString(this.props.field) ?
+            this.props.field : this.props.field.field;
+
+        setFieldsValue({ [field]: void 0 });
+      }
     }
   }
 
@@ -84,7 +105,7 @@ export default class FormChannelSelectItem extends PureComponent {
     try {
       await this.setStateAsync({ fetching: true, entries: DEFAULT_ENTRIES });
       await setTimeoutAsync(random(128, 1024));
-      const { [entriesProp]: entries } = await this.fetchChannelList(query);
+      const { [entriesProp]: entries } = await this.fetchCategoryList(query);
       await this.setStateAsync({
         fetching: false,
         entries: isEmpty(entries) ? DEFAULT_ENTRIES : entries
@@ -100,7 +121,9 @@ export default class FormChannelSelectItem extends PureComponent {
    *  焦点事件处理器
    *  @this 绑定当前组件实例
    */
-  onFocus = () => isEmpty(this.state.entries) && this.fetchEntryList();
+  onFocus = () => {
+    isEmpty(this.state.entries) && this.fetchEntryList(this.query());
+  }
 
   /**
    *  选择事件处理器
@@ -114,16 +137,18 @@ export default class FormChannelSelectItem extends PureComponent {
    *  @this 绑定当前组件实例
    *  @param {string} channelId 频道编号
    */
-  onChange = channelId => {
+  onChange = categoryId => {
     const { onChange } = this.props;
     const { entries } = this.state;
 
-    if (channelId === void 0) {
+    if (categoryId === void 0) {
       this.setState({ entries: DEFAULT_ENTRIES });
     }
 
-    if (isFunction(onChange)) {
-      onChange(channelId, entries.filter(({ _id }) => channelId === _id)[0]);
+    if (onChange) {
+      const category = entries.filter(({ _id }) => categoryId === _id)[0];
+      const { channel } = category || {};
+      onChange(channel._id, categoryId, channel, category);
     }
   }
 
@@ -133,16 +158,30 @@ export default class FormChannelSelectItem extends PureComponent {
    */
   onSearch = searchName => {
     if (!this.selected) {
-      this.fetchEntryList({ searchName });
+      this.fetchEntryList(this.query({ searchName }));
     }
 
     this.setState({ searchName });
     this.selected = null;
   }
 
+  /**
+   *  生成查询条件
+   *  @param {object} [query] 查询条件
+   *  @returns {object}
+   */
+  query = query => {
+    const { channelId } = this.props;
+
+    return {
+      ...query,
+      ...channelId ? { channelId } : null
+    };
+  };
+
   render() {
     const {
-      form,
+      channelId, form,
       rules, initialValue, selectProps,
       notFoundContent, placeholder,
       ...formItemProps
@@ -157,7 +196,7 @@ export default class FormChannelSelectItem extends PureComponent {
         {getFieldDecorator(field, {
           ...extraFieldOpts,
           rules,
-          ...!isUndefined(initialValue) ? { initialValue } : null
+          ...!isNil(initialValue) ? { initialValue } : null
         })(
           <Select
             showSearch
@@ -172,7 +211,7 @@ export default class FormChannelSelectItem extends PureComponent {
           >
             {entries.map(entry => (
               <SelectOption key={entry._id}>
-                <ChannelOption entry={entry} searchName={searchName} />
+                <CategoryOption entry={entry} searchName={searchName} />
               </SelectOption>
             ))}
           </Select>

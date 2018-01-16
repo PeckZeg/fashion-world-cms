@@ -14,10 +14,7 @@ export default class SelectSpinOption extends PureComponent {
    *  @static
    */
   static propTypes = {
-    label: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.element
-    ])
+    label: PropTypes.node
   };
 
   /**
