@@ -9,9 +9,12 @@ import random from 'lodash/random';
 import TimingPublishModal from '@components/TimingPublishModal';
 import PageHeaderLayout from '@layout/PageHeaderLayout';
 import Exception from 'ant-design-pro/lib/Exception';
+import ImageViewer from '@components/ImageViewer';
 
 import historyListener from '@util/profile/historyListener';
+import { loopVideo as loopVideoIcon } from '@const/icons';
 import validateFields from '@util/form/validateFields';
+import toProcessImage from '@util/qiniu/toProcessImage';
 import mapMyToProps from '@util/connect/mapMyToProps';
 import renderRoute from '@util/profile/renderRoute';
 import setTimeoutAsync from '@util/setTimeoutAsync';
@@ -25,35 +28,48 @@ import genRoutes from './genRoutes';
 import genTabs from './genTabs';
 
 /**
- *  关于信息
+ *  循环视频信息页
  *  @class
  */
 @withRouter
 @connect(mapMyToProps)
-@injectApi('about')
+@injectApi('loopVideo')
 @injectProto('ref', 'setStateAsync')
 @historyListener('setTabs')
 export default class Profile extends PureComponent {
   constructor(props) {
     super(props);
 
-    initState(this, props, 'aboutId', {
-      docTitle: '关于信息',
-      entryProp: 'about',
-      entryTitle: '关于',
-      entryNameProp: 'name',
+    initState(this, props, 'loopVideoId', {
+      docTitle: '循环视频信息',
+      entryProp: 'loopVideo',
+      entryTitle: '循环视频',
+      entryNameProp: 'title',
       defaultTab: props.location.pathname,
       ...genTabs(this)
     });
   }
 
   /**
+   *  打开图片预览器
+   */
+  openImageViewer = () => {
+    const { entry } = this.state;
+
+    this.imageViewer.show(entry.cover, (
+      <ImageViewer.Title
+        icon={loopVideoIcon}
+        title={entry.title}
+        avatar={toProcessImage(entry.cover, { w: 32, h: 32 })}
+      />
+    ));
+  }
+
+  /**
    *  标签切换处理器
    *  @param {string} pathname 切换的路径
    */
-  onTabChange = pathname => {
-    this.props.history.push(pathname);
-  }
+  onTabChange = pathname => this.props.history.push(pathname);
 
   /**
    *  条目更新处理器
@@ -69,7 +85,7 @@ export default class Profile extends PureComponent {
 
     try {
       await this.setStateAsync({ loading: true, entry: null, exception: null });
-      const { [entryProp]: entry } = await this.fetchAboutProfile(entryId);
+      const { [entryProp]: entry } = await this.fetchLoopVideoProfile(entryId);
 
       await setTimeoutAsync(random(256, 1024));
       await this.setStateAsync({
@@ -115,7 +131,7 @@ export default class Profile extends PureComponent {
     try {
       await modal.startSubmit();
       const body = await validateFields(form);
-      const { [entryProp]: newEntry } = await this.publishAbout(entryId, body);
+      const { [entryProp]: newEntry } = await this.publishLoopVideo(entryId, body);
 
       this.onUpdate(newEntry);
       await modal.endSubmit();
@@ -132,25 +148,25 @@ export default class Profile extends PureComponent {
    *  发布条目
    *  @param {React.Component} btn 按钮
    */
-  publishEntry = btn => handleEntry(this, btn, '发布', 'publishAbout');
+  publishEntry = btn => handleEntry(this, btn, '发布', 'publishLoopVideo');
 
   /**
    *  恢复条目
    *  @param {React.Component} btn 按钮
    */
-  recoverEntry = btn => handleEntry(this, btn, '恢复', 'recoverAbout');
+  recoverEntry = btn => handleEntry(this, btn, '恢复', 'recoverLoopVideo');
 
   /**
    *  冻结条目
    *  @param {React.Component} btn 按钮
    */
-  blockEntry = btn => handleEntry(this, btn, '冻结', 'blockAbout');
+  blockEntry = btn => handleEntry(this, btn, '冻结', 'blockLoopVideo');
 
   /**
    *  删除条目
    *  @param {React.Component} btn 按钮
    */
-  destroyEntry = btn => handleEntry(this, btn, '删除', 'destroyAbout');
+  destroyEntry = btn => handleEntry(this, btn, '删除', 'destroyLoopVideo');
 
   render() {
     const {
@@ -180,6 +196,8 @@ export default class Profile extends PureComponent {
             ))}
           </Switch>
 
+          <ImageViewer ref={this.ref.bind(this, 'imageViewer')} />
+
           <TimingPublishModal
             onRef={this.ref.bind(this, 'timingPublishModal')}
             onSubmit={this.publishTimingEntry}
@@ -188,4 +206,4 @@ export default class Profile extends PureComponent {
       </DocumentTitle>
     );
   }
-};
+}

@@ -1,8 +1,10 @@
 @import "src/scss/global";
 
 :local(.container) {
-  &:global(.margin-bottom) {
-    margin-bottom: $padding-lg-horizontal;
+  @each $direction in top, bottom {
+    &:global(.margin-#{$direction}) {
+      margin-#{$direction}: $padding-lg-horizontal;
+    }
   }
 
   :global {

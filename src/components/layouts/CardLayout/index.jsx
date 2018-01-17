@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Card } from 'antd';
 
 import HeaderInfo from './HeaderInfo';
+import VideoInfo from './VideoInfo';
 
 import styles from './styles.css';
 
@@ -19,12 +20,18 @@ export default class CardLayout extends PureComponent {
   static HeaderInfo = HeaderInfo;
 
   /**
+   *  视频信息
+   *  @static
+   */
+  static VideoInfo = VideoInfo;
+
+  /**
    *  `props` 类型检查
    *  @static
    */
   static propTypes = {
     title: PropTypes.string,
-    margin: PropTypes.oneOf(['bottom']),
+    margin: PropTypes.oneOf(['top', 'bottom']),
     bordered: PropTypes.bool
   };
 

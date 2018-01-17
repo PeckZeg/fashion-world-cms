@@ -3,6 +3,7 @@ import has from 'lodash/has';
 
 import setStateAsync from '@util/injectProto/setStateAsync';
 
+import * as loopVideo from './loopVideo';
 import * as category from './category';
 import * as account from './account';
 import * as channel from './channel';
@@ -13,6 +14,7 @@ import * as user from './user';
 import * as my from './my';
 
 const METHOD_LIST = {
+  loopVideo,
   category,
   account,
   channel,

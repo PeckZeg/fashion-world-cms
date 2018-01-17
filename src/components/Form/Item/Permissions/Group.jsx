@@ -133,8 +133,8 @@ export default class PermissionGroup extends PureComponent {
     return (
       <Form.Item
         className={styles.permissionGroup}
-        labelCol={{ span: 4 }}
-        wrapperCol={{ span: 20 }}
+        labelCol={{ span: 6 }}
+        wrapperCol={{ span: 18 }}
         label={label}
         // colon={false}
       >

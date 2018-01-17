@@ -2,6 +2,7 @@ import forEach from 'lodash/forEach';
 import reduce from 'lodash/reduce';
 import map from 'lodash/map';
 
+import * as loopVideo from './loopVideo';
 import * as category from './category';
 import * as account from './account';
 import * as channel from './channel';
@@ -16,6 +17,7 @@ export const menus = [
   channel,
   category,
   video,
+  loopVideo,
   about,
   account
 ];

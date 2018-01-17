@@ -5,7 +5,10 @@
 > 更新于 `2018-01-17`
 
 * 新增 `循环视频` 相关权限
+* 现在 `@util/injectProto/genLink` 方法会将 `entryProp` 转换成串型字符串
 * 移除 `@util/form/validateFields` 调试信息
+* 核心
+  * 修正了包未加入 `package.json`
 
 ## `3.1.2`
 

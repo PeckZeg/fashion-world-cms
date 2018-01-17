@@ -1,3 +1,6 @@
+:local(.container):global(.margin-top) {
+  margin-top: 16px; }
+
 :local(.container):global(.margin-bottom) {
   margin-bottom: 16px; }
 

@@ -7,6 +7,7 @@ import { Button, Icon } from 'antd';
 import TimingPublishModal from '@components/TimingPublishModal';
 import PageHeaderLayout from '@layout/PageHeaderLayout';
 import TimelineModal from '@components/TimelineModal';
+import ImageViewer from '@components/ImageViewer';
 import CardLayout from '@layout/CardLayout';
 import EntryTable from '@layout/EntryTable';
 import Toolbar from '@table/Toolbar';
@@ -14,7 +15,9 @@ import Filter from './Filter';
 
 import handleEntries from '@util/list/handleSelectedEntries';
 import genRowSelection from '@util/table/genRowSelection';
+import { loopVideo as loopVideoIcon } from '@const/icons';
 import historyListener from '@util/list/historyListener';
+import toProcessImage from '@util/qiniu/toProcessImage';
 import validateFields from '@util/form/validateFields';
 import mapMyToProps from '@util/connect/mapMyToProps';
 import onTableChange from '@util/table/onTableChange';
@@ -30,12 +33,12 @@ import injectApi from '@util/injectApi';
 import genColumns from './genColumns';
 
 /**
- *  关于信息列表
+ *  循环视频列表
  *  @class
  */
 @withRouter
 @connect(mapMyToProps)
-@injectApi('about')
+@injectApi('loopVideo')
 @injectProto('ref', 'setStateAsync', 'hasPermission', 'genLink')
 @historyListener(querySchema)
 export default class List extends PureComponent {
@@ -44,11 +47,25 @@ export default class List extends PureComponent {
 
     initState(this, props, querySchema, {
       timeline: [],
-      entriesProp: 'abouts',
-      entryProp: 'about',
-      entryTitle: '关于',
-      entryNameProp: 'name'
+      entriesProp: 'loopVideos',
+      entryProp: 'loopVideo',
+      entryTitle: '循环视频',
+      entryNameProp: 'title'
     });
+  }
+
+  /**
+   *  打开图片预览模态
+   *  @param {object} entry 条目字典
+   */
+  openImageViewer = entry => {
+    this.imageViewer.show(entry.cover, (
+      <ImageViewer.Title
+        icon={loopVideoIcon}
+        title={entry.title}
+        avatar={toProcessImage(entry.cover, { w: 32, h: 32 })}
+      />
+    ));
   }
 
   /**
@@ -61,7 +78,7 @@ export default class List extends PureComponent {
         <Icon type="clock-circle-o" />
         定时发布{this.state.entryTitle}
         <small>
-          {entry.name}
+          {entry.title}
         </small>
       </Fragment>
     )
@@ -81,7 +98,7 @@ export default class List extends PureComponent {
       const {
         total,
         [entriesProp]: entries
-      } = await this.fetchAboutList(query);
+      } = await this.fetchLoopVideoList(query);
 
       await this.setStateAsync({
         total,
@@ -108,25 +125,25 @@ export default class List extends PureComponent {
    *  发布条目
    *  @param {React.Component} button 按钮组件实例
    */
-  publishEntry = btn => handleEntry(this, btn, '发布', 'publishAbout');
+  publishEntry = btn => handleEntry(this, btn, '发布', 'publishLoopVideo');
 
   /**
    *  恢复条目
    *  @param {React.Component} button 按钮组件实例
    */
-  recoverEntry = btn => handleEntry(this, btn, '恢复', 'recoverAbout');
+  recoverEntry = btn => handleEntry(this, btn, '恢复', 'recoverLoopVideo');
 
   /**
    *  冻结条目
    *  @param {React.Component} button 按钮组件实例
    */
-  blockEntry = btn => handleEntry(this, btn, '冻结', 'blockAbout');
+  blockEntry = btn => handleEntry(this, btn, '冻结', 'blockLoopVideo');
 
   /**
    *  删除条目
    *  @param {React.Component} button 按钮组件实例
    */
-  destroyEntry = btn => handleEntry(this, btn, '删除', 'destroyAbout');
+  destroyEntry = btn => handleEntry(this, btn, '删除', 'destroyLoopVideo');
 
   /**
    *  定时发布条目
@@ -140,7 +157,7 @@ export default class List extends PureComponent {
     try {
       await modal.startSubmit();
       const body = await validateFields(form);
-      const { [entryProp]: newEntry } = await this.publishAbout(entryId, body);
+      const { [entryProp]: newEntry } = await this.publishLoopVideo(entryId, body);
       const entries = replace(this.state.entries, entry, newEntry);
 
       await this.setStateAsync({ entries });
@@ -157,28 +174,28 @@ export default class List extends PureComponent {
   /**
    *  激活已选择条目
    */
-  publishEntries = () => handleEntries(this, '激活', 'publishAbout', {
+  publishEntries = () => handleEntries(this, '激活', 'publishLoopVideo', {
     shouldIgnore: entry => entry.publishAt
   });
 
   /**
    *  恢复已选择条目
    */
-  recoverEntries = () => handleEntries(this, '恢复', 'recoverAbout', {
+  recoverEntries = () => handleEntries(this, '恢复', 'recoverLoopVideo', {
     shouldIgnore: entry => !entry.removeAt
   });
 
   /**
    *  冻结已选择条目
    */
-  blockEntries = () => handleEntries(this, '冻结', 'blockAbout', {
+  blockEntries = () => handleEntries(this, '冻结', 'blockLoopVideo', {
     shouldIgnore: entry => !entry.publishAt
   });
 
   /**
    *  删除已选择条目
    */
-  destroyEntries = () => handleEntries(this, '删除', 'destroyAbout', {
+  destroyEntries = () => handleEntries(this, '删除', 'destroyLoopVideo', {
     shouldIgnore: entry => entry.removeAt
   });
 
@@ -247,6 +264,8 @@ export default class List extends PureComponent {
 
             {toolbar}
 
+            <ImageViewer ref={this.ref.bind(this, 'imageViewer')} />
+
             <TimelineModal ref={this.ref.bind(this, 'timelineModal')}>
               {timeline}
             </TimelineModal>
@@ -260,4 +279,4 @@ export default class List extends PureComponent {
       </DocumentTitle>
     );
   }
-};
+}

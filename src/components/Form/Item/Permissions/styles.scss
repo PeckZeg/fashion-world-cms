@@ -11,6 +11,7 @@ $label-color: map-fetch($component-colors, grey-cascade, base);
 
   :global {
     .ant-form-item-label label {
+      width: 100%;
       color: $label-color;
     }
 

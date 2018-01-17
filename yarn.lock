@@ -1966,6 +1966,10 @@ clap@^1.0.9:
   dependencies:
     chalk "^1.1.3"
 
+clark@^0.0.6:
+  version "0.0.6"
+  resolved "http://registry.npm.taobao.org/clark/download/clark-0.0.6.tgz#911d78503d1e2d7650dcce4b474d1103c36332f2"
+
 class-utils@^0.3.5:
   version "0.3.5"
   resolved "http://registry.npm.taobao.org/class-utils/download/class-utils-0.3.5.tgz#17e793103750f9627b2176ea34cfd1b565903c80"
