@@ -8,7 +8,8 @@ const BASE_PROPS = [
   'subtitle',
   'abstract',
   'summary',
-  'videoId'
+  'videoId',
+  'priority'
 ];
 
 export default com => ({

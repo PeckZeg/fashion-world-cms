@@ -43,3 +43,12 @@ export const summary = {
     autosize: { minRows: 4, maxRows: 12 }
   }
 };
+
+export const priority = {
+  label: '排序值',
+  inputProps: {
+    style: {
+      width: '100%'
+    }
+  }
+};

@@ -138,6 +138,9 @@ export default class Edit extends PureComponent {
               />
             </FormItem>
 
+            {/* 排序值 */}
+            <InputNumberItem {...fields.priority} />
+
             {/* 标题 */}
             <InputItem {...fields.title} />
 
@@ -150,6 +153,19 @@ export default class Edit extends PureComponent {
             {/* 简介 */}
             <TextAreaItem {...fields.summary} />
           </Spin>
+
+          <FormItem {...fields.submit}>
+            <Button type="primary" htmlType="submit" loading={submitting}>
+              保存
+            </Button>
+            <Button
+              className={globalStyles.submitButton}
+              type="dashed"
+              onClick={this.onReset}
+            >
+              重置
+            </Button>
+          </FormItem>
         </Form>
       </CardLayout>
     );

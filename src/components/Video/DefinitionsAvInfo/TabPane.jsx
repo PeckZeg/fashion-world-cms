@@ -2,6 +2,7 @@ import React, { PureComponent, Fragment } from 'react';
 import { Tabs, Spin } from 'antd';
 import Animate from 'rc-animate';
 
+import isFunction from 'lodash/isFunction';
 import random from 'lodash/random';
 import get from 'lodash/get';
 
@@ -88,13 +89,17 @@ export default class AvInfoTabPane extends PureComponent {
             ) : (
               <Fragment>
                 <DescList title="格式" key={this.animKeys.key('format')}>
-                  {schema.format.map(({ key, label }) => (
-                    <DescListItem key={key} label={label}>
-                      <code>
-                        {get(avinfo, `format.${key}`, '-')}
-                      </code>
-                    </DescListItem>
-                  ))}
+                  {schema.format.map(({ key, label, format }) => {
+                    const value = get(avinfo, `format.${key}`, '-');
+
+                    return (
+                      <DescListItem key={key} label={label}>
+                        <code>
+                          {isFunction(format) ? format(value) : value}
+                        </code>
+                      </DescListItem>
+                    );
+                  })}
                 </DescList>
 
                 {schema.streams.map((stream, idx) => (
