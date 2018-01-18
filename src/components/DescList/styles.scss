@@ -1,6 +1,8 @@
 @import "src/scss/global";
 
 :local(.desc) {
+  margin-bottom: -$padding-lg-horizontal;
+
   .title {
     margin-bottom: $padding-lg-horizontal;
     font-size: $font-size-medium;

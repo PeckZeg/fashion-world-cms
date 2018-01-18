@@ -1,4 +1,5 @@
 import Profile from '@components/Category/Profile';
+import Create from '@components/Category/Create';
 import List from '@components/Category/List';
 
 export const key = 'category';
@@ -45,6 +46,13 @@ export const items = [
     label: '已删除的分类',
     component: List,
     baseQuery: { publishAt: 'off', removeAt: 'on' }
+  },
+  {
+    permission: 'CREATE_CATEGORY',
+    key: '/create-category',
+    icon: 'plus',
+    label: '创建分类',
+    component: Create
   },
   {
     permission,
