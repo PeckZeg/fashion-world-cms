@@ -66,9 +66,22 @@ export default class AvInfoTabPane extends PureComponent {
     }
   }
 
+  renderItems = (pathPrefix, items) => items.map(({ key, label, format }) => {
+    const value = get(this.state.avinfo, `${pathPrefix}.${key}`, '-');
+
+    return (
+      <DescListItem key={key} label={label}>
+        <code>
+          {isFunction(format) ? format(value) : value}
+        </code>
+      </DescListItem>
+    );
+  });
+
   render() {
     const { definition, ...tabPaneProps } = this.props;
-    const { loading, status, avinfo } = this.state;
+    const { loading, status } = this.state;
+    const { animKeys, renderItems } = this;
 
     return (
       <TabPane className={styles.tabpane} {...tabPaneProps}>
@@ -78,42 +91,26 @@ export default class AvInfoTabPane extends PureComponent {
           transitionAppear
           transitionLeave={false}
         >
-          {loading ? <Spin key={this.animKeys.key('spin')} /> : (
+          {loading ? <Spin key={animKeys.key('spin')} /> : (
             status === 'exception' ? (
               <Exception
-                key={this.animKeys.key('exception')}
+                key={animKeys.key('exception')}
                 className={styles.exception}
                 type="500"
                 desc="无法读取视频信息"
               />
             ) : (
               <Fragment>
-                <DescList title="格式" key={this.animKeys.key('format')}>
-                  {schema.format.map(({ key, label, format }) => {
-                    const value = get(avinfo, `format.${key}`, '-');
-
-                    return (
-                      <DescListItem key={key} label={label}>
-                        <code>
-                          {isFunction(format) ? format(value) : value}
-                        </code>
-                      </DescListItem>
-                    );
-                  })}
+                <DescList title="格式" key={animKeys.key('format')}>
+                  {renderItems('format', schema.format)}
                 </DescList>
 
                 {schema.streams.map((stream, idx) => (
                   <DescList
                     title={`流 #${idx}`}
-                    key={this.animKeys.key(`stream${idx}`)}
+                    key={animKeys.key(`stream${idx}`)}
                   >
-                    {stream.map(({ key, label }) => (
-                      <DescListItem key={key} label={label}>
-                        <code>
-                          {get(avinfo, `streams[${idx}].${key}`, '-')}
-                        </code>
-                      </DescListItem>
-                    ))}
+                    {renderItems(`streams[${idx}]`, stream)}
                   </DescList>
                 ))}
               </Fragment>

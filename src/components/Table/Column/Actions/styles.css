@@ -43,6 +43,9 @@
       height: 40px;
       line-height: 40px;
       text-align: left; }
+      :local(.popover) :global .ant-popover-inner-content ul li .ant-btn a {
+        color: inherit;
+        transition: inherit; }
       :local(.popover) :global .ant-popover-inner-content ul li .ant-btn:not(.ant-btn-primary):not(:hover):not(:focus) {
         background-color: #ffffff; }
       :local(.popover) :global .ant-popover-inner-content ul li .ant-btn.ant-btn-clicked:after {

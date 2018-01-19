@@ -3,6 +3,7 @@ import { Popover, Icon } from 'antd';
 import PropTypes from 'prop-types'
 
 import SwitchAction from './SwitchAction';
+import LinkAction from './LinkAction';
 import EditLink from './EditLink';
 import Action from './Action';
 
@@ -14,6 +15,7 @@ import styles from './styles.css';
  */
 export default class TableActionsColumn extends PureComponent {
   static SwitchAction = SwitchAction;
+  static LinkAction = LinkAction;
   static EditLink = EditLink;
   static Action = Action;
 

@@ -73,6 +73,11 @@ $popover-btn-height:                    40px;
             line-height: $popover-btn-height;
             text-align: left;
 
+            a {
+              color: inherit;
+              transition: inherit;
+            }
+
             &:not(.ant-btn-primary):not(:hover):not(:focus) {
               background-color: $white;
             }

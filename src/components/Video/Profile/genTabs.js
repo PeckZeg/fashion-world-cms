@@ -1,3 +1,6 @@
+import React, { Fragment } from 'react';
+import { Icon } from 'antd';
+
 /**
  *  生成标签页列表
  *  @param {React.Component} com 当前组件实例
@@ -17,23 +20,48 @@ export default function(com, location, match) {
     tabList.tabs = [
       {
         key: `/video/${videoId}`,
-        tab: '详情'
+        tab: (
+          <Fragment>
+            <Icon type="profile" />
+            详情
+          </Fragment>
+        )
       },
       {
         key: `/video/${videoId}/player`,
-        tab: '预览'
+        tab: (
+          <Fragment>
+            <Icon type="video-camera" />
+            预览
+          </Fragment>
+        )
       },
       {
         key: `/video/${videoId}/avinfo`,
-        tab: '视频元信息'
+        tab: (
+          <Fragment>
+            <Icon type="file-text" />
+            元信息
+          </Fragment>
+        )
       },
       {
         key: `/video/${videoId}/edit`,
-        tab: '编辑'
+        tab: (
+          <Fragment>
+            <Icon type="edit" />
+            编辑
+          </Fragment>
+        )
       },
       {
         key: `/video/${videoId}/edit/subtitle-files`,
-        tab: '编辑字幕文件',
+        tab: (
+          <Fragment>
+            <Icon type="code-o" />
+            编辑字幕文件
+          </Fragment>
+        ),
         disabled: true
       }
     ];

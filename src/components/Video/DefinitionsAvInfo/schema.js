@@ -1,4 +1,8 @@
 import filesize from 'filesize';
+import moment from 'moment';
+
+import decimalSeparator from '@util/decimalSeparator';
+import formatDuration from '@util/formatDuration';
 
 export const format = [
   {
@@ -19,11 +23,13 @@ export const format = [
   },
   {
     key: 'start_time',
-    label: '首帧时间'
+    label: '首帧时间',
+    format: startTime => formatDuration(moment.duration(+startTime, 's'))
   },
   {
     key: 'duration',
-    label: '时长'
+    label: '时长',
+    format: duration => formatDuration(moment.duration(+duration, 's'))
   },
   {
     key: 'size',
@@ -32,7 +38,8 @@ export const format = [
   },
   {
     key: 'bit_rate',
-    label: '码率'
+    label: '码率',
+    format: decimalSeparator
   },
   {
     key: 'tags.major_brand',
@@ -84,11 +91,13 @@ export const streams = [
     },
     {
       key: 'width',
-      label: '宽度'
+      label: '宽度',
+      format: decimalSeparator
     },
     {
       key: 'height',
-      label: '高度'
+      label: '高度',
+      format: decimalSeparator
     },
     {
       key: 'has_b_frames',
@@ -124,15 +133,18 @@ export const streams = [
     },
     {
       key: 'start_time',
-      label: '首帧时间'
+      label: '首帧时间',
+      format: startTime => formatDuration(moment.duration(+startTime, 's'))
     },
     {
       key: 'duration',
-      label: '文件总时间'
+      label: '文件总时间',
+      format: duration => formatDuration(moment.duration(+duration, 's'))
     },
     {
       key: 'nb_frames',
-      label: '帧数'
+      label: '帧数',
+      format: decimalSeparator
     },
     {
       key: 'tags.creation_time',
@@ -182,7 +194,8 @@ export const streams = [
     },
     {
       key: 'sample_rate',
-      label: '采样率'
+      label: '采样率',
+      format: decimalSeparator
     },
     {
       key: 'channels',
@@ -206,15 +219,18 @@ export const streams = [
     },
     {
       key: 'start_time',
-      label: '首帧时间'
+      label: '首帧时间',
+      format: startTime => formatDuration(moment.duration(+startTime, 's'))
     },
     {
       key: 'duration',
-      label: '文件总时间'
+      label: '文件总时间',
+      format: duration => formatDuration(moment.duration(+duration, 's'))
     },
     {
       key: 'nb_frames',
-      label: '帧数'
+      label: '帧数',
+      format: decimalSeparator
     },
     {
       key: 'tags.creation_time',

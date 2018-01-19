@@ -9,7 +9,7 @@ import CoverCol from '@table-column/Cover';
 
 import genSorter from '@util/table/genSorter';
 
-const { Action, EditLink, SwitchAction } = ActionsCol;
+const { LinkAction, Action, EditLink, SwitchAction } = ActionsCol;
 const { ChannelHead } = TitleCol;
 
 /**
@@ -86,6 +86,12 @@ export default function(com, query) {
       render(actions, entry) {
         const more = (
           <ul>
+            <LinkAction icon="video-camera" to={com.genLink(entry, '/player')}>
+              预览
+            </LinkAction>
+            <LinkAction icon="file-text" to={com.genLink(entry, '/avinfo')}>
+              元信息
+            </LinkAction>
             <SwitchAction
               disabled={!com.hasPermission('UPDATE_VIDEO')}
               entry={entry}
