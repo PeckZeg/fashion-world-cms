@@ -44,11 +44,12 @@ export default class CardLayout extends PureComponent {
   };
 
   render() {
-    const { children, margin, bordered, ...resetProps } = this.props;
+    const { className, children, margin, bordered, ...resetProps } = this.props;
 
     return (
       <Card
         className={classnames(
+          className,
           styles.container,
           { [`margin-${margin}`]: margin }
         )}

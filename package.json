@@ -1,6 +1,6 @@
 {
   "name": "fashion-world-v3",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "private": true,
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
@@ -64,6 +64,7 @@
     "react-dom": "^16.1.0",
     "react-highlight-words": "^0.10.0",
     "react-markdown": "^3.1.1",
+    "react-player": "^1.1.1",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.8",

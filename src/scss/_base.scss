@@ -1,8 +1,8 @@
 @import "src/scss/global";
 
-html, body {
-  @include size(100%);
-}
+// html, body {
+//   @include size(100%);
+// }
 
 :global {
   .fade-enter {

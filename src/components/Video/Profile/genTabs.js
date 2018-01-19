@@ -21,7 +21,7 @@ export default function(com, location, match) {
       },
       {
         key: `/video/${videoId}/player`,
-        tab: '视频预览'
+        tab: '预览'
       },
       {
         key: `/video/${videoId}/avinfo`,

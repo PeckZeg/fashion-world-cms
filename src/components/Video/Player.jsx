@@ -1,11 +1,7 @@
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 import React, { PureComponent } from 'react';
-import { List, Tag, message } from 'antd';
 import PropTypes from 'prop-types';
 
-import CardLayout from '@components/layouts/CardLayout';
-
-const { Item: ListItem } = List;
+import VideoPlayer from '@components/VideoPlayer';
 
 /**
  *  播放器
@@ -29,33 +25,14 @@ export default class Player extends PureComponent {
     onUpdate: PropTypes.func
   };
 
-  /**
-   *  复制事件处理器
-   *  @this 当前组件实例
-   */
-  onCopy = () => message.success('已复制');
-
   render() {
     const { entry } = this.props;
     const { definitions } = entry;
 
     return (
-      <CardLayout>
-        <List>
-          {definitions.map(({ key, url, definition }) => (
-            <ListItem key={key}>
-              <CopyToClipboard
-                text={url}
-                onCopy={this.onCopy}
-              >
-                <Tag>
-                  {definition}
-                </Tag>
-              </CopyToClipboard>
-            </ListItem>
-          ))}
-        </List>
-      </CardLayout>
+      <VideoPlayer
+        url={definitions[0].url}
+      />
     );
   }
 }
