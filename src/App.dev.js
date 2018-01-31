@@ -1,13 +1,14 @@
-import React, { PureComponent } from 'react';
-import { ConnectedRouter } from 'react-router-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
+import { ConnectedRouter } from 'react-router-redux';
 import { Provider, connect } from 'react-redux';
+import React, { PureComponent } from 'react';
 
-import MyLogin from '~/src/components/My/Login';
-import Index from '~/src/components/Index';
-import Docs from '~/src/components/Docs';
+import ClockOffCountDown from '@components/ClockOffCountDown';
+import MyLogin from '@components/My/Login';
+import Index from '@components/Index';
+import Docs from '@components/Docs';
 
-import mapMyToProps from '~/src/utils/connect/mapMyToProps';
+import mapMyToProps from '@util/connect/mapMyToProps';
 
 @connect(mapMyToProps)
 export default class App extends PureComponent {
@@ -18,6 +19,11 @@ export default class App extends PureComponent {
       <Provider store={store}>
         <ConnectedRouter history={history}>
           <Switch>
+            <Route
+              path="/clock-off"
+              extect
+              component={ClockOffCountDown}
+            />
             <Route path="/my/login" exact component={MyLogin} />
             <Route path="/docs" component={Docs} />
             {!token ? (

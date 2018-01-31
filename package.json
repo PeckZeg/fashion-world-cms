@@ -1,6 +1,6 @@
 {
   "name": "fashion-world-v3",
-  "version": "3.2.2",
+  "version": "3.3.0",
   "private": true,
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
@@ -55,6 +55,7 @@
     "postcss-loader": "^2.0.10",
     "promise": "8.0.1",
     "prop-types": "^15.6.0",
+    "push.js": "^1.0.5",
     "querystring": "^0.2.0",
     "raf": "3.4.0",
     "rc-animate": "^2.4.1",

@@ -1,0 +1,62 @@
+@import "src/scss/global";
+
+$footer-height: 60px;
+
+:local(.container) {
+  position: relative;
+  padding-bottom: $footer-height;
+  @include size(100%);
+  background: $my-bg-color url(../My/bg.svg) 50%/100% no-repeat;
+
+  .main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include size(100%);
+  }
+
+  .content {
+    line-height: 1.25;
+    cursor: default;
+    user-select: none;
+
+    h2 {
+      position: relative;
+      margin: 0;
+      font-weight: 400;
+      color: map-fetch($component-colors, blue, base);
+
+      small {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: $font-size-small;
+        color: $gray;
+      }
+    }
+
+    .countdown {
+      font-size: $font-size-h1 * 2.5;
+    }
+  }
+
+  h1 {
+    margin: 0;
+    font-size: $font-size-h1 * 2.5;
+    font-weight: 400;
+    color: map-fetch($component-colors, grey-mint, base);
+  }
+
+  .global-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    padding: 0 $padding-lg-horizontal;
+    @include size(100%, $footer-height);
+    text-align: center;
+    line-height: $footer-height;
+    user-select: none;
+  }
+}
