@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
+import { Icon } from 'antd';
+
+import get from 'lodash/get';
 
 import CreateAtCol from '@table-column/CreateAt';
 import ActionsCol from '@table-column/Actions';
@@ -7,17 +11,13 @@ import TitleCol from '@table-column/Title';
 import CoverCol from '@table-column/Cover';
 
 import genSorter from '@util/table/genSorter';
+import { types } from '@const/banner/types';
 
 const { Action, SwitchAction, EditLink } = ActionsCol;
+const { ChannelHead } = TitleCol;
 
-/**
- *  生成表格栏参数
- *  @param {React.Component} com 当前组件实例
- *  @param {object} query 查询对象
- *  @returns {object[]} 表格栏参数
- */
 export default function(com, query) {
-  const { searchName } = query;
+  const { searchTitle } = query;
 
   return [
     {
@@ -43,16 +43,62 @@ export default function(com, query) {
       )
     },
     {
-      dataIndex: 'name',
-      title: '名称',
-      // width: 256,
-      render: (name, entry) => (
-        <TitleCol
-          title={name}
-          searchTitle={searchName}
-          link={`/channel/${entry._id}`}
-        />
-      )
+      dataIndex: 'title',
+      title: '标题',
+      render: (title, entry) => {
+        const type = types.filter(({ key }) => entry.type === key)[0];
+        const typeLabel = (
+          <Fragment>
+            <Icon type={type.icon} style={{ marginRight: '0.5em' }} />
+            {type.label}
+          </Fragment>
+        );
+        let headChildren = null;
+
+        switch (entry.type) {
+          case 'URL':
+            headChildren = (
+              <a href={entry.value.url} target="_blank">
+                {entry.value.url}
+              </a>
+            );
+            break;
+
+          case 'GOTO_VIDEO_PROFILE':
+            headChildren = (
+              entry.video ? (
+                <Link to={`/video/${get(entry, 'video._id')}`}>
+                  {get(entry, 'video.title')}
+                </Link>
+              ) : '未知视频'
+            );
+            break;
+
+          default:
+            headChildren = '-';
+        }
+
+        const head = (
+          <Fragment>
+            <p>
+              <ChannelHead categoryVisible entry={entry} />
+            </p>
+            <p>
+              {typeLabel}：{headChildren}
+            </p>
+          </Fragment>
+        );
+
+        return (
+          <TitleCol
+            head={head}
+            title={title}
+            searchTitle={searchTitle}
+            desc={entry.description}
+            link={com.genLink(entry)}
+          />
+        );
+      }
     },
     {
       dataIndex: 'priority',
@@ -77,7 +123,7 @@ export default function(com, query) {
         const more = (
           <ul>
             <SwitchAction
-              disabled={!com.hasPermission('UPDATE_CHANNEL')}
+              disabled={!com.hasPermission('UPDATE_BANNER')}
               entry={entry}
               status={!entry.publishAt}
               yesLabel="发布"
@@ -90,14 +136,14 @@ export default function(com, query) {
             {!entry.publishAt && (
               <Action
                 icon="clock-circle-o"
-                disabled={!com.hasPermission('UPDATE_CHANNEL')}
+                disabled={!com.hasPermission('UPDATE_BANNER')}
                 onClick={com.openTimingPublishModal.bind(com, entry)}
               >
                 定时发布
               </Action>
             )}
             <SwitchAction
-              disabled={!com.hasPermission('DESTROY_CHANNEL')}
+              disabled={!com.hasPermission('DESTROY_BANNER')}
               entry={entry}
               status={!entry.removeAt}
               yesType="danger"
@@ -115,8 +161,8 @@ export default function(com, query) {
         return (
           <ActionsCol moreContent={more}>
             <EditLink
-              to={`/channel/${entry._id}/edit`}
-              disabled={!com.hasPermission('UPDATE_CHANNEL')}
+              to={com.genLink(entry, '/edit')}
+              disabled={!com.hasPermission('UPDATE_BANNER')}
             />
           </ActionsCol>
         );

@@ -6,6 +6,7 @@ import * as loopVideo from './loopVideo';
 import * as category from './category';
 import * as account from './account';
 import * as channel from './channel';
+import * as banner from './banner';
 import * as about from './about';
 import * as video from './video';
 import * as user from './user';
@@ -14,6 +15,7 @@ import { title } from '../config';
 // 菜单列表
 export const menus = [
   user,
+  banner,
   channel,
   category,
   video,

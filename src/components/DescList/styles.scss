@@ -36,6 +36,10 @@
     width: 100%;
     word-break: break-all;
 
+    > :global(.anticon) {
+      margin-right: 0.5em;
+    }
+
     .flex {
       display: flex;
       align-items: center;

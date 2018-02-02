@@ -140,6 +140,12 @@ export default class Detail extends PureComponent {
               ))}
             </DescListItem>
           </DescList>
+
+          <DescList title="原始信息" col={1}>
+            <DescListItem label="文件名" flex>
+              <code>{entry.filename || '-'}</code>
+            </DescListItem>
+          </DescList>
         </CardLayout>
       </Fragment>
     );
