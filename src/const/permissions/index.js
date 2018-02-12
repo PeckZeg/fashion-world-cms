@@ -5,6 +5,7 @@ import * as loopVideo from './loopVideo';
 import * as category from './category';
 import * as account from './account';
 import * as channel from './channel';
+import * as version from './version';
 import * as banner from './banner';
 import * as video from './video';
 import * as about from './about';
@@ -19,6 +20,7 @@ export const permissions = [
   category,
   video,
   loopVideo,
+  version,
   about
 ];
 

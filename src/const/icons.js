@@ -6,3 +6,4 @@ export const user = 'user';
 export const video = 'video-camera';
 export const loopVideo = 'loading-3-quarters';
 export const banner = 'codepen';
+export const version = 'fork';

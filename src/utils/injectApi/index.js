@@ -7,6 +7,7 @@ import * as loopVideo from './loopVideo';
 import * as category from './category';
 import * as account from './account';
 import * as channel from './channel';
+import * as version from './version';
 import * as banner from './banner';
 import * as qiniu from './qiniu';
 import * as about from './about';
@@ -19,6 +20,7 @@ const METHOD_LIST = {
   category,
   account,
   channel,
+  version,
   banner,
   video,
   qiniu,

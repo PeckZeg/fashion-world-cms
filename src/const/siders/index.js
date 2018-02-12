@@ -6,6 +6,7 @@ import * as loopVideo from './loopVideo';
 import * as category from './category';
 import * as account from './account';
 import * as channel from './channel';
+import * as version from './version';
 import * as banner from './banner';
 import * as about from './about';
 import * as video from './video';
@@ -21,6 +22,7 @@ export const menus = [
   video,
   loopVideo,
   about,
+  version,
   account
 ];
 
