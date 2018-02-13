@@ -1,4 +1,5 @@
 import Profile from '@components/Version/Profile';
+import Create from '@components/Version/Create';
 import List from '@components/Version/List';
 
 export const key = 'version';
@@ -52,5 +53,12 @@ export const items = [
     key: '/version/:versionId',
     label: '版本信息',
     component: Profile
+  },
+  {
+    permission: 'CREATE_VERSION',
+    key: '/create-version',
+    label: '创建版本',
+    icon: 'plus',
+    component: Create
   }
 ];

@@ -1,4 +1,7 @@
+import { Icon } from 'antd';
 import React from 'react';
+
+import filter from 'lodash/filter';
 
 import CreateAtCol from '@table-column/CreateAt';
 import ActionsCol from '@table-column/Actions';
@@ -7,6 +10,7 @@ import TitleCol from '@table-column/Title';
 import CoverCol from '@table-column/Cover';
 
 import genSorter from '@util/table/genSorter';
+import { types } from '@const/version/types';
 
 const { Action, SwitchAction, EditLink } = ActionsCol;
 
@@ -46,15 +50,27 @@ export default function(com, query) {
       dataIndex: 'title',
       title: '标题',
       // width: 256,
-      render: (title, entry) => (
-        <TitleCol
-          head={<code>{entry.type} - {entry.version}</code>}
-          title={title}
-          searchTitle={searchTitle}
-          desc={entry.description}
-          link={com.genLink(entry)}
-        />
-      )
+      render: (title, entry) => {
+        const type = filter(types, ({ key }) => key === entry.type)[0];
+        const head = (
+          <code>
+            {type && (
+              <Icon type={type.icon} style={{ marginRight: '0.5em' }} />
+            )}
+            {entry.version}
+          </code>
+        );
+
+        return (
+          <TitleCol
+            head={head}
+            title={title}
+            searchTitle={searchTitle}
+            desc={entry.description}
+            link={com.genLink(entry)}
+          />
+        );
+      }
     },
     {
       dataIndex: 'createAt',

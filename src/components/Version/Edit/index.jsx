@@ -8,7 +8,6 @@ import isFunction from 'lodash/isFunction';
 import ImageUploader from '@qiniu/ImageUploader';
 import CardLayout from '@layout/CardLayout';
 
-import InputNumberItem from '@form-item/InputNumber';
 import TextAreaItem from '@form-item/TextArea';
 import InputItem from '@form-item/Input';
 

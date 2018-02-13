@@ -197,7 +197,7 @@ export default class List extends PureComponent {
      this.imageViewer.show(entry.cover, (
        <ImageViewer.Title
          icon="user"
-         title={entry.name}
+         title={entry[this.state.entryNameProp]}
          avatar={toProcessImage(entry.cover, { w: 32, h: 32 })}
        />
      ));

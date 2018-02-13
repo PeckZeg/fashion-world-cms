@@ -1,7 +1,15 @@
+import VERSION_PATTERN from '@const/patterns/version';
 import URL_PATTERN from '@const/patterns/url';
 
 export const cover = {
   label: '封面'
+};
+
+export const type = {
+  label: '更新平台',
+  rules: [
+    { required: true, message: '更新平台是必需的' }
+  ]
 };
 
 export const title = {
@@ -26,7 +34,6 @@ export const description = {
 };
 
 export const link = {
-  field: 'link',
   label: '链接',
   rules: [
     { required: true, message: '跳转链接是必需的' },
@@ -34,5 +41,16 @@ export const link = {
   ],
   inputProps: {
     placeholder: 'http://www.example.com'
+  }
+};
+
+export const version = {
+  label: '更新版本',
+  rules: [
+    { required: true, message: '更新版本是必需的' },
+    { pattern: VERSION_PATTERN, message: '更新版本格式错误' }
+  ],
+  inputProps: {
+    placeholder: '2.1.3'
   }
 };

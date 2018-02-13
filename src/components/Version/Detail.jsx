@@ -1,12 +1,16 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
+import { Avatar, Icon } from 'antd';
 import PropTypes from 'prop-types';
-import { Avatar } from 'antd';
+
+import filter from 'lodash/filter';
 
 import CardLayout from '@layout/CardLayout';
 import DescList from '@components/DescList';
 
 import toProcessImage from '@util/qiniu/toProcessImage';
 import { version as icon } from '@const/icons';
+import { types } from '@const/version/types';
+import get from '@util/get';
 
 const { Item: DescListItem } = DescList;
 
@@ -30,6 +34,7 @@ export default class Detail extends PureComponent {
 
   render() {
     const { entry } = this.props;
+    const type = filter(types, ({ key }) => key === entry.type)[0];
 
     return (
       <CardLayout>
@@ -39,7 +44,14 @@ export default class Detail extends PureComponent {
           </DescListItem>
 
           <DescListItem label="更新平台">
-            <code>{entry.type}</code>
+            {type ? (
+              <Fragment>
+                <Icon type={type.icon} />
+                <code>
+                  {type.label}
+                </code>
+              </Fragment>
+            ) : '-'}
           </DescListItem>
 
           <DescListItem label="更新版本">
@@ -63,11 +75,11 @@ export default class Detail extends PureComponent {
               shape="square"
               src={toProcessImage(entry.cover, { w: 64, h: 64 })}
             />
-            {entry.title}
+            {get(entry, 'title')}
           </DescListItem>
 
           <DescListItem label="描述">
-            {entry.description}
+            {get(entry, 'description')}
           </DescListItem>
         </DescList>
       </CardLayout>
